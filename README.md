@@ -7,10 +7,9 @@ The gnucash's xml file will act as transaction database. All other reports will 
 ## Source of Information
 
 * Nubank credit card
-* Bank
-** Itau's checking account
-** CEF's savings
-** Bradesco's savings
+* Itau's checking account
+* CEF's savings
+* Bradesco's savings
 * Gnucash mobile (untracked expenses: money in wallet, gifts, etc)
 
 
@@ -26,7 +25,6 @@ The gnucash's xml file will act as transaction database. All other reports will 
 ## Source of transactions
 
 * Itau Checking Account
-* Itau savings (maybe...)
 * CEF savings
 * Bradesco savings
 * Money in wallet

@@ -1,0 +1,92 @@
+@startuml
+
+' ------------------------------------------------------
+' Class
+' ------------------------------------------------------
+' Main goal is read a file and, for each line, convert it to a transaction
+' Each datasource can be different and must have the own method to read a file (structure of file can be diffent, etc)
+class DataSource {
+	  - List[Line] lines
+	  + Transaction getTransaction(Line l)
+}
+
+class ItauCheckAccount {
+	  - Account source
+}
+
+class CEFSavings {
+	  - Account source
+}
+
+class BradescoSavvings {
+	  - Account source
+}
+
+class Nubank {
+	  - Account source
+}
+
+class MOneyInWallet {
+	  - Account source
+}
+
+' Use note field to hold meta information like tags.
+class Transaction {
+	  - String uid
+	  - Account source
+	  - Account destiny
+	  - Date date
+	  ' - Float value
+	  - Text description
+	  ' - Text notes
+	  + void writeToLedger(self)
+	  + void generateUID(self)
+}
+
+class Split {
+	  - Number value
+	  - Text notes
+}
+
+class Account {
+	  - String uid
+	  - String name
+}
+
+' Fill data into destiny and note field. Update's description field or add comment to notes?
+class Classifier {
+	  + Transaction classifier(Transaction t)
+}
+
+' ------------------------------------------------------
+' Notes
+' ------------------------------------------------------
+note as N1
+	 Data sources can be:
+	 * All Assets
+	 ** Itau
+	 *** Cheking account
+	 *** Savings account
+	 * CEF Saving account
+	 * Bradesco Saving account
+	 * Money in wallet
+	 * Liabilities
+	 ** Nubank
+	 * many more...
+end note
+
+note as note_transaction
+	 How to generate uid for a transaction?!?
+end note
+' ------------------------------------------------------
+' Relationships
+' ------------------------------------------------------
+DataSource <|-- Itau
+DataSource <|-- CEF
+DataSource -right- Transaction
+Transaction -- Account
+Transaction -- Split
+Transaction -right- Classifier
+
+Transaction -up- note_transaction
+@enduml
