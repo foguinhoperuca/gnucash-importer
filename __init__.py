@@ -4,9 +4,30 @@ import uuid
 import argparse
 import logging
 
+# ofxparse 0.14+
+from ofxparse import OfxParser
+
 # gather the uuid frm kernel...
 # uuid = open('/proc/sys/kernel/random/uuid', 'r')
 # print str(uuid.uuid4())
+
+def read_nubank(ofx_file):
+    print 'Reading Nubank data from .ofx!!'
+
+    ofx = OfxParser.parse(file(ofx_file))
+
+    for transaction in ofx.account.statement.transactions:
+        # print dir(transaction)
+        print "amount: %s" % (transaction.amount)
+        print "checknum: %s" % (transaction.checknum)
+        print "date: %s" % (transaction.date)
+        print "id: %s" % (transaction.id)
+        print "mcc: %s" % (transaction.mcc)
+        print "memo: %s" % (transaction.memo)
+        print "payee: %s" % (transaction.payee)
+        print "sic: %s" % (transaction.sic)
+        print "type: %s" % (transaction.type)
+        print "------------------------------------------------------------"
 
 def get_args():
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
@@ -26,10 +47,8 @@ def main():
     else:
         loglevel = logging.INFO
 
-    print 'loglevel is: '
-    print loglevel
-    
-    print 'bye!!'
+    logging.basicConfig(level = loglevel)
+    read_nubank('nubank.ofx')
 
 if __name__ == "__main__":
     main()
