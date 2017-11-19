@@ -64,8 +64,20 @@ def create_gnucash_tansaction(book, item, curr, account_from = assets_account_pa
     tx.CommitEdit()
 
 # FIXME receive items or gnucash transaction?
-def write_to_gnucash_file(dry_run = True, gnucash_file = default_gnucash_file, items, curr = default_currency):
-    print "TODO stub: Writing to GNUCash file"
+def write_to_gnucash_file(dry_run = True, gnucash_file = default_gnucash_file, items, curr = default_currency, account_from, account_to):
+    sess = Session(gnucash_file)
+    book = sess.book
+    currency = get_currency(book, curr)
+
+    imported_items = set()
+    for item in items:
+        if item.as_tuple() in imported_items:
+            logging.info("Skipped because it already was imported!!!")
+            continue
+
+        create_gnucash_tansaction(book, item, currency, account_from, account_to):
+        imported_items.add(item.as_tuple())
+
     if dry_run:
         logging.info('############### DRY-RUN ###############')
     else:

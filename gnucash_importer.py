@@ -10,6 +10,8 @@ from ofxparse import OfxParser
 # GNUCash interface
 import gnucash_interface
 # from gnucash_interface import write_to_gnucash_file
+import read_entry
+import account
 
 def read_nubank(ofx_file):
     print 'Reading Nubank data from .ofx!!'
@@ -29,22 +31,9 @@ def read_nubank(ofx_file):
     #     print "sic: %s" % (transaction.sic)
     #     print "type: %s" % (transaction.type)
     #     print "------------------------------------------------------------"
-    #     # create_gnucash_tansaction()
-        
+    #     # create_gnucash_tansaction()        
 
-        
-
-def get_args():
-    parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
-    parser.add_argument("-q", "--quiet", action='store_true', help="Set *NO* verbose logging i.e.: loglevel = logging.WARN")
-    parser.add_argument("-v", "--verbose", action='store_true', help="Set *VERBOSE* logging i.e.: loglevel = logging.DEBUG")
-    parser.add_argument("gnucash_file", help="GNUCash xml file")
-    args = parser.parse_args()
-
-    return args
-
-def main():
-    args = get_args()
+def main(args):
     if args.verbose:
         loglevel = logging.DEBUG
     elif args.quiet:
@@ -59,7 +48,7 @@ def main():
     else:
         file_path = args.gnucash_file
 
-        
+
     read_nubank(file_path)
     # gnucash_interface.write_to_gnucash_file()
 
@@ -67,4 +56,9 @@ def main():
     
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
+    parser.add_argument("-q", "--quiet", action='store_true', help="Set *NO* verbose logging i.e.: loglevel = logging.WARN")
+    parser.add_argument("-v", "--verbose", action='store_true', help="Set *VERBOSE* logging i.e.: loglevel = logging.DEBUG")
+    parser.add_argument("gnucash_file", help="GNUCash xml file")
+    
+    main(parser.parse_args())
