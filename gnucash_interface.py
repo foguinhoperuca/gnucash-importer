@@ -7,9 +7,10 @@ Meant to be reuseable interface with gnucash
 
 import logging
 import datetime
-from Decimal import decimal
+from decimal import Decimal
 from gnucash import Session, Transaction, Split, GncNumeric
 
+# FIXME default_currency isn't working
 def get_currency(book, curr = default_currency):
     commod_tab = book.get_table()
     currency = commod_tab.lookup('ISO4217', curr)
@@ -64,7 +65,7 @@ def create_gnucash_tansaction(book, item, curr, account_from = assets_account_pa
     tx.CommitEdit()
 
 # FIXME receive items or gnucash transaction?
-def write_to_gnucash_file(dry_run = True, gnucash_file = default_gnucash_file, items, curr = default_currency, account_from, account_to):
+def write_to_gnucash_file(items, account_from, account_to, dry_run = True, gnucash_file = default_gnucash_file, curr = default_currency):
     sess = Session(gnucash_file)
     book = sess.book
     currency = get_currency(book, curr)
@@ -75,7 +76,7 @@ def write_to_gnucash_file(dry_run = True, gnucash_file = default_gnucash_file, i
             logging.info("Skipped because it already was imported!!!")
             continue
 
-        create_gnucash_tansaction(book, item, currency, account_from, account_to):
+        create_gnucash_tansaction(book, item, currency, account_from, account_to)
         imported_items.add(item.as_tuple())
 
     if dry_run:
