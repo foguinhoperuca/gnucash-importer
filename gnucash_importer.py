@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 
-import argparse
 import logging
-
-# ofxparse 0.14+
-from ofxparse import OfxParser
+import argparse
+import configparser
 
 # GNUCash interface
 import gnucash_interface
 # from gnucash_interface import write_to_gnucash_file
 import read_entry
 import account
+from util import Util
 
 def read_nubank(ofx_file):
     print 'Reading Nubank data from .ofx!!'
@@ -36,6 +35,7 @@ def main(args):
         account_src = args.account_src
 
     read_nubank(file_path)
+
     print "ARGS:"
     print args.gnucash_file
     print args.account_src
@@ -47,5 +47,9 @@ if __name__ == "__main__":
     parser.add_argument("-v", "--verbose", action = 'store_true', help = "Set *VERBOSE* logging i.e.: loglevel = logging.DEBUG")
     parser.add_argument("gnucash_file", help = "GNUCash xml file")
     parser.add_argument("account_src", help = "Set account source to integrate")
+
+    # TODO pass config as an argument to main or use directly?
+    config = configparser.ConfigParser()
+    config.read('setup.cfg')
     
     main(parser.parse_args())

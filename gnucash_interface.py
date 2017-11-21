@@ -6,12 +6,15 @@ Meant to be reuseable interface with gnucash
 '''
 
 import logging
+import configparser
 import datetime
 from decimal import Decimal
+
 from gnucash import Session, Transaction, Split, GncNumeric
+from util import Util
 
 # FIXME default_currency isn't working
-def get_currency(book, curr = default_currency):
+def get_currency(book, curr = Util().DEFAULT_CURRENCY):
     commod_tab = book.get_table()
     currency = commod_tab.lookup('ISO4217', curr)
 
@@ -30,7 +33,7 @@ def get_account_by_path(root, path):
 def get_account(book, acc_name):
     get_account_by_path(book.get_root_account(), acc_name.split(':'))
 
-def create_gnucash_tansaction(book, item, curr, account_from = assets_account_path, account_to = blackhole_account_path):
+def create_gnucash_tansaction(book, item, curr, account_from, account_to):
     if curr is None:
         curr = get_currency(book, default_currency)
 
@@ -65,7 +68,7 @@ def create_gnucash_tansaction(book, item, curr, account_from = assets_account_pa
     tx.CommitEdit()
 
 # FIXME receive items or gnucash transaction?
-def write_to_gnucash_file(items, account_from, account_to, dry_run = True, gnucash_file = default_gnucash_file, curr = default_currency):
+def write_to_gnucash_file(items, account_from, account_to, dry_run = True, gnucash_file = Util().DEFAULT_GNUCASH_FILE, curr = Util().DEFAULT_CURRENCY):
     sess = Session(gnucash_file)
     book = sess.book
     currency = get_currency(book, curr)
