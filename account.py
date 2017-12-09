@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 import logging
+from util import Util
 
-class Account():
+class Account(object):
     def __init__(self, acc_from, acc_to, acc_src_file):
         self.acc_from = acc_from
         self.to = acc_to
@@ -24,36 +25,36 @@ class Account():
 # for every source account do:
 class Nubank(Account):
     def __init__(self, acc_src_file):
-        super(Nubank).__init__(self, acc_src_file)
+        super(Nubank, self).__init__(acc_src_file)
         self.account_from = "NUBANK_FROM"
         self.to = "NUBANK_TO"
 
 class CashInWallet(Account):
     def __init__(self, acc_src_file):
-        super(CashinWallet).__init__(self, acc_src_file)
+        super(CashInWallet, self).__init__(acc_src_file)
         self.account_from = "CIW_FROM"
         self.to = "CIW_TO"
 
 class CefSavingsAccount(Account):
     def __init__(self, acc_src_file):
-        super(CefSavingsAccount).__init__(self, acc_src_file)
+        super(CefSavingsAccount, self).__init__(acc_src_file)
         self.account_from = "CEF_FROM"
         self.to = "CEF_TO"
 
 class ItauCheckingAccount(Account):
     def __init__(self, acc_src_file):
-        super(ItauCheckingAccount).__init__(self, acc_src_file)
+        super(ItauCheckingAccount, self).__init__(acc_src_file)
         self.account_from = "ITAUCC_FROM"
         self.to = "ITAUCC_TO"
 
 class ItauSavingsAccount(Account):
     def __init__(self, acc_src_file):
-        super(ItauSavingsAccount).__init__(self, acc_src_file)
+        super(ItauSavingsAccount, self).__init__(acc_src_file)
         self.account_from = "ITAUSAVINGS_FROM"
         self.to = "ITAUSAVINGS_TO"
 
 class BradescoSavingsAccount(Account):
     def __init__(self, acc_src_file):
-        super(BradescoSavingsAccount).__init__(self, acc_src_file)
+        super(BradescoSavingsAccount, self).__init__(acc_src_file)
         self.account_from = "BRADESCO_FROM"
         self.to = "BRADESCO_TO"

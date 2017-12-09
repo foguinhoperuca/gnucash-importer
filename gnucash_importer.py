@@ -14,6 +14,15 @@ from util import Util
 def main(args):
     if args.verbose:
         loglevel = logging.DEBUG
+        print "ARGS:"
+        print args
+        print args.dry_run
+        print loglevel
+        print args.currency
+        print args.gnucash_file
+        print args.account
+        print args.account_src_file
+        print "--------------------------------"
     elif args.quiet:
         loglevel = logging.WARN
     else:
@@ -32,20 +41,12 @@ def main(args):
 
     if account is None:
         raise Exception("Failed with account: need be defined!!!")
-    
-    print "ARGS:"
-    print args
-    print args.dry_run
-    print loglevel
-    print args.currency
-    print args.gnucash_file
-    print args.account
-    print args.account_src_file
+
+    print account
     print account.account_from
     print account.to
     print account.account_src_file
-
-    gnucash_interface.stub()
+    # gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
@@ -54,7 +55,7 @@ if __name__ == "__main__":
     parser.add_argument("-v", "--verbose", action = 'store_true', help = "Set *VERBOSE* logging i.e.: loglevel = logging.DEBUG")
     parser.add_argument("-c", "--currency", default = Util().DEFAULT_CURRENCY, help = "currency used in gnucash. Default is BRL.")
     parser.add_argument("-gf", "--gnucash_file", default = Util().DEFAULT_GNUCASH_FILE, help = "GNUCash xml file to write")
-    parser.add_argument("-a", "--account", choices = ["nubank", "ciw", "cef-savings", "itau-cc", "itau-savings", "bradesco-savings"], required = True, help = "Set account that will be used. Options:")
+    parser.add_argument("-a", "--account", choices = ["nubank", "ciw", "cef-savings", "itau-cc", "itau-savings", "bradesco-savings"], required = True, help = "Set account that will be used.")
     parser.add_argument("-af", "--account_src_file", required = True, help = "Set account source to integrate")
 
     main(parser.parse_args())
