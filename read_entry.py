@@ -8,18 +8,8 @@ import logging
 from ofxparse import OfxParser  # ofxparse 0.14+
 
 class EntryReader:
-    def get_transaction():
+    def get_transaction(report_file):
         pass
-
-class OfxReader(EntryReader):
-    def get_transactions(ofx_file):
-        print "TODO stub method"
-        ofx = OfxParser.parse(file(ofx_file))
-
-        for transaction in ofx.account.statement.transactions:
-            print_transaction(transaction)
-
-        return ofx.account.statement.transactions
 
     def print_transaction(transaction):
         print "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -35,10 +25,20 @@ class OfxReader(EntryReader):
         print "type: %s" % (transaction.type)
         print "------------------------------------------------------------"
 
+class OfxReader(EntryReader):
+    def get_transactions(report_file):
+        print "TODO stub method"
+        ofx = OfxParser.parse(file(report_file))
+
+        for transaction in ofx.account.statement.transactions:
+            print_transaction(transaction)
+
+        return ofx.account.statement.transactions
+
 class QifReader(EntryReader):
-    def get_transactions():
+    def get_transactions(report_file):
         print "TODO stub method"
 
 class CsvReader(EntryReader):
-    def get_transactions():
+    def get_transactions(report_file):
         print "TODO stub method"
