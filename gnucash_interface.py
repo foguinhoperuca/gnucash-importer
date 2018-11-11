@@ -5,6 +5,7 @@
 Meant to be reuseable interface with gnucash
 '''
 
+import os
 import logging
 import configparser
 import datetime
@@ -16,7 +17,7 @@ from util import Util
 # FIXME default_currency isn't working
 def get_currency(book, curr = Util().DEFAULT_CURRENCY):
     commod_tab = book.get_table()
-    currency = commod_tab.lookup('ISO4217', curr)
+    currency = commod_tab.lookup('ISO4217', str(curr))
 
 # Extracted from https://github.com/hjacobs/gnucash-qif-import/blob/master/import.py#lookup_account_by_path(root, path)
 def get_account_by_path(root, path):
@@ -74,7 +75,7 @@ def write_to_gnucash_file(account, dry_run = True, gnucash_file = Util().DEFAULT
     currency = get_currency(book, curr)
 
     imported_items = set()
-    for item in account.get_items():
+    for item in account.get_items(account, os.path.splitext(account.account_src_file)[1]):
         if item.as_tuple() in imported_items:
             logging.info("Skipped because it already was imported!!!")
             continue
@@ -91,4 +92,4 @@ def write_to_gnucash_file(account, dry_run = True, gnucash_file = Util().DEFAULT
     session.end()
 
 def stub():
-    print "Just a stub method..."
+    print("Just a stub method...")

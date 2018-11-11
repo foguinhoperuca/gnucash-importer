@@ -12,22 +12,22 @@ class EntryReader:
         pass
 
     def print_transaction(transaction):
-        print "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-        # print dir(transaction)
-        print "amount: %s" % (transaction.amount)
-        print "checknum: %s" % (transaction.checknum)
-        print "date: %s" % (transaction.date)
-        print "id: %s" % (transaction.id)
-        print "mcc: %s" % (transaction.mcc)
-        print "memo: %s" % (transaction.memo.encode('iso-8859-1'))
-        print "payee: %s" % (transaction.payee)
-        print "sic: %s" % (transaction.sic)
-        print "type: %s" % (transaction.type)
-        print "------------------------------------------------------------"
+        print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        # print(transaction)
+        print("amount): %s" % (transaction.amount))
+        print("checknum): %s" % (transaction.checknum))
+        print("date): %s" % (transaction.date))
+        print("id): %s" % (transaction.id))
+        print("mcc): %s" % (transaction.mcc))
+        print("memo): %s" % (transaction.memo.encode('iso-8859-1')))
+        print("payee): %s" % (transaction.payee))
+        print("sic): %s" % (transaction.sic))
+        print("type): %s" % (transaction.type))
+        print("------------------------------------------------------------")
 
 class OfxReader(EntryReader):
     def get_transactions(report_file):
-        print "TODO stub method"
+        print("TODO stub method")
         ofx = OfxParser.parse(file(report_file))
 
         for transaction in ofx.account.statement.transactions:
@@ -37,8 +37,8 @@ class OfxReader(EntryReader):
 
 class QifReader(EntryReader):
     def get_transactions(report_file):
-        print "TODO stub method"
+        print("TODO stub method")
 
 class CsvReader(EntryReader):
     def get_transactions(report_file):
-        print "TODO stub method"
+        print("TODO stub method")

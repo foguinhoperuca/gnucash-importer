@@ -103,3 +103,5 @@ ENV/
 # My personal customized
 *~
 *#
+
+example/local/
