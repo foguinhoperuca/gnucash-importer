@@ -10,7 +10,6 @@ class Account(object):
     acc_from = None
     to = None
     account_src_file = None
-
     
     def __init__(self, acc_from, acc_to, acc_src_file):
         self.acc_from = acc_from
@@ -34,14 +33,19 @@ class Account(object):
         #     "qif": QifReader.get_transactions(self.account_src_file),
         #     "csv": CsvReader.get_transactions(self.account_src_file),
         # }.get(file_type, "ofx")
+        reader = None
         items = None
         if file_type == "qif":
-            items = QifReader.get_transactions(self.account_src_file)
+            # items = QifReader.get_transactions(self.account_src_file)
+            reader = qifReader()
         elif file_type == "csv":
-            items = CsvReader.get_transactions(self.account_src_file)
+            # items = CsvReader.get_transactions(self.account_src_file)
+            reader = CsvReader()
         else:
-            items = OfxReader.get_transactions(self.account_src_file)
+            # items = OfxReader.get_transactions(self.account_src_file)
+            reader = OfxReader()
 
+        items = reader.get_transactions(self.account_src_file)
         return items
 
 # for every source account do:

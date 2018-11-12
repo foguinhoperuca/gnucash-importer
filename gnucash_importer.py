@@ -14,15 +14,15 @@ from util import Util
 def main(args):
     if args.verbose:
         loglevel = logging.DEBUG
-        print("ARGS:")
-        print(args)
-        print(args.dry_run)
-        print(loglevel)
-        print(args.currency)
-        print(args.gnucash_file)
-        print(args.account)
-        print(args.account_src_file)
-        print("-------------------------------------------------------")
+        # print("ARGS:")
+        # print(args)
+        # print(args.dry_run)
+        # print(loglevel)
+        # print(args.currency)
+        # print(args.gnucash_file)
+        # print(args.account)
+        # print(args.account_src_file)
+        # print("-------------------------------------------------------")
     elif args.quiet:
         loglevel = logging.WARN
     else:
@@ -42,13 +42,15 @@ def main(args):
     if account is None:
         raise Exception("Failed with account: need be defined!!!")
 
-    if args.verbose:
-        print(account)
-        print(account.account_from)
-        print(account.to)
-        print(account.account_src_file)
-        print("-------------------------------------------------------")
+    # if args.verbose:
+    #     print(account)
+    #     print(account.account_from)
+    #     print(account.to)
+    #     print(account.account_src_file)
+    #     print("-------------------------------------------------------")
 
+    print("currency is: %s" % args.currency)
+    
     gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
 
 # Basic command: python3 gnucash_importer.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx -dr -v

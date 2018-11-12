@@ -14,10 +14,31 @@ from decimal import Decimal
 from gnucash import Session, Transaction, Split, GncNumeric
 from util import Util
 
-# FIXME [WIP] default_currency isn't working
-def get_currency(book, curr = Util().DEFAULT_CURRENCY):
+# FIXME curr = Util().DEFAULT_CURRENCY do not work...
+# def get_currency(book, curr = Util().DEFAULT_CURRENCY):
+def get_currency(book, curr = 'BRL'):
+    curr_local = Util().DEFAULT_CURRENCY
+    curr_local2 = 'BRL'
+    logging.info('XXXXXXXXXXXX curr INSIDE get_currency')
+    # logging.debug(type('BRL'))
+    # logging.debug(type(curr))
+    # logging.debug(curr)
+    # logging.debug(type(Util().DEFAULT_CURRENCY))
+    # logging.debug(Util().DEFAULT_CURRENCY)
+    
     commod_tab = book.get_table()
-    currency = commod_tab.lookup('ISO4217', str(curr))
+    currency = commod_tab.lookup('ISO4217', 'BRL') # works!!!
+    # currency = commod_tab.lookup('ISO4217', curr)  # FIXME curr isn't working.
+    # currency = commod_tab.lookup('ISO4217', curr_local)
+    # currency = commod_tab.lookup('ISO4217', curr_local2)
+
+    logging.info('XXXXXXXXXXXX commod_tab: type => {commod_type}, value => {value}'.format(commod_type = type(commod_tab), value = commod_tab))
+    # logging.debug(type(commod_tab))
+    # logging.debug(commod_tab)
+    logging.info('XXXXXXXXXXXX currency: type => {curr_type}, value => {value}'.format(curr_type = type(currency), value = currency))
+    # logging.debug(type(currency))
+    # logging.debug(currency)
+    logging.info('*****************************************')
 
     return currency
 
@@ -48,9 +69,9 @@ def create_gnucash_tansaction(book, item, curr, account_from, account_to):
         logging.debug(type(curr))
         logging.info(curr)
 
-    logging.info('############### CONTENT for curr ###############')
-    logging.debug(type(curr))
-    logging.debug(curr)
+    # logging.info('############### CONTENT for curr INSIDE create_gnucash_transaction ###############')
+    # logging.debug(type(curr))
+    # logging.debug(curr)
 
     if item is None:
         raise Exception("Could not create a gnucash transaction: missing item!!")
@@ -89,35 +110,40 @@ def create_gnucash_tansaction(book, item, curr, account_from, account_to):
 def write_to_gnucash_file(account, dry_run = True, gnucash_file = Util().DEFAULT_GNUCASH_FILE, curr = Util().DEFAULT_CURRENCY):
     sess = Session(gnucash_file)
     book = sess.book
+    # logging.debug("----------------------------- FIRST time get_currency")
     currency = get_currency(book, curr)
 
     imported_items = set()
     
     items = account.get_items(account, os.path.splitext(account.account_src_file)[1])
-    logging.debug('############### CONTENT for itemS ###############')
-    logging.debug(type(items))
-    logging.debug(items)
+    # logging.debug('############### CONTENT for itemS ###############')
+    # logging.debug(type(items))
+    # logging.debug(items)
 
-    # for item in account.get_items(account, os.path.splitext(account.account_src_file)[1]):
-    for item in items:
-        # if item.as_tuple() in imported_items:
-        if item in imported_items:
-            logging.info("Skipped because it already was imported!!!")
-            continue
+    # # for item in account.get_items(account, os.path.splitext(account.account_src_file)[1]):
+    # for item in items:
+    #     # if item.as_tuple() in imported_items:
+    #     if item in imported_items:
+    #         logging.info("Skipped because it already was imported!!!")
+    #         continue
 
 
-        logging.info('############### CONTENT for item XXX ###############')
-        logging.debug(type(item))
-        logging.debug(item)
-        
-        create_gnucash_tansaction(book, item, currency, account.account_from, account.to)
-        # imported_items.add(item.as_tuple())
-        imported_items.add(item)
+    #     # logging.info('############### CONTENT for item XXX ###############')
+    #     # logging.debug(type(item))
+    #     # logging.debug(item)
 
-    if dry_run:
-        logging.info('############### DRY-RUN ###############')
-    else:
-        logging.info('Saving GNUCash file..')
-        session.save()
+    #     logging.debug("----------------------------- SHOW currency before call create_gnucash_tansaction()")
+    #     logging.debug(currency)
+    #     logging.debug(Util().DEFAULT_CURRENCY)
+    #     logging.debug("----------------------------- SHOW currency before call create_gnucash_tansaction()")
+    #     create_gnucash_tansaction(book, item, currency, account.account_from, account.to)
+    #     # imported_items.add(item.as_tuple())
+    #     imported_items.add(item)
 
-    session.end()
+    # if dry_run:
+    #     logging.info('############### DRY-RUN ###############')
+    # else:
+    #     logging.info('Saving GNUCash file..')
+    #     session.save()
+
+    # session.end()
