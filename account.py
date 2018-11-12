@@ -3,6 +3,8 @@
 import logging
 from util import Util
 from read_entry import OfxReader
+from read_entry import QifReader
+from read_entry import CsvReader
 
 class Account(object):
     acc_from = None
@@ -26,11 +28,21 @@ class Account(object):
             file_type = "ofx"
 
         # FIXME how to get property value in python?
-        return {
-            "ofx": OfxReader.get_transactions(self.account_src_file),
-            "qif": QifReader.get_transactions(self.account_src_file),
-            "csv": CsvReader.get_transactions(self.account_src_file),
-        }.get(file_type, "ofx")
+        # FIXME switch isn't working....
+        # return {
+        #     "ofx": OfxReader.get_transactions(self.account_src_file),
+        #     "qif": QifReader.get_transactions(self.account_src_file),
+        #     "csv": CsvReader.get_transactions(self.account_src_file),
+        # }.get(file_type, "ofx")
+        items = None
+        if file_type == "qif":
+            items = QifReader.get_transactions(self.account_src_file)
+        elif file_type == "csv":
+            items = CsvReader.get_transactions(self.account_src_file)
+        else:
+            items = OfxReader.get_transactions(self.account_src_file)
+
+        return items
 
 # for every source account do:
 class Nubank(Account):
