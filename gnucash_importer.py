@@ -49,8 +49,6 @@ def main(args):
     #     print(account.account_src_file)
     #     print("-------------------------------------------------------")
 
-    print("currency is: %s" % args.currency)
-    
     gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
 
 # Basic command: python3 gnucash_importer.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx -dr -v

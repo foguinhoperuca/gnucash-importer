@@ -8,12 +8,18 @@ import logging
 from ofxparse import OfxParser  # ofxparse 0.14+
 
 class EntryReader(object):
+    transactions = None
+
     def __init__(self):
         pass
 
     def get_transaction(self, report_file):
         pass
 
+    def print_transactions(self):
+        for transaction in self.transactions:
+            self.print_transaction(transaction)
+    
     def print_transaction(self, transaction):
         print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         print("amount....: %s" % (transaction.amount))
@@ -27,17 +33,13 @@ class EntryReader(object):
         print("type......: %s" % (transaction.type))
 
 class OfxReader(EntryReader):
-    def __init__(self):
-        pass
-
     def get_transactions(self, report_file):
         ofx = OfxParser.parse(open(report_file))
+        self.transactions = ofx.account.statement.transactions
 
-        # TODO implement global verbose debug
-        # for transaction in ofx.account.statement.transactions:
-        #     self.print_transaction(transaction)
+        # self.print_transactions() # TODO implement global verbose debug
 
-        return ofx.account.statement.transactions
+        return self.transactions
 
 class QifReader(EntryReader):
     def get_transactions(report_file):
