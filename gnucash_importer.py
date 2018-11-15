@@ -14,21 +14,23 @@ from util import Util
 def main(args):
     if args.verbose:
         loglevel = logging.DEBUG
-        # print("ARGS:")
-        # print(args)
-        # print(args.dry_run)
-        # print(loglevel)
-        # print(args.currency)
-        # print(args.gnucash_file)
-        # print(args.account)
-        # print(args.account_src_file)
-        # print("-------------------------------------------------------")
     elif args.quiet:
         loglevel = logging.WARN
     else:
         loglevel = logging.INFO
 
-    logging.basicConfig(level = loglevel)
+    # TODO config logger by dictnoray - https://realpython.com/python-logging/
+    logging.basicConfig(level = loglevel, format = Util.LOG_FORMAT_SIMPLE) # There is 3 options to format: [SIMPLE | DEBUG | FULL ]
+
+    if args.verbose:
+        logging.debug(Util.debug("ARGS:"))
+        logging.debug(Util.debug(args))
+        logging.debug(Util.debug(args.dry_run))
+        logging.debug(Util.debug(loglevel))
+        logging.debug(Util.debug(args.currency))
+        logging.debug(Util.debug(args.gnucash_file))
+        logging.debug(Util.debug(args.account))
+        logging.debug(Util.debug(args.account_src_file))
     
     account = {
         "nubank": Nubank(args.account_src_file),
@@ -41,13 +43,6 @@ def main(args):
 
     if account is None:
         raise Exception("Failed with account: need be defined!!!")
-
-    # if args.verbose:
-    #     print(account)
-    #     print(account.account_from)
-    #     print(account.to)
-    #     print(account.account_src_file)
-    #     print("-------------------------------------------------------")
 
     gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
 

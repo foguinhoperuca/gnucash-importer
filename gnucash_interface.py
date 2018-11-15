@@ -14,6 +14,7 @@ from decimal import Decimal
 from gnucash import Session, Transaction, Split, GncNumeric
 from util import Util
 
+
 # FIXME curr = Util().DEFAULT_CURRENCY do not work...
 # def get_currency(book, curr = Util().DEFAULT_CURRENCY):
 def get_currency(book, curr = 'BRL'):
@@ -129,9 +130,9 @@ def write_to_gnucash_file(account, dry_run = True, gnucash_file = Util().DEFAULT
         imported_items.add(item)
 
     if dry_run:
-        logging.info('############### DRY-RUN ###############')
+        logging.info(Util.info('############### DRY-RUN ###############'))
     else:
-        logging.info('Saving GNUCash file..')
+        logging.info(Util.info('Saving GNUCash file..'))
         session.save()
 
     session.end()

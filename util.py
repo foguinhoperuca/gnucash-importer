@@ -2,9 +2,13 @@
 
 import configparser
 import logging
+from termcolor import colored, cprint
 
 class Util:
     config = configparser.ConfigParser()
+    LOG_FORMAT_FULL = '[%(asctime)s][%(process)d:%(processName)s][%(filename)s#%(funcName)s:%(lineno)d][%(levelname)s] %(message)s'
+    LOG_FORMAT_DEBUG = '[%(filename)s#%(funcName)s:%(lineno)d][%(levelname)s] %(message)s'
+    LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
     DEFAULT_CURRENCY = None
     DEFAULT_GNUCASH_FILE = None
     DEFAULT_NUBANK_TO = None
@@ -39,7 +43,19 @@ class Util:
 
     # Helper to discovery API of an object
     def show_methods(obj):
-        logging.debug("_______________________________________________________")
+        logging.debug("_______________________________________________________") # TODO use debug color text helper
         for method in [method_name for method_name in dir(obj) if callable(getattr(obj, method_name))]:
             print(method)
-        logging.debug("_______________________________________________________")
+        logging.debug("_______________________________________________________") # TODO use debug color text helper
+
+    def info(msg):
+        return colored(msg, 'blue')
+
+    def warning(msg):
+        return colored(msg, 'yellow', attrs=['bold'])
+
+    def error(msg):
+        return colored(msg, 'red', attrs=['bold', 'underline'])
+
+    def debug(msg):
+        return colored(msg, 'red', attrs=['reverse', 'blink', 'bold', 'underline'])
