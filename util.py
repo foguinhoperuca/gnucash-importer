@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import configparser
+import logging
 
 class Util:
     config = configparser.ConfigParser()
@@ -35,3 +36,10 @@ class Util:
         self.DEFAULT_ITAU_SAVINGS_FROM = self.config['bdist_wheel']['default_itau_savings_from']
         self.DEFAULT_BRADESCO_SAVINGS_TO = self.config['bdist_wheel']['default_bradesco_savings_to']
         self.DEFAULT_BRADESCO_SAVINGS_FROM = self.config['bdist_wheel']['default_bradesco_savings_from']
+
+    # Helper to discovery API of an object
+    def show_methods(obj):
+        logging.debug("_______________________________________________________")
+        for method in [method_name for method_name in dir(obj) if callable(getattr(obj, method_name))]:
+            print(method)
+        logging.debug("_______________________________________________________")

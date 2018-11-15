@@ -45,12 +45,15 @@ def get_account_by_path(root, path): # FIXME this method isn't working fine anym
         # logging.debug("acc......: {a}".format(a = acc))
         # logging.debug("========================================================")
 
-        # # FIXME test isn't not working anymore
-        # if acc.get_instance() == None:
-        #     raise Exception('NO Good: account path not found --> %s' % (path[0]))
+        if acc.get_instance() == None:
+            raise Exception('NO Good: account path not found --> %s' % (path[0]))
+
+        # logging.debug("========================================================")
+        # logging.debug("path information!! path: {path} -- len(path): {lenght} -- name: {name}".format(path = path, lenght = len(path), name = acc.GetName()))
+        # logging.debug("========================================================")
 
         if len(path) > 1:
-            get_account_by_path(acc, path[1:])
+            acc = get_account_by_path(acc, path[1:])
 
     return acc
 
@@ -73,16 +76,15 @@ def create_gnucash_tansaction(book, item, curr, account_from, account_to):
     # amount = int(Decimal(item.split_amount.replace(',', '.')) * curr.get_fraction()) # FIXME need it yet?
     amount = int(Decimal(item.amount) * curr.get_fraction())
     
-    logging.debug("::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-    logging.debug("book...............: {b}".format(b = book))
-    logging.debug("account_name_from..: {a}".format(a = account_from))
-    logging.debug("account_name_to....: {a}".format(a = account_to))
-    logging.debug("acc_from...........: {account}".format(account = acc_from))
-    logging.debug("acc_to.............: {account}".format(account = acc_to))
-    logging.debug("[create_gnucash_transaction] amount: {amount} :: get_mnemonic: {mnemonic} :: curr: {curr}".format(amount = amount, curr = curr, mnemonic = curr.get_mnemonic()))
+    # logging.debug("::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+    # logging.debug("book...............: {b}".format(b = book))
+    # logging.debug("account_name_from..: {a}".format(a = account_from))
+    # logging.debug("name acc_from......: {name}".format(name = acc_from.GetName()))
+    # logging.debug("account_name_to....: {a}".format(a = account_to))
+    # logging.debug("name acc_to........: {name}".format(name = acc_to.GetName()))
+    # logging.debug("[create_gnucash_transaction] amount: {amount} :: get_mnemonic: {mnemonic} :: curr: {curr}".format(amount = amount, curr = curr, mnemonic = curr.get_mnemonic()))
     
     tx = Transaction(book)
-    # show_methods(tx)
 
     tx.BeginEdit()
     tx.SetCurrency(curr)
@@ -105,15 +107,6 @@ def create_gnucash_tansaction(book, item, curr, account_from, account_to):
     split_to.SetAmount(GncNumeric(amount, curr.get_fraction()))
 
     tx.CommitEdit()
-
-    logging.debug("::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-
-# Helper to discovery API of an object
-def show_methods(obj):
-    logging.debug("_______________________________________________________")
-    for method in [method_name for method_name in dir(obj) if callable(getattr(obj, method_name))]:
-        print(method)
-    logging.debug("_______________________________________________________")
     
 # FIXME receive items or gnucash transaction?
 def write_to_gnucash_file(account, dry_run = True, gnucash_file = Util().DEFAULT_GNUCASH_FILE, curr = Util().DEFAULT_CURRENCY):
@@ -122,30 +115,23 @@ def write_to_gnucash_file(account, dry_run = True, gnucash_file = Util().DEFAULT
     currency = get_currency(book, curr)
     imported_items = set()
     
-    items = account.get_items(account, os.path.splitext(account.account_src_file)[1])
+    # items = account.get_items(account, os.path.splitext(account.account_src_file)[1])
 
-    # for item in account.get_items(account, os.path.splitext(account.account_src_file)[1]):
-    for item in items:
+    for item in account.get_items(account, os.path.splitext(account.account_src_file)[1]):
+        # TODO implement validation of imported items
         # if item.as_tuple() in imported_items:
         if item in imported_items:
             logging.info("Skipped because it already was imported!!!")
             continue
 
-        # logging.info('############### CONTENT for item XXX ###############')
-        # logging.debug("amount: {amount} :: date: {date} :: memo: {memo}".format(amount = item.amount, date = item.date, memo = item.memo.encode('iso-8859-1')))
-
-        # logging.debug("----------------------------- SHOW currency before call create_gnucash_tansaction()")
-        # logging.debug(currency)
-        # logging.debug(Util().DEFAULT_CURRENCY)
-        # logging.debug("----------------------------- SHOW currency before call create_gnucash_tansaction()")
         create_gnucash_tansaction(book, item, currency, account.account_from, account.to)
         # imported_items.add(item.as_tuple())
         imported_items.add(item)
 
-        if dry_run:
-            logging.info('############### DRY-RUN ###############')
-        else:
-            logging.info('Saving GNUCash file..')
-            session.save()
+    if dry_run:
+        logging.info('############### DRY-RUN ###############')
+    else:
+        logging.info('Saving GNUCash file..')
+        session.save()
 
     session.end()
