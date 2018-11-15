@@ -14,13 +14,17 @@ from util import Util
 def main(args):
     if args.verbose:
         loglevel = logging.DEBUG
+        logformat = Util.LOG_FORMAT_DEBUG
     elif args.quiet:
         loglevel = logging.WARN
+        # TODO log to file in this case
+        logformat = Util.LOG_FORMAT_FULL
     else:
         loglevel = logging.INFO
+        logformat = Util.LOG_FORMAT_SIMPLE
 
     # TODO config logger by dictnoray - https://realpython.com/python-logging/
-    logging.basicConfig(level = loglevel, format = Util.LOG_FORMAT_SIMPLE) # There is 3 options to format: [SIMPLE | DEBUG | FULL ]
+    logging.basicConfig(level = loglevel, format = logformat)
 
     if args.verbose:
         logging.debug(Util.debug("ARGS:"))
@@ -46,7 +50,6 @@ def main(args):
 
     gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
 
-# Basic command: python3 gnucash_importer.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx -dr -v
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
     parser.add_argument("-dr", "--dry-run", action = 'store_true', help = "actions will *NOT* be writen to gnucash file.")

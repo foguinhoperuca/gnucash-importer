@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
 Module to read all file formats that will be supported
-'''
-
+"""
 import logging
 from ofxparse import OfxParser  # ofxparse 0.14+
 
@@ -37,14 +36,12 @@ class OfxReader(EntryReader):
         ofx = OfxParser.parse(open(report_file))
         self.transactions = ofx.account.statement.transactions
 
-        # self.print_transactions() # TODO implement global verbose debug
-
         return self.transactions
 
 class QifReader(EntryReader):
-    def get_transactions(report_file):
+    def get_transactions(self, report_file):
         print("TODO stub method")
 
 class CsvReader(EntryReader):
-    def get_transactions(report_file):
+    def get_transactions(self, report_file):
         print("TODO stub method")

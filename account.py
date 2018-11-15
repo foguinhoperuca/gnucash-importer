@@ -26,27 +26,12 @@ class Account(object):
         if file_type is None:
             file_type = "ofx"
 
-        # FIXME how to get property value in python?
-        # FIXME switch isn't working....
-        # return {
-        #     "ofx": OfxReader.get_transactions(self.account_src_file),
-        #     "qif": QifReader.get_transactions(self.account_src_file),
-        #     "csv": CsvReader.get_transactions(self.account_src_file),
-        # }.get(file_type, "ofx")
-        reader = None
-        items = None
         if file_type == "qif":
-            # items = QifReader.get_transactions(self.account_src_file)
-            reader = qifReader()
+            return QifReader().get_transactions(self.account_src_file)
         elif file_type == "csv":
-            # items = CsvReader.get_transactions(self.account_src_file)
-            reader = CsvReader()
+            return CsvReader().get_transactions(self.account_src_file)
         else:
-            # items = OfxReader.get_transactions(self.account_src_file)
-            reader = OfxReader()
-
-        items = reader.get_transactions(self.account_src_file)
-        return items
+            return OfxReader().get_transactions(self.account_src_file)
 
 # for every source account do:
 class Nubank(Account):

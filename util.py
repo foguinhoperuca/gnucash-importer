@@ -6,8 +6,8 @@ from termcolor import colored, cprint
 
 class Util:
     config = configparser.ConfigParser()
-    LOG_FORMAT_FULL = '[%(asctime)s][%(process)d:%(processName)s][%(filename)s#%(funcName)s:%(lineno)d][%(levelname)s] %(message)s'
-    LOG_FORMAT_DEBUG = '[%(filename)s#%(funcName)s:%(lineno)d][%(levelname)s] %(message)s'
+    LOG_FORMAT_FULL = colored('[%(asctime)s][%(process)d:%(processName)s]', 'green', attrs=['bold', 'dark']) + colored('[%(filename)s#%(funcName)s:%(lineno)d]', 'white', attrs=['bold', 'dark']) + colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
+    LOG_FORMAT_DEBUG = colored('[%(filename)s#%(funcName)s:%(lineno)d]', 'white', attrs=['bold', 'dark']) + colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
     LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
     DEFAULT_CURRENCY = None
     DEFAULT_GNUCASH_FILE = None
@@ -41,12 +41,15 @@ class Util:
         self.DEFAULT_BRADESCO_SAVINGS_TO = self.config['bdist_wheel']['default_bradesco_savings_to']
         self.DEFAULT_BRADESCO_SAVINGS_FROM = self.config['bdist_wheel']['default_bradesco_savings_from']
 
-    # Helper to discovery API of an object
+    """
+    Helper to discovery API of an object
+    """
     def show_methods(obj):
-        logging.debug("_______________________________________________________") # TODO use debug color text helper
+        logging.debug(colored("_______________________________________________________", 'cyan'))
+        logging.debug(colored("type(obj): {t}".format(t = type(obj)), 'cyan'))
         for method in [method_name for method_name in dir(obj) if callable(getattr(obj, method_name))]:
             print(method)
-        logging.debug("_______________________________________________________") # TODO use debug color text helper
+        logging.debug(colored("_______________________________________________________", 'cyan'))
 
     def info(msg):
         return colored(msg, 'blue')
@@ -58,4 +61,4 @@ class Util:
         return colored(msg, 'red', attrs=['bold', 'underline'])
 
     def debug(msg):
-        return colored(msg, 'red', attrs=['reverse', 'blink', 'bold', 'underline'])
+        return colored(msg, 'grey', attrs=['reverse', 'bold', 'underline'])
