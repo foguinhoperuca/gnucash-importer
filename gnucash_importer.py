@@ -3,11 +3,7 @@
 import logging
 import argparse
 import configparser
-
-# GNUCash interface
-import gnucash_interface
-# from gnucash_interface import write_to_gnucash_file
-import read_entry
+from ledger import Ledger
 from account import *
 from util import Util
 
@@ -48,7 +44,9 @@ def main(args):
     if account is None:
         raise Exception("Failed with account: need be defined!!!")
 
-    gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
+    # gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
+    ledger = Ledger(args.currency, args.dry_run, args.gnucash_file)
+    ledger.write(account)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")

@@ -1,0 +1,16 @@
+* TODO implement a packge version
+** TODO create a binary version
+** TODO deb
+** TODO pip/egg
+* TODO implement a build tool (Makefile)
+* TODO implement setup.py
+* TODO implement config
+* TODO implement unit test
+* TODO add CHANGELOG.md
+* TODO use virtualenv
+* TODO log
+** TODO write to file
+** DONE basic implementation
+** DONE color
+* DONE implement requirement dependency
+* DONE implement basic version to write

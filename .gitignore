@@ -106,3 +106,4 @@ ENV/
 
 example/local/
 example/test_ledger.gnucash.*
+*#*

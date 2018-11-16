@@ -1,19 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 '''
 Meant to be reuseable interface with gnucash
 '''
-
 import os
 import logging
-import configparser
 import datetime
 from decimal import Decimal
-
 from gnucash import Session, Transaction, Split, GncNumeric
 from util import Util
-
 
 # FIXME curr = Util().DEFAULT_CURRENCY do not work...
 # def get_currency(book, curr = Util().DEFAULT_CURRENCY):
@@ -32,7 +28,7 @@ def get_currency(book, curr = 'BRL'):
     return currency
 
 # Extracted from https://github.com/hjacobs/gnucash-qif-import/blob/master/import.py#lookup_account_by_path(root, path)
-def get_account_by_path(root, path): # FIXME this method isn't working fine anymore...
+def get_account_by_path(root, path):
     acc = None
     if not root == None:
         acc = root.lookup_by_name(path[0])
@@ -126,3 +122,4 @@ def write_to_gnucash_file(account, dry_run = True, gnucash_file = Util().DEFAULT
         session.save()
 
     session.end()
+    session.destroy()           # TODO it remove gnucash temp files?

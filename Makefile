@@ -2,7 +2,10 @@ all: clean run
 
 clean:
 	clear
-	rm example/test_ledger.gnucash.*
+	find . -name '*.pyc' -exec rm --force {} +
+	find . -name '*.pyo' -exec rm --force {} +
+	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
+	find . -name 'other.gnucash.*' -exec rm --force {} +
 	git checkout example/test_ledger.gnucash
 
 test: clean test_verbose

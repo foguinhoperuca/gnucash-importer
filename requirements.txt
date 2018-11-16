@@ -1,5 +1,2 @@
-# gnucash-utilities
-
 ofxparse
 termcolor
-
