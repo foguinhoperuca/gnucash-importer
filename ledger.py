@@ -1,4 +1,3 @@
-import os
 import logging
 import datetime
 from decimal import Decimal
@@ -65,7 +64,7 @@ class Ledger():
         gnucash_book = session.book
         imported_items = set()
 
-        for item in self.account.get_items(self.account, os.path.splitext(self.account.account_src_file)[1]): # FIXME need pass account_src_file?!
+        for item in self.account.get_items():
             # TODO implement validation of imported items
             if item in imported_items:
                 logging.info(Util.info("Skipped because it already was imported!!!"))

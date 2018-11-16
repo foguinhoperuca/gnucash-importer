@@ -3,6 +3,7 @@ all: clean run
 clean:
 	clear
 	find . -name '*.pyc' -exec rm --force {} +
+	find . -name '*~' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
 	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
 	find . -name 'other.gnucash.*' -exec rm --force {} +

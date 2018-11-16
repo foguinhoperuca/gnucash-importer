@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import logging
+import os
 from util import Util
 from read_entry import OfxReader
 from read_entry import QifReader
@@ -49,13 +49,8 @@ class Account(object):
     def account_src_file(self):
         del self._account_src_file
 
-    def get_items(self, file_type, account_file):
-        if account_file is None:
-            acc_src = self.account_src_file
-
-        # FIXME need it?
-        if file_type is None:
-            file_type = "ofx"
+    def get_items(self):
+        file_type = os.path.splitext(self.account_src_file)[1]
 
         if file_type == "qif":
             return QifReader().get_transactions(self.account_src_file)

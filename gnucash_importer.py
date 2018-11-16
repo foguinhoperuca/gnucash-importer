@@ -2,9 +2,8 @@
 
 import logging
 import argparse
-import configparser
 from ledger import Ledger
-from account import *
+from account import Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
 from util import Util
 
 def main(args):
