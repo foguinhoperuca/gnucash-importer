@@ -46,3 +46,4 @@ The gnucash's xml file will act as transaction database. All other reports will 
 * https://github.com/tdf/pygnclib
 * https://github.com/hjacobs/gnucash-fiximports
 * https://github.com/hjacobs/gnucash-qif-import
+* https://krzysztofzuraw.com/blog/2016/makefiles-in-python-projects.html
