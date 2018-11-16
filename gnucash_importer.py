@@ -44,7 +44,6 @@ def main(args):
     if account is None:
         raise Exception("Failed with account: need be defined!!!")
 
-    # gnucash_interface.write_to_gnucash_file(account, args.dry_run, args.gnucash_file, args.currency)
     ledger = Ledger(args.currency, args.dry_run, args.gnucash_file)
     ledger.write(account)
 
