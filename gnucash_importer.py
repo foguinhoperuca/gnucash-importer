@@ -44,8 +44,8 @@ def main(args):
     if account is None:
         raise Exception("Failed with account: need be defined!!!")
 
-    ledger = Ledger(args.currency, args.dry_run, args.gnucash_file)
-    ledger.write(account)
+    ledger = Ledger(account, args.currency, args.dry_run, args.gnucash_file)
+    ledger.write()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
