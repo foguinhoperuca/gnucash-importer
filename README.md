@@ -1,4 +1,4 @@
-# GNUCash Parser
+# GNUCash Importer
 
 Set of scripts to manage my personal finance with gnucash. This project have many parsers to gnucash file. The intent is integrate diferents data sources into gnucash data file.
 
@@ -11,7 +11,6 @@ The gnucash's xml file will act as transaction database. All other reports will 
 * CEF's savings
 * Bradesco's savings
 * Gnucash mobile (untracked expenses: money in wallet, gifts, etc)
-
 
 # Requirements
 
@@ -47,3 +46,4 @@ The gnucash's xml file will act as transaction database. All other reports will 
 * https://github.com/hjacobs/gnucash-fiximports
 * https://github.com/hjacobs/gnucash-qif-import
 * https://krzysztofzuraw.com/blog/2016/makefiles-in-python-projects.html
+* https://github.com/sdementen/gnucash-utilities

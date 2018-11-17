@@ -15,6 +15,12 @@ test: clean test_verbose
 run:
 	python3 gnucash_importer.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx
 
+build:
+	python3 setup.py sdist bdist_wheel
+
+dist_test:
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
 run_verbose:
 	python3 gnucash_importer.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx -v
 

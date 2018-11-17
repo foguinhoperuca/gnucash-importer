@@ -2,6 +2,11 @@
 ** TODO create a binary version
 ** TODO deb
 ** TODO pip/egg
+* TODO dist
+** TODO pypi
+** TODO ubuntu/debian
+* TODO fix project name (from parser to something that can be used in debin/ubuntu/pypi)
+* TODO create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)
 * TODO implement a build tool (Makefile)
 * TODO implement setup.py
 * TODO implement config
