@@ -10,6 +10,7 @@
 * TODO implement a build tool (Makefile)
 * TODO implement setup.py
 * TODO implement config
+* TODO implement ncurses interface
 * TODO implement unit test
 * TODO add CHANGELOG.md
 * TODO use virtualenv
