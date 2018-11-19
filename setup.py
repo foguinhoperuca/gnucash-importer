@@ -16,7 +16,7 @@ setuptools.setup(
     classifiers = [
         'Development Status :: 3 - Alpha',
         "Programming Language :: Python :: 3",
-        "Filter License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
     # data_files=[('my_data', ['data/data_file'])],  # Optional
