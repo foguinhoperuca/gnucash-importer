@@ -1,14 +1,22 @@
 import logging
 import argparse
-from cli import Cli
-from util import Util
-from ledger import Ledger
-from read_entry import OfxReader, QifReader, CsvReader
-from account import Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
+# from cli import Cli
+# from util import Util
+# from ledger import Ledger
+# from read_entry import OfxReader, QifReader, CsvReader
+# from account import Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
 
 name = "gnucash_importer"
+__all__ = ["account", "cli", "ledger", "ncurses", "red_entry", "util"] # TODO verify what that's meaning
 
 if __name__ == "__main__":
+    # FIXME try to put imports in start of file - after main
+    from cli import Cli
+    from util import Util
+    from ledger import Ledger
+    from read_entry import OfxReader, QifReader, CsvReader
+    from account import Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
+
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
     parser.add_argument("-dr", "--dry-run", action = 'store_true', help = "actions will *NOT* be writen to gnucash file.")
     parser.add_argument("-q", "--quiet", action = 'store_true', help = "Set *NO* verbose logging i.e.: loglevel = logging.WARN")
