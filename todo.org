@@ -1,14 +1,12 @@
+
 * TODO implement a packge version
 ** TODO create a binary version
 ** TODO deb
-** TODO pip/egg
+** DONE pip/egg
 * TODO dist
 ** TODO pypi
 ** TODO ubuntu/debian
-* TODO fix project name (from parser to something that can be used in debin/ubuntu/pypi)
 * TODO create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)
-* TODO implement a build tool (Makefile)
-* TODO implement setup.py
 * TODO implement config
 * TODO implement ncurses interface
 * TODO implement unit test
@@ -18,5 +16,8 @@
 ** TODO write to file
 ** DONE basic implementation
 ** DONE color
+* DONE fix project name (from parser to something that can be used in debin/ubuntu/pypi)
+* DONE implement a build tool (Makefile)
+* DONE implement setup.py
 * DONE implement requirement dependency
 * DONE implement basic version to write
