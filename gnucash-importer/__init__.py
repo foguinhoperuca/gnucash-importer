@@ -1,6 +1,22 @@
-name = gnucash_importer
+import logging
+import argparse
+import gnucash_importer
+from util import Util
+from ledger import Ledger
+from read_entry import OfxReader, QifReader, CsvReader
+from account import Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
 
+name = "gnucash_importer"
 
-# def main():
-#     """Entry point for the application script"""
-#     print("Call your main application code here")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
+    parser.add_argument("-dr", "--dry-run", action = 'store_true', help = "actions will *NOT* be writen to gnucash file.")
+    parser.add_argument("-q", "--quiet", action = 'store_true', help = "Set *NO* verbose logging i.e.: loglevel = logging.WARN")
+    parser.add_argument("-v", "--verbose", action = 'store_true', help = "Set *VERBOSE* logging i.e.: loglevel = logging.DEBUG")
+    parser.add_argument("-c", "--currency", default = Util().DEFAULT_CURRENCY, help = "currency used in gnucash. Default is BRL.")
+    parser.add_argument("-gf", "--gnucash_file", default = Util().DEFAULT_GNUCASH_FILE, help = "GNUCash xml file to write")
+    parser.add_argument("-a", "--account", choices = ["nubank", "ciw", "cef-savings", "itau-cc", "itau-savings", "bradesco-savings"], required = True, help = "Set account that will be used.")
+    parser.add_argument("-af", "--account_src_file", required = True, help = "Set account source to integrate")
+
+    gnucash_importer.main(parser.parse_args())
+    

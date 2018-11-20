@@ -13,7 +13,7 @@ test: clean test_verbose
 
 # TODO use gnu time
 run:
-	python3 gnucash-importer/gnucash_importer.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx
+	python3 gnucash-importer/__init__.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx
 
 build:
 	python3 setup.py sdist bdist_wheel
@@ -22,7 +22,7 @@ dist_test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 run_verbose:
-	python3 gnucash_importer.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx -v
+	python3 gnucash-importer/__init__.py -gf example/test_ledger.gnucash -a nubank -af example/local/nubank-2016-10.ofx -v
 
 test_verbose: run_verbose
 	git diff HEAD example/test_ledger.gnucash
