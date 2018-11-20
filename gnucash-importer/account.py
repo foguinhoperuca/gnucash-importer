@@ -10,7 +10,14 @@ class Account(object):
     _acc_from = None
     _acc_to = None
     _account_src_file = None
+    _name = None
 
+    def __init__(self, acc_from, acc_to, acc_src_file, name):
+        self._acc_from = acc_from
+        self._to = acc_to
+        self._account_src_file = acc_src_file
+        self._name = name
+        
     def __init__(self, acc_from, acc_to, acc_src_file):
         self._acc_from = acc_from
         self._to = acc_to
@@ -49,6 +56,16 @@ class Account(object):
     def account_src_file(self):
         del self._account_src_file
 
+    @property
+    def name(self):
+        return self._name
+    @name.setter
+    def name(self, value):
+        self._name = value
+    @name.deleter
+    def name(self):
+        del self._name
+
     def get_items(self):
         file_type = os.path.splitext(self.account_src_file)[1]
 
@@ -65,33 +82,39 @@ class Nubank(Account):
         super(Nubank, self).__init__(acc_src_file)
         self.acc_from = Util().DEFAULT_NUBANK_FROM
         self.acc_to = Util().DEFAULT_NUBANK_TO
+        self.name = "Nubank"
 
 class CashInWallet(Account):
     def __init__(self, acc_src_file):
         super(CashInWallet, self).__init__(acc_src_file)
         self.acc_from = Util().DEFAULT_CIW_FROM
         self.acc_to = Util().DEFAULT_CIW_TO
+        self.name = "Cash in Wallet"
 
 class CefSavingsAccount(Account):
     def __init__(self, acc_src_file):
         super(CefSavingsAccount, self).__init__(acc_src_file)
         self.acc_from = Util().DEFAULT_CEF_SAVINGS_FROM
         self.acc_to = Util().DEFAULT_CEF_SAVINGS_TO
+        self.name = "CEF Savings Account"
 
 class ItauCheckingAccount(Account):
     def __init__(self, acc_src_file):
         super(ItauCheckingAccount, self).__init__(acc_src_file)
         self.acc_from = Util().DEFAULT_ITAU_CHECKING_ACCOUNT_FROM
         self.acc_to = Util().DEFAULT_ITAU_CHECKING_ACCOUNT_TO
+        self.name = "ITAU Checking Account"
 
 class ItauSavingsAccount(Account):
     def __init__(self, acc_src_file):
         super(ItauSavingsAccount, self).__init__(acc_src_file)
         self.acc_from = Util().DEFAULT_ITAU_SAVINGS_FROM
         self.acc_to = Util().DEFAULT_ITAU_SAVINGS_TO
+        self.name = "ITAU Savings Account"
 
 class BradescoSavingsAccount(Account):
     def __init__(self, acc_src_file):
         super(BradescoSavingsAccount, self).__init__(acc_src_file)
         self.acc_from = Util().DEFAULT_BRADESCO_SAVINGS_FROM
         self.acc_to = Util().DEFAULT_BRADESCO_SAVINGS_TO
+        self.name = "BRADESCO Savings Account"
