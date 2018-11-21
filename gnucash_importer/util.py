@@ -45,11 +45,13 @@ class Util:
     Helper to discovery API of an object
     """
     def show_methods(obj):
+        logging.basicConfig(level = logging.DEBUG, format = Util.LOG_FORMAT_DEBUG)
         logging.debug(colored("_______________________________________________________", 'cyan'))
         logging.debug(colored("type(obj): {t}".format(t = type(obj)), 'cyan'))
         for method in [method_name for method_name in dir(obj) if callable(getattr(obj, method_name))]:
             print(method)
         logging.debug(colored("_______________________________________________________", 'cyan'))
+        help(obj)
 
     def info(msg):
         return colored(msg, 'blue')
