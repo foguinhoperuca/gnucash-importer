@@ -28,6 +28,5 @@ test_verbose: run_verbose
 	git diff HEAD example/test_ledger.gnucash
 
 pytest: clean
-	python3 -m unittest test/test_ledger.py
-	# python3 -m unittest test.test_ledger.py # run single test
+	python3 -m unittest test.test_ledger # run single test
 	# python3 -m unittest discover # auto discover tests
