@@ -33,8 +33,10 @@ class EntryReader(object):
 
 class OfxReader(EntryReader):
     def get_transactions(self, report_file):
-        ofx = OfxParser.parse(open(report_file))
+        report = open(report_file)
+        ofx = OfxParser.parse(report)
         self.transactions = ofx.account.statement.transactions
+        report.close()
 
         return self.transactions
 
