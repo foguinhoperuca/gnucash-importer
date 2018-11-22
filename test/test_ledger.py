@@ -5,7 +5,7 @@ from gnucash_importer.ledger import Ledger
 import unittest
 from gnucash import Session, GncCommodity
 
-class TestLedger(unittest.TestCase):
+class LedgerTestCase(unittest.TestCase):
     def setUp(self):
         self.util = Util()
         self.account = Nubank('example/local/nubank-2016-10.ofx')

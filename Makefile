@@ -28,4 +28,4 @@ test_verbose: run_verbose
 	git diff HEAD example/test_ledger.gnucash
 
 pytest: clean
-	python3 -m unittest test.test_ledger # run single test case
+	python3 -m unittest test.test_ledger test.test_read_entry
