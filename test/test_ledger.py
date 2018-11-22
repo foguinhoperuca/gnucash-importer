@@ -5,7 +5,6 @@ from gnucash_importer.ledger import Ledger
 import unittest
 
 # from gnucash import Session, Transaction, Split, GncNumeric, gnucash_core_c
-import xml.etree.ElementTree as ET
 
 class TestLedger(unittest.TestCase):
     def setUp(self):
@@ -13,39 +12,23 @@ class TestLedger(unittest.TestCase):
         self.account = Nubank('example/local/nubank-2016-10.ofx')
         self.ledger = Ledger(self.account, self.util.DEFAULT_CURRENCY, False, self.util.DEFAULT_GNUCASH_FILE)
 
-        # FIXME can't get count_transactions
-        # print("self.util.DEFAULT_GNUCASH_FILE: {d}".format(d = self.util.DEFAULT_GNUCASH_FILE))
-        # session = Session(self.util.DEFAULT_GNUCASH_FILE)
-        # gnucash_book = session.book
-        # Util.show_methods(gnucash_book)
-        # Util.show_methods(gnucash_core_c.gnc_book_count_transactions)
-        # print(gnucash_core_c.gnc_book_count_transactions(session.book))
-        # print(gnucash_core_c.gnc_book_count_transactions(gnucash_book)')
+    # TODO implement catch exception
+    def test_get_quantity_transactions(self): # only happy case
+        # initial quantity
+        self.assertEqual(self.ledger.get_quantity_transactions(), 36)
 
-        # TODO implement Manual count gnucash transactions...
-        # <gnc:count-data cd:type="transaction">45</gnc:count-data>
-        tree = ET.parse(self.util.DEFAULT_GNUCASH_FILE)
-        root = tree.getroot()
-        
-        print(root.tag)
-        print(root.attrib)
-        
-        for child in root:
-            print("tag: {t}".format(t = child.tag))
-            print("attrib: {a}".format(a = child.attrib))
+        # after commit some transactions
+        self.ledger.write()
+        self.assertEqual(self.ledger.get_quantity_transactions(), 45)
 
-        print("+++++++++++++++++")
-        for x in root.iter('count-data'):
-            print(x.attrib)
-
-        # for node in tree.findall('gnc:book'):
-        #     print("inside tree...")
-        #     url = node.attrib.get('xmlUrl')
-        #     if url:
-        #         print(url)
-
+    @unittest.skip("not implemented yet!")
     def test_get_gnucash_currency(self):
-        # def get_gnucash_currency(self, book, curr = 'BRL'):
+        book = None             # TODO implement setUp to get book information
+        currency = self.ledger.get_gnucas_currency(book, self.util.DEFAULT_CURRENCY)
+        self.assertEqual('BRL', currency)
+
+    @unittest.skip("not implemented yet!")
+    def test_write(self):
         self.assertTrue(True)
         # self.ledger.write()
 

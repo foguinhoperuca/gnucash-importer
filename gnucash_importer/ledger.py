@@ -1,6 +1,7 @@
 import logging
 import datetime
 from decimal import Decimal
+import xml.etree.ElementTree as ET
 from gnucash import Session, Transaction, Split, GncNumeric
 from util import Util
 
@@ -164,3 +165,15 @@ class Ledger():
         # logging.debug(Util.debug('currency: type => {curr_type}, value => {value}'.format(curr_type = type(gnucash_currency), value = gnucash_currency)))
 
         return gnucash_currency
+
+    # TODO can't get count_transactions by gnucash_core_c.gnc_book_count_transactions(session.book)
+    def get_quantity_transactions(self):
+        total_transactions = None
+        for counter in ET.parse(self.src_file).getroot()[1].iter('{http://www.gnucash.org/XML/gnc}count-data'):
+            if counter.attrib['{http://www.gnucash.org/XML/cd}type' ] == 'transaction': # # root[1][4]
+                total_transactions = int(counter.text)
+
+        if total_transactions is None:
+            raise ValueError('Total transaction tag not found!!')
+
+        return total_transactions

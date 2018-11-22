@@ -1,5 +1,5 @@
 
-* TODO implement a packge version
+* TODO implement a package version
 ** TODO create a binary version
 ** TODO deb
 ** DONE pip/egg
@@ -9,9 +9,15 @@
 * TODO create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)
 * TODO implement config
 * TODO implement ncurses interface
-* TODO implement unit test
+* TODO implement test
+** TODO implement unittest discover --> python3 -m unittest discover
+** DONE implement basic layout
 * TODO add CHANGELOG.md
 * TODO use virtualenv
+* TODO implement get total transactions
+** TODO verify an implementation for gnucash-bind using gnucash_core_c.gnc_book_count_transactions(session.book)
+** DONE implement manually
+* TODO FIXME gnucash_importer/read_entry.py:36: ResourceWarning: unclosed file <_io.TextIOWrapper name='example/local/nubank-2016-10.ofx' mode='r' encoding='UTF-8'> ofx = OfxParser.parse(open(report_file))
 * TODO log
 ** TODO write to file
 ** DONE basic implementation
