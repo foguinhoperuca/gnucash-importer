@@ -137,6 +137,7 @@ class Ledger():
     def get_gnucash_account_by_path(self, root, path):
         acc = None
         if not root == None:
+            # FIXME catch if not found root.lookup_by_name
             acc = root.lookup_by_name(path[0])
             logging.debug(Util.debug("root.....: {a}".format(a = root.GetName())))
             logging.debug(Util.debug("path[0]..: {p}".format(p = path[0])))

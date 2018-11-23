@@ -32,6 +32,18 @@ class LedgerTestCase(unittest.TestCase):
         self.assertEqual(currency.is_iso(), self.currency.is_iso())
         self.assertEqual(currency.get_mnemonic(), self.currency.get_mnemonic())
 
+    def test_get_gnucash_account_by_path(self):
+        # Happy case
+        root = self.book.get_root_account()
+        path = "Assets:Cash in Wallet".split(':') # Testing a balance != 0
+        gnucash_account = self.ledger.get_gnucash_account_by_path(root, path)
+
+        self.assertEqual(-6.0, gnucash_account.GetBalance().to_double())
+        self.assertEqual("Cash in Wallet", gnucash_account.GetName())
+        self.assertEqual("Assets.Cash in Wallet", gnucash_account.get_full_name())
+
+        # TODO implement the catch if not found root.lookup_by_name
+
     def test_write(self):
         self.ledger.write()
         self.assertEqual(self.ledger.get_quantity_transactions(), 45)
