@@ -1,3 +1,4 @@
+import logging
 import gnucash_importer
 from gnucash_importer.util import Util
 from gnucash_importer.account import Nubank
@@ -32,11 +33,9 @@ class LedgerTestCase(unittest.TestCase):
         self.assertEqual(currency.is_iso(), self.currency.is_iso())
         self.assertEqual(currency.get_mnemonic(), self.currency.get_mnemonic())
 
-    def test_get_gnucash_account_by_path(self):
+    def test_get_gnucash_account(self):
         # Happy case
-        root = self.book.get_root_account()
-        path = "Assets:Cash in Wallet".split(':') # Testing a balance != 0
-        gnucash_account = self.ledger.get_gnucash_account_by_path(root, path)
+        gnucash_account = self.ledger.get_gnucash_account(self.book, "Assets:Cash in Wallet") # Testing a balance != 0
 
         self.assertEqual(-6.0, gnucash_account.GetBalance().to_double())
         self.assertEqual("Cash in Wallet", gnucash_account.GetName())

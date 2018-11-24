@@ -29,3 +29,6 @@ test_verbose: run_verbose
 
 pytest: clean
 	python3 -m unittest test.test_ledger test.test_read_entry
+
+pyfocus: clean
+	DEBUG_TEST=True python3 -m unittest test.test_ledger

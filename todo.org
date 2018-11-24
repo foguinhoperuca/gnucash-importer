@@ -1,4 +1,7 @@
-
+* implement doc
+** uml
+** source code
+** manual
 * TODO implement a package version
 ** TODO create a binary version
 ** TODO deb
@@ -10,6 +13,7 @@
 * TODO implement ncurses interface
 * TODO implement test
 ** TODO implement unittest discover --> python3 -m unittest discover
+** implement a CI
 ** DONE implement basic layout
 * TODO add CHANGELOG.md
 * TODO use virtualenv
