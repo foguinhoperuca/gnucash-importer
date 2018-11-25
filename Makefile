@@ -28,7 +28,7 @@ test_verbose: run_verbose
 	git diff HEAD example/test_ledger.gnucash
 
 pytest: clean
-	python3 -m unittest test.test_ledger test.test_read_entry
+	python3 -m unittest test.test_ledger test.test_read_entry test.test_account
 
 pyfocus: clean
-	DEBUG_TEST=True python3 -m unittest test.test_ledger
+	DEBUG_TEST=True python3 -m unittest test.test_account
