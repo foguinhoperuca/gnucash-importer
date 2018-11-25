@@ -9,7 +9,7 @@ from gnucash import Session, GncCommodity
 class LedgerTestCase(unittest.TestCase):
     def setUp(self):
         self.util = Util()
-        self.account = Nubank('example/local/nubank-2016-10.ofx')
+        self.account = Nubank(self.util.DEFAULT_ACCOUNT_SRC_FILE)
         self.ledger = Ledger(self.account, self.util.DEFAULT_CURRENCY, False, self.util.DEFAULT_GNUCASH_FILE)
 
         session = Session(self.util.DEFAULT_GNUCASH_FILE)

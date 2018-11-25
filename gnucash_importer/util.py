@@ -11,6 +11,7 @@ class Util:
     LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
     DEFAULT_CURRENCY = None
     DEFAULT_GNUCASH_FILE = None
+    DEFAULT_ACCOUNT_SRC_FILE = None
     DEFAULT_NUBANK_TO = None
     DEFAULT_NUBANK_FROM = None
     DEFAULT_CIW_TO = None
@@ -28,6 +29,7 @@ class Util:
         self.config.read('setup.cfg')
         self.DEFAULT_CURRENCY = self.config['app_init']['default_currency']
         self.DEFAULT_GNUCASH_FILE = self.config['app_init']['default_gnucash_file']
+        self.DEFAULT_ACCOUNT_SRC_FILE = self.config['app_init']['default_account_src_file']
         self.DEFAULT_NUBANK_TO = self.config['app_init']['default_nubank_to']
         self.DEFAULT_NUBANK_FROM = self.config['app_init']['default_nubank_from']
         self.DEFAULT_CIW_TO = self.config['app_init']['default_ciw_to']
