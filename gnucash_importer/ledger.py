@@ -155,17 +155,8 @@ class Ledger():
 
     def get_gnucash_currency(self, book, curr = 'BRL'):
         commod_tab = book.get_table()
-        # currency = commod_tab.lookup('ISO4217', curr)  # FIXME curr isn't working.
-        gnucash_currency = commod_tab.lookup('ISO4217', 'BRL') # works!!!
 
-        # curr_local = Util().DEFAULT_CURRENCY
-        # gnucash_currency = commod_tab.lookup('ISO4217', curr_local)
-        # curr_local2 = 'BRL'
-        # gnucash_currency = commod_tab.lookup('ISO4217', curr_local2)
-        # logging.debug(Util.debug('commod_tab: type => {c}, value => {v}'.format(c = type(commod_tab), v = commod_tab)))
-        # logging.debug(Util.debug('currency: type => {curr_type}, value => {value}'.format(curr_type = type(gnucash_currency), value = gnucash_currency)))
-
-        return gnucash_currency
+        return commod_tab.lookup('ISO4217', curr)
 
     # TODO can't get count_transactions by gnucash_core_c.gnc_book_count_transactions(session.book)
     def get_quantity_transactions(self):
