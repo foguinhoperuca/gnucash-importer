@@ -16,6 +16,9 @@ test: clean test_verbose
 run:
 	python3 gnucash_importer/__init__.py -gf $(FIXTURE_LEDGER) -a nubank -af test/fixtures/creditcard.ofx
 
+generic: clean
+	python3 gnucash_importer/__init__.py -gf $(FIXTURE_LEDGER) -a generic -af test/fixtures/creditcard.ofx -acf "Liabilities:Credit Card:Nubank" -act "Imbalance-BRL:nubank"
+
 build:
 	python3 setup.py sdist bdist_wheel
 

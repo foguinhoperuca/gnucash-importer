@@ -14,17 +14,9 @@ class Account(object):
 
     def __init__(self, acc_from, acc_to, acc_src_file, name):
         self._acc_from = acc_from
-        self._to = acc_to
+        self._acc_to = acc_to
         self._account_src_file = acc_src_file
         self._name = name
-        
-    def __init__(self, acc_from, acc_to, acc_src_file):
-        self._acc_from = acc_from
-        self._to = acc_to
-        self._account_src_file = acc_src_file
-
-    def __init__(self, acc_src_file):
-        self._account_src_file = acc_src_file
 
     @property
     def acc_from(self):
@@ -76,45 +68,34 @@ class Account(object):
         else:
             return OfxReader().get_transactions(self.account_src_file)
 
+class GenericAccount(Account):
+    def __init__(self, acc_from, acc_to, acc_src_file):
+        super(GenericAccount, self).__init__(acc_from, acc_to, acc_src_file, "USER DEFINED IMPORT")
+
 # for every source account do:
 class Nubank(Account):
     def __init__(self, acc_src_file):
-        super(Nubank, self).__init__(acc_src_file)
-        self.acc_from = Util().DEFAULT_NUBANK_FROM
-        self.acc_to = Util().DEFAULT_NUBANK_TO
-        self.name = "Nubank"
+        super(Nubank, self).__init__(Util().DEFAULT_NUBANK_FROM, Util().DEFAULT_NUBANK_TO, acc_src_file, "Nubank")
+        # self.acc_from = Util().DEFAULT_NUBANK_FROM
+        # self.acc_to = Util().DEFAULT_NUBANK_TO
+        # self.name = "Nubank"
 
 class CashInWallet(Account):
     def __init__(self, acc_src_file):
-        super(CashInWallet, self).__init__(acc_src_file)
-        self.acc_from = Util().DEFAULT_CIW_FROM
-        self.acc_to = Util().DEFAULT_CIW_TO
-        self.name = "Cash in Wallet"
+        super(CashInWallet, self).__init__(Util().DEFAULT_CIW_FROM, Util().DEFAULT_CIW_TO, acc_src_file, "Cash in Wallet")
 
 class CefSavingsAccount(Account):
     def __init__(self, acc_src_file):
-        super(CefSavingsAccount, self).__init__(acc_src_file)
-        self.acc_from = Util().DEFAULT_CEF_SAVINGS_FROM
-        self.acc_to = Util().DEFAULT_CEF_SAVINGS_TO
-        self.name = "CEF Savings Account"
+        super(CefSavingsAccount, self).__init__(Util().DEFAULT_CEF_SAVINGS_FROM, Util().DEFAULT_CEF_SAVINGS_TO, acc_src_file, "CEF Savings Account")
 
 class ItauCheckingAccount(Account):
     def __init__(self, acc_src_file):
-        super(ItauCheckingAccount, self).__init__(acc_src_file)
-        self.acc_from = Util().DEFAULT_ITAU_CHECKING_ACCOUNT_FROM
-        self.acc_to = Util().DEFAULT_ITAU_CHECKING_ACCOUNT_TO
-        self.name = "ITAU Checking Account"
+        super(ItauCheckingAccount, self).__init__(Util().DEFAULT_ITAU_CHECKING_ACCOUNT_FROM, Util().DEFAULT_ITAU_CHECKING_ACCOUNT_TO, acc_src_file, "ITAU Checking Account")
 
 class ItauSavingsAccount(Account):
     def __init__(self, acc_src_file):
-        super(ItauSavingsAccount, self).__init__(acc_src_file)
-        self.acc_from = Util().DEFAULT_ITAU_SAVINGS_FROM
-        self.acc_to = Util().DEFAULT_ITAU_SAVINGS_TO
-        self.name = "ITAU Savings Account"
+        super(ItauSavingsAccount, self).__init__(Util().DEFAULT_ITAU_SAVINGS_FROM, Util().DEFAULT_ITAU_SAVINGS_TO, acc_src_file, "ITAU Savings Account")
 
 class BradescoSavingsAccount(Account):
     def __init__(self, acc_src_file):
-        super(BradescoSavingsAccount, self).__init__(acc_src_file)
-        self.acc_from = Util().DEFAULT_BRADESCO_SAVINGS_FROM
-        self.acc_to = Util().DEFAULT_BRADESCO_SAVINGS_TO
-        self.name = "BRADESCO Savings Account"
+        super(BradescoSavingsAccount, self).__init__(Util().DEFAULT_BRADESCO_SAVINGS_FROM, Util().DEFAULT_BRADESCO_SAVINGS_TO, acc_src_file, "BRADESCO Savings Account")

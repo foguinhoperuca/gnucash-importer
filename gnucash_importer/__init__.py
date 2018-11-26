@@ -4,7 +4,7 @@ from cli import Cli
 from util import Util
 from ledger import Ledger
 from read_entry import OfxReader, QifReader, CsvReader
-from account import Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
+from account import GenericAccount, Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
 
 name = "gnucash_importer"
 __all__ = ["account", "cli", "ledger", "ncurses", "red_entry", "util"] # TODO verify what that's meaning
@@ -16,8 +16,10 @@ if __name__ == "__main__":
     parser.add_argument("-v", "--verbose", action = 'store_true', help = "Set *VERBOSE* logging i.e.: loglevel = logging.DEBUG")
     parser.add_argument("-c", "--currency", default = Util().DEFAULT_CURRENCY, help = "currency used in gnucash. Default is BRL.")
     parser.add_argument("-gf", "--gnucash_file", default = Util().DEFAULT_GNUCASH_FILE, help = "GNUCash xml file to write")
-    parser.add_argument("-a", "--account", choices = ["nubank", "ciw", "cef-savings", "itau-cc", "itau-savings", "bradesco-savings"], required = True, help = "Set account that will be used.")
+    parser.add_argument("-a", "--account", choices = ["nubank", "ciw", "cef-savings", "itau-cc", "itau-savings", "bradesco-savings", "generic"], required = True, help = "Set account that will be used.")
     parser.add_argument("-af", "--account_src_file", required = True, help = "Set account source to integrate")
+    parser.add_argument("-acf", "--account_from", help = "Define from import")
+    parser.add_argument("-act", "--account_to", help = "Define to import")
 
     args = parser.parse_args()
     if args.verbose:
@@ -51,7 +53,9 @@ if __name__ == "__main__":
         "itau-cc": ItauCheckingAccount(args.account_src_file),
         "itau-savings": ItauSavingsAccount(args.account_src_file),
         "bradesco-savings": BradescoSavingsAccount(args.account_src_file)
-    }.get(args.account, None)
+    }.get(args.account, GenericAccount(args.account_from, args.account_to, args.account_src_file))
+
+    logging.debug(Util.debug(vars(account)))
 
     if account is None:
         raise Exception("Failed with account: need be defined!!!")
