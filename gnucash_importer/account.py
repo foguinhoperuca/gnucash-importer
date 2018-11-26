@@ -78,8 +78,12 @@ class Account(object):
             return OfxReader().get_transactions(self.account_src_file)
 
 class GenericAccount(Account):
-    def __init__(self, acc_from, acc_to, acc_src_file):
-        super(GenericAccount, self).__init__(acc_from, acc_to, acc_src_file, "USER DEFINED IMPORT")
+    DEFAULT_NAME = "USER DEFINED IMPORT"
+    def __init__(self, acc_from, acc_to, acc_src_file, name = DEFAULT_NAME):
+        if name is None:
+            name = self.DEFAULT_NAME
+
+        super(GenericAccount, self).__init__(acc_from, acc_to, acc_src_file, name)
 
 # for every source account do:
 class Nubank(Account):

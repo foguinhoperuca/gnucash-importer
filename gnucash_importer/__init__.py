@@ -1,5 +1,6 @@
 import logging
 import argparse
+import sys
 from cli import Cli
 from util import Util
 from ledger import Ledger
@@ -37,28 +38,36 @@ if __name__ == "__main__":
     logging.basicConfig(level = loglevel, format = logformat)
 
     if args.verbose:
-        logging.debug(Util.debug("ARGS:"))
-        logging.debug(Util.debug(args))
-        logging.debug(Util.debug(args.dry_run))
-        logging.debug(Util.debug(loglevel))
-        logging.debug(Util.debug(args.currency))
-        logging.debug(Util.debug(args.gnucash_file))
-        logging.debug(Util.debug(args.account))
-        logging.debug(Util.debug(args.account_src_file))
+        logging.debug(Util.debug("args: {v}".format(v = vars(args))))
 
-    account = {
-        "nubank": Nubank(args.account_src_file),
-        "ciw": CashInWallet(args.account_src_file),
-        "cef-savings": CefSavingsAccount(args.account_src_file),
-        "itau-cc": ItauCheckingAccount(args.account_src_file),
-        "itau-savings": ItauSavingsAccount(args.account_src_file),
-        "bradesco-savings": BradescoSavingsAccount(args.account_src_file)
-    }.get(args.account, GenericAccount(args.account_from, args.account_to, args.account_src_file))
+    account = None
+    if args.account == "nubank":
+        account = Nubank(args.account_src_file)
+    elif args.account == "ciw":
+        account = CashInWallet(args.account_src_file)
+    elif args.account == "cef-savings":
+        account = CefSavingsAccount(args.account_src_file)
+    elif args.account == "itau-cc":
+        account = ItauCheckingAccount(args.account_src_file)
+    elif args.account == "itau-savings":
+        account = ItauSavingsAccount(args.account_src_file)
+    elif args.account == "bradesco-savings":
+        account = BradescoSavingsAccount(args.account_src_file)
+    else:
+        try:
+            account = GenericAccount(args.account_from, args.account_to, args.account_src_file, args.account)
+        except Exception as error:
+            logging.error(Util.error("Can't work without account_from || account_to || account_src_file!! Please, inform all parameters!!"))
+            logging.error(Util.error("message: {m}".format(m = error)))
+            logging.error(Util.error("type: {t} with args {args}".format(t = type(error), args = error.args)))
+            sys.exit("Failed execution. Please, see the log above.")
 
     logging.debug(Util.debug(vars(account)))
 
     if account is None:
-        raise Exception("Failed with account: need be defined!!!")
+        logging.error(Util.error("Failed with account: need be defined!!!"))
+        sys.exit("Failed execution. Please, see the log above.")
 
-
+    # FIXME args.gnuccash_file must be mandatory!!!
     Cli.import_data(account, args.currency, args.dry_run, args.gnucash_file)
+    sys.exit(0)

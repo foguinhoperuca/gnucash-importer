@@ -1,3 +1,4 @@
+.PHONY: all clean test run generic build dist_test run_verbose test_verbose pytest pyfocus
 FIXTURE_LEDGER=test/fixtures/test_ledger.gnucash
 
 all: clean run
@@ -30,6 +31,7 @@ run_verbose:
 
 test_verbose: run_verbose
 	git diff HEAD $(FIXTURE_LEDGER)
+	$(MAKE) clean
 
 pytest: clean
 	python3 -m unittest test.test_ledger test.test_read_entry test.test_account
