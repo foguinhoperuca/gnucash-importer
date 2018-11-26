@@ -1,10 +1,10 @@
 from gnucash_importer.read_entry import OfxReader, QifReader, CsvReader
+from gnucash_importer.util import Util
 import unittest
 
 class EntryReaderTestCase(unittest.TestCase):
-    # FIXME create a fixture for this test (example/local/nubank-2016-10.ofx is private file)
     def test_get_transactions_ofx(self):
-        transactions = OfxReader().get_transactions("example/local/nubank-2016-10.ofx")
+        transactions = OfxReader().get_transactions(Util().DEFAULT_ACCOUNT_SRC_FILE)
         self.assertEqual(len(transactions), 9)
 
     @unittest.skip("not implemented yet")
