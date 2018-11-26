@@ -49,11 +49,13 @@ class Util:
     def show_methods(obj):
         logging.basicConfig(level = logging.DEBUG, format = Util.LOG_FORMAT_DEBUG)
         logging.debug(colored("_______________________________________________________", 'cyan'))
-        logging.debug(colored("type(obj): {t}".format(t = type(obj)), 'cyan'))
+        logging.debug(colored("type(obj)..: {t}".format(t = type(obj)), 'cyan'))
+        logging.debug(colored("vars(obj)..: {v}".format(v = vars(obj)), 'cyan'))
+        logging.debug(colored("dir(obj)...: {d}".format(d = dir(obj)), 'cyan'))
         for method in [method_name for method_name in dir(obj) if callable(getattr(obj, method_name))]:
             print(method)
-        logging.debug(colored("_______________________________________________________", 'cyan'))
         help(obj)
+        logging.debug(colored("_______________________________________________________", 'cyan'))
 
     def info(msg):
         return colored(msg, 'blue')

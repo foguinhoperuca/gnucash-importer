@@ -13,6 +13,15 @@ class Account(object):
     _name = None
 
     def __init__(self, acc_from, acc_to, acc_src_file, name):
+        if acc_from is None:
+            raise ValueError("acc_from can't be None!! Please, inform the \"account from\" parameter")
+
+        if acc_to is None:
+            raise ValueError("acc_to can't be None!! Please, inform the \"account to\" parameter")
+
+        if acc_src_file is None:
+            raise ValueError("acc_src_file can't be None!! Please, inform the \"account source file\" parameter")
+
         self._acc_from = acc_from
         self._acc_to = acc_to
         self._account_src_file = acc_src_file
@@ -76,9 +85,6 @@ class GenericAccount(Account):
 class Nubank(Account):
     def __init__(self, acc_src_file):
         super(Nubank, self).__init__(Util().DEFAULT_NUBANK_FROM, Util().DEFAULT_NUBANK_TO, acc_src_file, "Nubank")
-        # self.acc_from = Util().DEFAULT_NUBANK_FROM
-        # self.acc_to = Util().DEFAULT_NUBANK_TO
-        # self.name = "Nubank"
 
 class CashInWallet(Account):
     def __init__(self, acc_src_file):
