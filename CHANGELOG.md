@@ -10,17 +10,23 @@
 
 # Changelog #
 
-Todas as atualizações notáveis serão documentadas neste arquivo. Mais detalhes sobre o projeto podem ser vistos no [README](README.md).
+All notable changes to this project will be documented in this file. More details in [README](README.md).
 
-O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) e é aderente ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] ##
 
-* see todo.org for more details... 
+Here are the scope to be released. See [todo.org](todo.org) for more details.
 
-## [0.1.0][HEAD] - 2018-11-19 ##
+* Implemented virtualenv
+* Implement UI with ncurse
+* Make this package debian friendly
+* Doc this project
+* Create bin version
 
-Deploy desktops in CMDB
+## [0.1.0][HEAD] - 2018-XX-XX ##
+
+Basic funcional version.
 
 ### Latest Commit's Hashes ###
 
@@ -29,4 +35,11 @@ Deploy desktops in CMDB
 
 ### Added ###
 
-* Added something useful here!
+* Implemented import transactions from ofx to gnucash
+* Implemented tests and fixtures
+* Added a build tool (GNU Build System)
+* Made this package pypi friendly
+* Implementeted a config file
+* Added support to logging
+* Added this changelog to manage releases
+* Implemented basic tests with unittest
