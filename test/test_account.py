@@ -2,7 +2,6 @@ import logging
 import unittest
 import gnucash_importer
 from gnucash_importer.util import Util
-
 from gnucash_importer.account import GenericAccount, Nubank
 
 class AccountTestCase(unittest.TestCase):

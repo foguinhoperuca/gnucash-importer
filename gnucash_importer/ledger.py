@@ -1,3 +1,5 @@
+"""Module that interact with gnucash-bindings."""
+
 import logging
 import datetime
 from decimal import Decimal
@@ -5,10 +7,8 @@ import xml.etree.ElementTree as ET
 from gnucash import Session, Transaction, Split, GncNumeric
 from util import Util
 
-"""
-Meant to be the main interaction with GnuCash
-"""
 class Ledger():
+    """Meant to be the main interaction with GnuCash."""
     _account = None
     _currency = None
     _dry_run = None
@@ -61,6 +61,7 @@ class Ledger():
         del self._src_file
 
     def write(self):
+        """Write all gnucash transactions to physical file."""
         session = Session(self.src_file)
         gnucash_book = session.book
         imported_items = set()
@@ -86,6 +87,7 @@ class Ledger():
 
     # TODO fill better - more splits...
     def create_tansaction(self, gnucash_book, item):
+        """Generate a gnucash transaction to be used elsewhere."""
         if gnucash_book is None:
             logging.error(Util.error("Could not create a gnucash transaction: missing book!!"))
             raise Exception("Could not create a gnucash transaction: missing book!!")
@@ -131,10 +133,13 @@ class Ledger():
 
         tx.CommitEdit()
 
+    # FIXME can be simplified?!? Can be removed albeit the recursion in get_gnucash_account_by_path?!?!
     def get_gnucash_account(self, book, acc_name):
+        """Wrapper method to get gnucash account."""
         return self.get_gnucash_account_by_path(book.get_root_account(), acc_name.split(':'))
 
     def get_gnucash_account_by_path(self, root, path):
+        """De facto, implement the search for an account into gnucash file."""
         acc = None
         if not root == None:
             # FIXME catch if not found root.lookup_by_name
@@ -154,12 +159,14 @@ class Ledger():
         return acc
 
     def get_gnucash_currency(self, book, curr = 'BRL'):
+        """Helper to get gnucash currency data type."""
         commod_tab = book.get_table()
 
         return commod_tab.lookup('ISO4217', curr)
 
     # TODO can't get count_transactions by gnucash_core_c.gnc_book_count_transactions(session.book)
     def get_quantity_transactions(self):
+        """Implement manual count number of transactions in a physical gnucash file."""
         total_transactions = None
         for counter in ET.parse(self.src_file).getroot()[1].iter('{http://www.gnucash.org/XML/gnc}count-data'):
             if counter.attrib['{http://www.gnucash.org/XML/cd}type' ] == 'transaction': # # root[1][4]

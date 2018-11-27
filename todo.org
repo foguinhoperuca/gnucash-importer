@@ -1,15 +1,12 @@
-* TODO implement doc
-** TODO uml
-** TODO source code
-** TODO manual
 * TODO implement a package version
 ** TODO create a binary version
 ** TODO deb
+** TODO dist
+*** TODO pypi
+*** TODO ubuntu/debian
+*** DONE source code (github)
 ** DONE pip/egg
-* TODO dist
-** TODO pypi
-** TODO ubuntu/debian
-* TODO implement get total transactions
+* TODO implement get total number of transactions
 ** TODO [#C] verify an implementation for gnucash-bind using gnucash_core_c.gnc_book_count_transactions(session.book)
 ** DONE implement manually
 * TODO implement test
@@ -22,9 +19,13 @@
 ** TODO write to file
 ** DONE basic implementation
 ** DONE color
+* TODO implement doc
+** TODO manual published in blogpost/social media
+** DONE source code with docstring
 * TODO implement ncurses interface
 * TODO create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)
-* TODO use virtualenv
+* TODO implement abstract class PEP 3119 - https://docs.python.org/3/library/abc.html
+* DONE use virtualenv
 * DONE add CHANGELOG.md
 * DONE implement config
 * DONE FIXME gnucash_importer/read_entry.py:36: ResourceWarning: unclosed file <_io.TextIOWrapper name='example/local/nubank-2016-10.ofx' mode='r' encoding='UTF-8'> ofx = OfxParser.parse(open(report_file))

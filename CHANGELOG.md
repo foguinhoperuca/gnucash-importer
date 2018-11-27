@@ -18,10 +18,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 Here are the scope to be released. See [todo.org](todo.org) for more details.
 
-* Implemented virtualenv
 * Implement UI with ncurse
 * Make this package debian friendly
-* Doc this project
 * Create bin version
 
 ## [0.1.0][HEAD] - 2018-XX-XX ##
@@ -43,3 +41,4 @@ Basic funcional version.
 * Added support to logging
 * Added this changelog to manage releases
 * Implemented basic tests with unittest
+* Added basic documentation to source code

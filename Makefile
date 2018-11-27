@@ -38,3 +38,7 @@ pytest: clean
 
 pyfocus: clean
 	DEBUG_TEST=True python3 -m unittest test.test_account
+
+# TODO configure it!!!
+doc: clean
+	pandoc README.md --standalone -o README.html -f gfm -t html --css vimwiki.css --metadata pagetitle="README v0.1.0"

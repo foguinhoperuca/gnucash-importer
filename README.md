@@ -48,3 +48,12 @@ The gnucash's xml file will act as transaction database. All other reports will 
 * https://krzysztofzuraw.com/blog/2016/makefiles-in-python-projects.html
 * https://github.com/sdementen/gnucash-utilities
 * https://github.com/wesabe/fixofx (has a fakeofx.py to genarete fixtures)
+
+# Enviroment
+
+It can't be used with virtualenv beacause of dependency on python3-gnucash deb package and gnucash itself.
+So, you'll need install direct in OS with command:
+```
+jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-importer/ $ pip3 install -r requirements.txt
+```
+
