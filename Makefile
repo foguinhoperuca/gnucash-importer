@@ -9,6 +9,9 @@ clean:
 	find . -name '*~' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
 	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
+	rm -rf build
+	rm -rf dist
+	rm -rf gnucash_importer.egg-info
 	git checkout $(FIXTURE_LEDGER)
 
 test: clean test_verbose
