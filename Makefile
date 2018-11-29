@@ -1,5 +1,8 @@
-.PHONY: all clean test run generic build dist_test run_verbose test_verbose pytest pyfocus
+.PHONY: all clean test run generic build dist_test run_verbose test_verbose pytest pyfocus doc
+# .SILENT: clean
 FIXTURE_LEDGER=test/fixtures/test_ledger.gnucash
+PLANTUML=/usr/local/plantuml/plantuml.jar
+VERSION=$(shell cat gnucash_importer/version.py | tr -d __version__\ =\ \')
 
 all: clean run
 
@@ -9,6 +12,7 @@ clean:
 	find . -name '*~' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
 	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
+	find doc/ -name '*.png' -exec rm --force {} +
 	rm -rf build
 	rm -rf dist
 	rm -rf gnucash_importer.egg-info
@@ -26,6 +30,12 @@ generic: clean
 build:
 	python3 setup.py sdist bdist_wheel
 
+run_build: build
+	dist/gnucash_importer-0.1.0-py3-none-any.whl
+
+sdist:
+	python3 setup.py sdist
+
 dist_test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
@@ -42,6 +52,10 @@ pytest: clean
 pyfocus: clean
 	DEBUG_TEST=True python3 -m unittest test.test_account
 
-# TODO configure it!!!
 doc: clean
-	pandoc README.md --standalone -o README.html -f gfm -t html --css vimwiki.css --metadata pagetitle="README v0.1.0"
+	mkdir -p build/doc
+	cp -r styles build/doc/
+	pandoc todo.org --standalone -o build/doc/todo.html -f org -t html --css styles/github-pandoc.css --metadata pagetitle="TODO $(VERSION)"
+	pandoc README.md --standalone -o build/doc/README.html -f gfm -t html --css styles/github-pandoc.css --metadata pagetitle="README $(VERSION)"
+	pandoc CHANGELOG.md --standalone -o build/doc/CHANGELOG.html -f gfm -t html --css styles/github-pandoc.css --metadata pagetitle="CHANGELOG $(VERSION)"
+	java -jar $(PLANTUML) doc/model.uml

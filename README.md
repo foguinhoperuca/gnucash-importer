@@ -48,6 +48,7 @@ The gnucash's xml file will act as transaction database. All other reports will 
 * https://krzysztofzuraw.com/blog/2016/makefiles-in-python-projects.html
 * https://github.com/sdementen/gnucash-utilities
 * https://github.com/wesabe/fixofx (has a fakeofx.py to genarete fixtures)
+* https://gist.github.com/foguinhoperuca/ef11a07937e531b5d0e98271f1422de5 (css style for doc)
 
 # Enviroment
 

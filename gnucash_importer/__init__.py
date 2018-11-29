@@ -11,6 +11,8 @@ from account import GenericAccount, Nubank, CashInWallet, CefSavingsAccount, Ita
 
 name = "gnucash_importer"
 __all__ = ["account", "cli", "ledger", "ncurses", "red_entry", "util"] # TODO verify what that's meaning
+with open('gnucash_importer/version.py') as f:
+    exec(f.read())
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")

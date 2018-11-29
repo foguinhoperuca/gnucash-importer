@@ -6,7 +6,6 @@
 *** TODO [#A] pypi
 *** TODO [#B] ubuntu/debian
 *** DONE [#A] source code (github)
-** TODO [#C] create a binary version
 ** DONE [#A] pip/egg
 * TODO [#A] implement test
 ** TODO [#A] Implement test coverage
@@ -30,7 +29,7 @@
 * DONE use virtualenv
 * DONE add CHANGELOG.md
 * DONE implement config
-* DONE FIXME gnucash_importer/read_entry.py:36: ResourceWarning: unclosed file <_io.TextIOWrapper name='example/local/nubank-2016-10.ofx' mode='r' encoding='UTF-8'> ofx = OfxParser.parse(open(report_file))
+* DONE FIXME gnucash_importer/read_entry.py#36: ResourceWarning: unclosed file <_io.TextIOWrapper name='example/local/nubank-2016-10.ofx' mode='r' encoding='UTF-8'> ofx = OfxParser.parse(open(report_file))
 * DONE fix project name (from parser to something that can be used in debin/ubuntu/pypi)
 * DONE implement a build tool (Makefile)
 * DONE implement setup.py
