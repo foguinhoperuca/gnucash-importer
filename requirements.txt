@@ -1,3 +1,4 @@
 ofxparse
 termcolor
 setuptools-version-command
+pyinstaller
