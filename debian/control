@@ -1,0 +1,16 @@
+Source: python-gnucash-magical-importer
+Section: python
+Priority: optional
+Maintainer: Jefferson Campos, <jefferson@jeffersoncampos.eti.br>
+Homepage:https://github.com/foguinhoperuca/gnucash_magical_importer
+Build-Depends: debhelper (>= 7),
+               python (>= 3.0.0-1~)
+Standards-Version: 3.9.2
+X-Python-Version: >= 3.0
+
+Package: python-gnucash-magical-importer
+Architecture: all
+Section: python
+Depends: python-appindicator, ${misc:Depends}, ${python:Depends}
+Description: a magical importer of data file to gnucash file.
+ A magical importer of data file to gnucash file.

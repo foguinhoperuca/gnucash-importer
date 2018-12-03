@@ -1,0 +1,5 @@
+gnucash-importer (0.1.0-1) UNRELEASED; urgency=low
+
+  * Initial release. (Closes: #1)
+
+ -- Jefferson Campos <jefferson@jeffersoncampos.eti.br>  Mon, 03 Dec 2018 02:12:03 -0200
