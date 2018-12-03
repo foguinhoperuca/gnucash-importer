@@ -1,4 +1,25 @@
+# from cx_Freeze import setup, Executable
+
+# # Dependencies are automatically detected, but it might need
+# # fine tuning.
+# buildOptions = dict(packages = [], excludes = [])
+
+# base = 'Console'
+
+# executables = [
+#     Executable('setup_cxfreeze.py', base=base, targetName = 'gnucash_importer/run_app.py')
+# ]
+
+# setup(name='gnucash_importer',
+#       version = '1.0',
+#       description = '',
+#       options = dict(build_exe = buildOptions),
+#       executables = executables)
+
+
 import setuptools
+import sys
+from cx_Freeze import setup, Executable
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -6,8 +27,11 @@ with open("README.md", "r") as fh:
 with open('gnucash_importer/version.py') as f:
     exec(f.read())
 
+buildOptions = dict(packages = [], excludes = [])
+base = 'Console'
+    
 setuptools.setup(
-    name = "gnucash-importer",
+    name = "gnucash_importer",
     version = __version__,
     # version_command='git describe',
     author = "Jefferson Campos",
@@ -30,4 +54,6 @@ setuptools.setup(
     #         'parser=parser:main',
     #     ],
     # },
+    # options = {"build_exe": buildOptions},
+    executables = [Executable("gnucash_importer/run_app.py", base = base)]
 )

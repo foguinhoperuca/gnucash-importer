@@ -20,10 +20,7 @@ from ledger import Ledger
 from read_entry import OfxReader, QifReader, CsvReader
 from account import GenericAccount, Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
 
-print("Initializing run_app...")
-
 if __name__ == "__main__":
-    print("inside if...")
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
     parser.add_argument("-dr", "--dry-run", action = 'store_true', help = "actions will *NOT* be writen to gnucash file.")
     parser.add_argument("-q", "--quiet", action = 'store_true', help = "Set *NO* verbose logging i.e.: loglevel = logging.WARN")

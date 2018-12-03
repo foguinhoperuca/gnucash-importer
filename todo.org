@@ -1,7 +1,9 @@
 * TODO [#A] implement a package version
 ** TODO [#B] deb
-*** [#A] binary
-*** [#B] source code
+*** TODO [#B] source code
+*** DONE [#A] binary
+**** DONE cx_freeze
+**** DONE pyinstller
 ** TODO [#B] dist
 *** TODO [#A] pypi
 *** TODO [#B] ubuntu/debian

@@ -1,4 +1,4 @@
 ofxparse
 termcolor
 setuptools-version-command
-pyinstaller
+cx_Freeze
