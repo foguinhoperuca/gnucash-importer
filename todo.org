@@ -6,7 +6,8 @@
 **** DONE pyinstller
 ** TODO [#B] dist
 *** TODO [#A] pypi
-*** TODO [#B] ubuntu/debian
+*** TODO [#B] ubuntu PPA
+*** TODO [#B] debian binary
 *** DONE [#A] source code (github)
 ** DONE [#A] pip/egg
 * TODO [#A] implement test
