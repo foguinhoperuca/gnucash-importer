@@ -4,6 +4,7 @@ python:
   - "3.6"
 # command to install dependencies
 before_install:
+  - sudo apt-get remove python3.5
   - sudo add-apt-repository --yes ppa:deadsnakes/ppa
   - sudo apt-get update -q
   - sudo apt-get --yes --force-yes install python3.6
@@ -19,7 +20,6 @@ before_install:
   - dpkg -l python3
   - apt policy python3
   - sudo apt-get update -q
-  - sudo apt-get remove python3.5
   # - sudo apt-get install -y python3-gnucash
   - wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gnucash/python3-gnucash_3.3-2_amd64.deb
   - sudo dpkg -i python3-gnucash_3.3-2_amd64.deb
