@@ -4,15 +4,13 @@ python:
   - "3.6"
 # command to install dependencies
 before_install:
-  - sudo apt-get remove python3.5
   - sudo add-apt-repository --yes ppa:deadsnakes/ppa
   - sudo apt-get update -q
+  - sudo apt-get remove python3.5
   - sudo apt-get --yes --force-yes install python3.6
   - sudo apt-get --yes --force-yes install libpython3.6
   # https://unix.stackexchange.com/questions/410579/change-the-python3-default-version-in-ubuntu
   # https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux
-  # - sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10
-  - sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1
   - sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2
   - sudo update-alternatives --set python3 /usr/bin/python3.6
   - python3 --version
