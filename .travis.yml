@@ -1,10 +1,15 @@
-langauge: python
+dist: xenial
+language: python
 python:
   - "3.6"
 # command to install dependencies
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y python3-gnucash
+  # - sudo add-apt-repository ppa:deadsnakes/ppa
+  # - sudo apt-get update -q
+  # - sudo apt-get install python3.6
+  # - sudo apt-get install -y python3-gnucash
+  - wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gnucash/python3-gnucash_3.3-2_amd64.deb
+  - sudo dpkg -i python3-gnucash_3.3-2_amd64.deb
 install:
   - pip3 install -r requirements.txt
 # command to run tests
