@@ -8,7 +8,9 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get --yes --force-yes install python3.6
   - sudo apt-get --yes --force-yes install libpython3.6
-  - sudo update-alternatives --set python3 /usr/bin/python3.6
+  # https://unix.stackexchange.com/questions/410579/change-the-python3-default-version-in-ubuntu
+  - sudo update-alternatives --install /usr/bin/python3 python /usr/bin/python3.6 10
+  - sudo update-alternatives --set python /usr/bin/python3.6
   # - sudo apt-get install -y python3-gnucash
   - wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gnucash/python3-gnucash_3.3-2_amd64.deb
   - sudo dpkg -i python3-gnucash_3.3-2_amd64.deb
