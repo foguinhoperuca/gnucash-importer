@@ -4,7 +4,7 @@ python:
   - "3.6"
 # command to install dependencies
 before_install:
-  - sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo add-apt-repository --yes ppa:deadsnakes/ppa
   - sudo apt-get update -q
   - sudo apt-get --yes --force-yes install python3.6
   # - sudo apt-get install -y python3-gnucash
