@@ -1,0 +1,12 @@
+langauge: python
+python:
+  - "3.6"
+# command to install dependencies
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y python3-gnucash
+install:
+  - pip3 install -r requirements.txt
+# command to run tests
+script:
+  - make unittest
