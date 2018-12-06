@@ -77,3 +77,11 @@ doc: clean
 	pandoc README.md --standalone -o build/doc/README.html -f gfm -t html --css styles/github-pandoc.css --metadata pagetitle="README $(VERSION)"
 	pandoc CHANGELOG.md --standalone -o build/doc/CHANGELOG.html -f gfm -t html --css styles/github-pandoc.css --metadata pagetitle="CHANGELOG $(VERSION)"
 	java -jar $(PLANTUML) doc/model.uml
+
+travis_ci: clean
+	python3 travis_ci.py
+	find /usr/lib/python3.6 -name '*gnucash*'
+	find /usr/lib/python3.6/lib-dynload -name '*gnucash*'
+	find /usr/lib/python3/dist-packages -name '*gnucash*'
+	find /usr/local/lib/python3.6/dist-packages -name '*gnucash*'
+	find /home -name '*gnucash*'

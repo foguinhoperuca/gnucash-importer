@@ -18,10 +18,11 @@ before_install:
   # - dpkg -l python3
   # - apt policy python3
   # - sudo apt-get update -q
+  - sudo apt-get install --assume-yes gnucash
   - wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gnucash/python3-gnucash_3.3-2_amd64.deb
   - sudo dpkg -i --force-depends python3-gnucash_3.3-2_amd64.deb
 install:
   - pip3 install -r requirements.txt
 # command to run tests
 script:
-  - make unittest
+  - make travis_ci
