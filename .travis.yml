@@ -11,8 +11,9 @@ before_install:
   - sudo apt-get --yes --force-yes install libglib2.0-0
   - sudo apt-get --yes --force-yes install python3.6
   - sudo apt-get --yes --force-yes install libpython3.6
+  - sudo apt-get --yes --force-yes install gnucash
   - python3 -V
-  # - sudo apt-get install --assume-yes gnucash
+  - gnucash --version
   - wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gnucash/python3-gnucash_3.3-2_amd64.deb
   - sudo dpkg -i --force-depends python3-gnucash_3.3-2_amd64.deb
 install:
