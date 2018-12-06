@@ -79,5 +79,5 @@ doc: clean
 	java -jar $(PLANTUML) doc/model.uml
 
 travis_ci: clean
-	find / -name "libgncmod-app-utils.so"
+	# find / -name "libgncmod-app-utils.so"
 	python3 travis_ci.py
