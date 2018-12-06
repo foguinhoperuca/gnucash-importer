@@ -79,9 +79,13 @@ doc: clean
 	java -jar $(PLANTUML) doc/model.uml
 
 travis_ci: clean
+	# find /usr/lib/python3.6 -name '*gnucash*'
+	# find /usr/lib/python3.6/lib-dynload -name '*gnucash*'
+	# find /usr/lib/python3/dist-packages -name '*gnucash*'
+	# find /usr/local/lib/python3.6/dist-packages -name '*gnucash*'
+	# find /home -name '*gnucash*'
+	find /home/travis/build/foguinhoperuca/gnucash_magical_importer -name '*gnucash*'
+	find /home/travis/virtualenv/python3.6.7/lib -name '*gnucash*'
+	find /home/travis/virtualenv/python3.6.7/lib/python3.6/site-packages -name '*gnucash*'
+	find /opt/python/3.6.7/lib/python3.6 -name '*gnucash*'
 	python3 travis_ci.py
-	find /usr/lib/python3.6 -name '*gnucash*'
-	find /usr/lib/python3.6/lib-dynload -name '*gnucash*'
-	find /usr/lib/python3/dist-packages -name '*gnucash*'
-	find /usr/local/lib/python3.6/dist-packages -name '*gnucash*'
-	find /home -name '*gnucash*'

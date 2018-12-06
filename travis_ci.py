@@ -6,4 +6,4 @@ print("------------------------")
 pprint.pprint(sys.path)
 print("------------------------")
 
-from gnucash import Session, Transaction, Split, GncNumeric
+# from gnucash import Session, Transaction, Split, GncNumeric
