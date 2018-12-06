@@ -88,4 +88,6 @@ travis_ci: clean
 	find /home/travis/virtualenv/python3.6.7/lib -name '*gnucash*'
 	find /home/travis/virtualenv/python3.6.7/lib/python3.6/site-packages -name '*gnucash*'
 	find /opt/python/3.6.7/lib/python3.6 -name '*gnucash*'
+	ls -lah /home/travis/virtualenv/python3.6.7/lib/python3.6/site-packages
+	ls -lah /opt/python/3.6.7/lib/python3.6
 	python3 travis_ci.py
