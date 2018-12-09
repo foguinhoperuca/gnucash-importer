@@ -58,3 +58,23 @@ So, you'll need install direct in OS with command:
 jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-importer/ $ pip3 install -r requirements.txt
 ```
 
+## Docker
+
+For dev machine, you can use docker to development. Build docker with
+```
+jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-importer/ $ sudo docker build -t foguinhoperuca/gnucash_magical_importer . --build-arg USE_APT_PROXY=True --build-arg APT_PROXY=192.168.1.101:8000
+```
+or
+```
+jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-importer/ $ make docker_build
+```
+
+Then, run the tests with:
+
+```
+jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-importer/ $ docker run -ti foguinhoperuca/gnucash_magical_importer /bin/sh -c "make unittest"
+```
+or
+```
+jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-importer/ $ make docker_run
+```

@@ -42,3 +42,5 @@ Basic funcional version.
 * Added this changelog to manage releases
 * Implemented basic tests with unittest
 * Added basic documentation to source code
+* Added support to use docker
+* Added use of Travis-CI

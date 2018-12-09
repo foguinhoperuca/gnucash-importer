@@ -3,23 +3,15 @@ MAINTAINER Jefferson Campos <jefferson@jeffersoncampos.eti.br>
 
 ENV DEBIAN_FRONTEND noninteractive 
 
-# # source: https://gist.github.com/dergachev/8441335
-# # FIXME hard-coded IP - maybe use build script?!?! - Maybe echo "Acquire::http::proxy DIRECT;" >> /etc/apt/apt.conf.d/30proxy
-# RUN echo "Acquire::http::Proxy \"http://192.168.1.101:8000\";" > /etc/apt/apt.conf.d/30proxy
-# RUN echo "Acquire::http::Proxy::ppa.launchpad.net DIRECT;" >> /etc/apt/apt.conf.d/30proxy
-# # RUN if [ "x$arg" = "x" ] ; then (echo "Acquire::http::Proxy \"http://192.168.1.101:8000\";" > /etc/apt/apt.conf.d/30proxy; echo "Acquire::http::Proxy::ppa.launchpad.net DIRECT;" >> /etc/apt/apt.conf.d/30proxy) ; else echo Argument is $arg ; fi
-# RUN cat /etc/apt/apt.conf.d/30proxy
-
-# # FIXME how to know the machine is from dev?
-# # ENV DOCKER_APT_PROXY $(uname -a | awk '/Linux / {print $2}')
-# ENV DOCKER_APT_PROXY True
-# RUN echo $DOCKER_APT_PROXY
-# RUN if [ $DOCKER_APT_PROXY = "True" ] ; then \
-# 		echo "Acquire::http::Proxy \"http://192.168.1.101:8000\";" > /etc/apt/apt.conf.d/30proxy;\
-# 		echo "Acquire::http::Proxy::ppa.launchpad.net DIRECT;" >> /etc/apt/apt.conf.d/30proxy;\
-# 	else \
-# 		echo "Not dev machine..." ;\
-# 	fi
+ARG USE_APT_PROXY=False
+ARG APT_PROXY=192.168.1.101:8000
+RUN if [ "$USE_APT_PROXY" = "True" ] ; then \
+		echo "Acquire::http::Proxy \"http://$APT_PROXY\";" > /etc/apt/apt.conf.d/30proxy; \
+		echo "Acquire::http::Proxy::ppa.launchpad.net DIRECT;" >> /etc/apt/apt.conf.d/30proxy; \
+		echo "------------------- Beware, USING apt proxy!! -------------------"; \
+	else \
+		echo "------------------- NOT a DEV machine!! -------------------"; \
+	fi
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   gnucash \

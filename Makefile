@@ -81,12 +81,11 @@ doc: clean
 squid-deb-proxy: clean
 	sudo tail -f /var/log/squid-deb-proxy/access.log /var/log/squid-deb-proxy/cache.log /var/log/squid-deb-proxy/store.log
 
-docker_build:
-	clear
-	sudo docker build -t foguinhoperuca/gnucash_magical_importer .
+# FIXME automatic get information from dev machine...
+docker_build: clean
+	sudo docker build -t foguinhoperuca/gnucash_magical_importer . --build-arg USE_APT_PROXY=True --build-arg APT_PROXY=192.168.1.101:8000
 
 docker_run:
-# sudo docker run -it gnucash_magical_importer make unittest # FIXME Why do not work?!?!
-	docker run -ti foguinhoperuca/gnucash_magical_importer /bin/sh -c "make unittest" # FIXME Why do not work?!?!
+	docker run -ti foguinhoperuca/gnucash_magical_importer /bin/sh -c "make unittest"
 	@echo "------------------- FINISHED docker_run -------------------"
 	@echo ""

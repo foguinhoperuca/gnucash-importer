@@ -12,15 +12,13 @@
 ** DONE [#A] pip/egg
 * TODO [#A] implement test
 ** TODO [#A] Implement test coverage
-** TODO [#B] implement a CI
-*** Travis-CI
-**** TODO Add dependency: python3.6
-**** TODO Add dependency: python3-gnucash
-**** [#A] Add support docker to run app (see ubuntu 18.04 and 18.10)
-***** https://djangostars.com/blog/what-is-docker-and-how-to-use-it-with-python/
-***** https://runnable.com/docker/python/dockerize-your-python-application
-***** https://tableless.com.br/iniciando-com-o-docker-dicas-praticas-para-comecar-usar-agora-mesmo/
 ** TODO [#C] implement unittest discover --> python3 -m unittest discover
+** DONE Implement support to docker
+** DONE implement a CI
+*** DONE Travis-CI
+**** DONE Add dependency: python3.6
+**** DONE Add dependency: python3-gnucash
+**** DONE Add support docker to run app (see ubuntu 18.04 and 18.10)
 ** DONE implement fixtures
 ** DONE implement basic layout
 * TODO [#B] create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)
