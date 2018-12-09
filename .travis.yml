@@ -1,24 +1,22 @@
 dist: xenial
+
 language: python
+
 python:
   - "3.6"
-# virtualenv:
-#   system_site_packages: true
+
+services:
+  - docker
+
 before_install:
-  - sudo add-apt-repository --yes ppa:deadsnakes/ppa
-  - sudo apt-get update -q
-  - sudo apt-get --yes --force-yes install libc6
-  - sudo apt-get --yes --force-yes install libglib2.0-0
-  - sudo apt-get --yes --force-yes install python3.6
-  - sudo apt-get --yes --force-yes install libpython3.6
-  - python3 -V
-  - wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gnucash/python3-gnucash_3.3-2_amd64.deb
-  - sudo dpkg -i --force-depends python3-gnucash_3.3-2_amd64.deb
-  # - sudo apt-get --yes --force-yes install gnucash
-  - wget mirrors.kernel.org/ubuntu/pool/universe/g/gnucash/gnucash_3.3-2_amd64.deb
-  - sudo dpkg -i gnucash_3.3-2_amd64.deb
-  - gnucash --version
-install:
-  - pip3 install -r requirements.txt
+  # - docker pull foguinhoperuca/gnucash_magical_import
+  - docker build -t foguinhoperuca/gnucash_magical_import .
+  - docker ps -a
+  - docker run foguinhoperuca/gnucash_magical_import /bin/sh -c "cd /app;"
+
 script:
-  - make travis_ci
+  - docker run -it foguinhoperuca/gnucash_magical_importer cd /app; make unittest
+
+after_script:
+  - docker images
+  - docker ps -a

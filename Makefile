@@ -68,7 +68,7 @@ unittest: clean
 	python3 -m unittest test.test_ledger test.test_read_entry test.test_account
 
 unittest_debug: clean
-	DEBUG_TEST=True python3 -m unittest test.test_account
+	DEBUG_TEST=True python3 -m unittest test.test_ledger test.test_read_entry test.test_account
 
 doc: clean
 	mkdir -p build/doc
@@ -78,6 +78,15 @@ doc: clean
 	pandoc CHANGELOG.md --standalone -o build/doc/CHANGELOG.html -f gfm -t html --css styles/github-pandoc.css --metadata pagetitle="CHANGELOG $(VERSION)"
 	java -jar $(PLANTUML) doc/model.uml
 
-travis_ci: clean
-	# find / -name "libgncmod-app-utils.so" +
-	python3 travis_ci.py
+squid-deb-proxy: clean
+	sudo tail -f /var/log/squid-deb-proxy/access.log /var/log/squid-deb-proxy/cache.log /var/log/squid-deb-proxy/store.log
+
+docker_build:
+	clear
+	sudo docker build -t foguinhoperuca/gnucash_magical_importer .
+
+docker_run:
+# sudo docker run -it gnucash_magical_importer make unittest # FIXME Why do not work?!?!
+	docker run -ti foguinhoperuca/gnucash_magical_importer /bin/sh -c "make unittest" # FIXME Why do not work?!?!
+	@echo "------------------- FINISHED docker_run -------------------"
+	@echo ""
