@@ -10,9 +10,8 @@ services:
 
 before_install:
   # - docker pull foguinhoperuca/gnucash_magical_import
-  - docker build -t foguinhoperuca/gnucash_magical_import .
+  - docker build -t foguinhoperuca/gnucash_magical_importer .
   - docker ps -a
-  - docker run foguinhoperuca/gnucash_magical_import /bin/sh -c "cd /app;"
 
 script:
   - docker run -it foguinhoperuca/gnucash_magical_importer /bin/sh -c "make unittest"
