@@ -4,10 +4,11 @@ MAINTAINER Jefferson Campos <jefferson@jeffersoncampos.eti.br>
 ENV DEBIAN_FRONTEND noninteractive 
 
 # source: https://gist.github.com/dergachev/8441335
-# FIXME hard-coded IP from quid-deb-proxy server
-RUN echo "Acquire::http::Proxy \"http://192.168.1.101:8000\";" > /etc/apt/apt.conf.d/30proxy
-RUN	echo "Acquire::http::Proxy::ppa.launchpad.net DIRECT;" >> /etc/apt/apt.conf.d/30proxy
-RUN cat /etc/apt/apt.conf.d/30proxy
+# FIXME hard-coded IP from quid-deb-proxy server - maybe use buld script?!?!
+# RUN echo "Acquire::http::Proxy \"http://192.168.1.101:8000\";" > /etc/apt/apt.conf.d/30proxy
+# RUN echo "Acquire::http::Proxy::ppa.launchpad.net DIRECT;" >> /etc/apt/apt.conf.d/30proxy
+# RUN if [ "x$arg" = "x" ] ; then (echo "Acquire::http::Proxy \"http://192.168.1.101:8000\";" > /etc/apt/apt.conf.d/30proxy; echo "Acquire::http::Proxy::ppa.launchpad.net DIRECT;" >> /etc/apt/apt.conf.d/30proxy) ; else echo Argument is $arg ; fi
+# RUN cat /etc/apt/apt.conf.d/30proxy
 
 # RUN apt-get install squid-deb-proxy-client # FIXME really need it?
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -32,3 +33,5 @@ WORKDIR /app
 COPY . /app
 
 RUN pip3 install -r requirements.txt
+
+RUN dconf load /org/gnucash/ < test/fixtures/gnucash.conf
