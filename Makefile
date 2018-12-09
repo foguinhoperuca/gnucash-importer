@@ -70,6 +70,10 @@ unittest: clean
 unittest_debug: clean
 	DEBUG_TEST=True python3 -m unittest test.test_ledger test.test_read_entry test.test_account
 
+coverage: clean
+	coverage run --source gnucash_importer/ $(APP_RUN_SCRIPT) $(APP_PARAMS)
+	coverage report
+
 doc: clean
 	mkdir -p build/doc
 	cp -r styles build/doc/
@@ -88,4 +92,9 @@ docker_build: clean
 docker_run:
 	docker run -ti foguinhoperuca/gnucash_magical_importer /bin/sh -c "make unittest"
 	@echo "------------------- FINISHED docker_run -------------------"
+	@echo ""
+
+docker_prune: clean
+	sudo docker system prune -a
+	@echo "------------------- FINISHED docker_prune -------------------"
 	@echo ""

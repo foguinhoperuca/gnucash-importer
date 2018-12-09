@@ -1,24 +1,15 @@
 * TODO [#A] implement a package version
 ** TODO [#B] deb
 *** TODO [#B] source code
-*** DONE [#A] binary
+*** DONE binary
 **** DONE cx_freeze
 **** DONE pyinstller
 ** TODO [#B] dist
 *** TODO [#A] pypi
-*** TODO [#B] ubuntu PPA
 *** TODO [#B] debian binary
-*** DONE [#A] source code (github)
-** DONE [#A] pip/egg
-* TODO [#A] implement test
-** TODO [#A] Implement test coverage
-** TODO [#C] implement unittest discover --> python3 -m unittest discover
-** DONE Implement support to docker
-** DONE implement a CI
-*** DONE Travis-CI
-**** DONE Add dependency: python3.6
-**** DONE Add dependency: python3-gnucash
-**** DONE Add support docker to run app (see ubuntu 18.04 and 18.10)
+*** TODO [#C] ubuntu PPA
+*** DONE source code (github)
+** DONE pip/egg
 ** DONE implement fixtures
 ** DONE implement basic layout
 * TODO [#B] create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)
@@ -33,6 +24,15 @@
 * TODO [#C] implement get total number of transactions
 ** TODO [#C] verify an implementation for gnucash-bind using gnucash_core_c.gnc_book_count_transactions(session.book)
 ** DONE implement manually
+* TODO [#C] implement test
+** TODO [#C] implement unittest discover --> python3 -m unittest discover
+** DONE Implement test coverage
+** DONE Implement support to docker
+** DONE implement a CI
+*** DONE Travis-CI
+**** DONE Add dependency: python3.6
+**** DONE Add dependency: python3-gnucash
+**** DONE Add support docker to run app (see ubuntu 18.04 and 18.10)
 * TODO [#C] implement ncurses interface
 * DONE use virtualenv
 * DONE add CHANGELOG.md

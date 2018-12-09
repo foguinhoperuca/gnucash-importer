@@ -2,3 +2,4 @@ ofxparse
 termcolor
 setuptools-version-command
 cx_Freeze
+coverage

@@ -1,5 +1,7 @@
 # GNUCash Importer
 
+[![Build Status](https://travis-ci.org/foguinhoperuca/gnucash_magical_importer.svg?branch=master)](https://travis-ci.org/foguinhoperuca/gnucash_magical_importer)
+
 Set of scripts to manage my personal finance with gnucash. This project have many parsers to gnucash file. The intent is integrate diferents data sources into gnucash data file.
 
 The gnucash's xml file will act as transaction database. All other reports will be born from Parsers.
