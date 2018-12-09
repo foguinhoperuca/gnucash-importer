@@ -15,7 +15,7 @@ before_install:
   - docker run foguinhoperuca/gnucash_magical_import /bin/sh -c "cd /app;"
 
 script:
-  - docker run -it foguinhoperuca/gnucash_magical_importer cd /app; make unittest
+  - docker run -it foguinhoperuca/gnucash_magical_importer /bin/sh -c "make unittest"
 
 after_script:
   - docker images

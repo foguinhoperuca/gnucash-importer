@@ -43,7 +43,6 @@ class LedgerTestCase(unittest.TestCase):
 
         # TODO implement the catch if not found root.lookup_by_name
 
-    @unittest.skip("FIXME in docker, gnucash is writing to compressed xml file. Need confgure it to use flat xml file.")
     def test_write(self):
         self.ledger.write()
         self.assertEqual(self.ledger.get_quantity_transactions(), 45)

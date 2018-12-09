@@ -31,7 +31,9 @@ RUN pip3 install -U pip setuptools
 COPY requirements.txt /tmp/
 RUN pip3 install -r /tmp/requirements.txt
 
+COPY test/fixtures/gnucash.conf /tmp/
+RUN dbus-launch dconf load /org/gnucash/ < /tmp/gnucash.conf
+
 WORKDIR /app
 COPY . /app
 
-# RUN dconf load /org/gnucash/ < test/fixtures/gnucash.conf
