@@ -12,6 +12,6 @@ RUN apt-get update && apt-get install -y \
   python3 \
   pip3\
   python3-gnucash \
-&& rm -rf /var/lib/apt/lists/*
-
+&& rm -rf /var/lib/apt/lists/* \
+&& sudo pip3 install -r requirements.txt
 ENTRYPOINT ["/usr/bin/gnucash", "--logto", "stderr"]
