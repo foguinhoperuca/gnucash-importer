@@ -20,6 +20,7 @@ The gnucash's xml file will act as transaction database. All other reports will 
 * From any data source, all transactions must be integrate into one file
 * one file with git commits
 * Report of imported files
+* Save gnucash's xml file as regular file instead of binary (compressed) - it can be achived with option file-compression=false in [general section of gnucash configuration](test/fixtures/gnucash.conf "Example configuration")
 
 # Financial Management
 
