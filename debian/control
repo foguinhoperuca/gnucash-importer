@@ -1,16 +1,24 @@
-Source: python-gnucash-magical-importer
+Source: python3-gnucash-magical-importer
 Section: python
 Priority: optional
-Maintainer: Jefferson Campos, <jefferson@jeffersoncampos.eti.br>
-Homepage:https://github.com/foguinhoperuca/gnucash_magical_importer
-Build-Depends: debhelper (>= 7),
-               python (>= 3.0.0-1~)
-Standards-Version: 3.9.2
-X-Python-Version: >= 3.0
+Maintainer: Jefferson Campos <jefferson@jeffersoncampos.eti.br>
+Build-Depends: debhelper (>= 11),
+			   python (>= 3.0.0-1~),
+			   gnucash,
+			   python3-gnucash,
+			   python3-pip,
+			   python3-setuptools,
+			   zlib1g-dev,
+			   dconf-cli,
+			   dbus-x11,
+			   vanilla-gnome-desktop
+Standards-Version: 4.1.3
+Homepage: https://github.com/foguinhoperuca/gnucash_magical_importer
+Vcs-Git: https://github.com/foguinhoperuca/gnucash_magical_importer.git
 
-Package: python-gnucash-magical-importer
-Architecture: all
+Package: python3-gnucash-magical-importer
+Architecture: any
 Section: python
-Depends: python-appindicator, ${misc:Depends}, ${python:Depends}
-Description: a magical importer of data file to gnucash file.
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A magical importer of data file to gnucash file.
  A magical importer of data file to gnucash file.

@@ -1,5 +1,5 @@
-gnucash-importer (0.1.0-1) UNRELEASED; urgency=low
+python3-gnucash-magical-importer (0.1.0-1) UNRELEASED; urgency=medium
 
   * Initial release. (Closes: #1)
 
- -- Jefferson Campos <jefferson@jeffersoncampos.eti.br>  Mon, 03 Dec 2018 02:12:03 -0200
+ -- Jefferson Campos <jefferson@jeffersoncampos.eti.br>  Mon, 10 Dec 2018 23:37:40 -0200
