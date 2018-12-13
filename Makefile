@@ -98,3 +98,24 @@ docker_prune: clean
 	sudo docker system prune -a
 	@echo "------------------- FINISHED docker_prune -------------------"
 	@echo ""
+
+manual_clean_bin: clean
+	@echo "------------------- STARTING manual_clean_bin -------------------"
+	rm -rf /usr/bin/gnucash-magical-importer/
+	rm -rf /usr/bin/gnucash_magical_importer
+	rm -rf /etc/gnucash-magical-importer
+	@echo "------------------- FINISHED manual_clean_bin -------------------"
+	@echo ""
+
+manual_install_bin: build_cxfreeze manual_clean_bin
+	@mkdir -p /usr/bin/gnucash-magical-importer/
+	@mkdir -p /etc/gnucash-magical-importer/
+	@cp dist/gnucash_magical_importer /usr/bin/gnucash-magical-importer/
+	@cp dist/libpython3.6m.so.1.0 /usr/bin/gnucash-magical-importer/
+	@cp -r dist/lib /usr/bin/gnucash-magical-importer/
+	@cp setup.cfg /usr/bin/gnucash-magical-importer/
+	@cp -r test/fixtures /usr/bin/gnucash-magical-importer/
+	@ln -s /usr/bin/gnucash-magical-importer/gnucash_magical_importer /usr/bin/gnucash_magical_importer
+	@echo "------------------- FINISHED copy -------------------"
+	ls -lah /usr/bin/gnucash-magical-importer
+	ls -lah /etc/gnucash-magical-importer
