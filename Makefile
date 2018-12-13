@@ -113,9 +113,9 @@ manual_install_bin: build_cxfreeze manual_clean_bin
 	@cp dist/gnucash_magical_importer /usr/bin/gnucash-magical-importer/
 	@cp dist/libpython3.6m.so.1.0 /usr/bin/gnucash-magical-importer/
 	@cp -r dist/lib /usr/bin/gnucash-magical-importer/
-	@cp setup.cfg /usr/bin/gnucash-magical-importer/
-	@cp -r test/fixtures /usr/bin/gnucash-magical-importer/
+	@cp setup.cfg /etc/gnucash-magical-importer/
 	@ln -s /usr/bin/gnucash-magical-importer/gnucash_magical_importer /usr/bin/gnucash_magical_importer
 	@echo "------------------- FINISHED copy -------------------"
 	ls -lah /usr/bin/gnucash-magical-importer
+	ls -lah /usr/bin/gnucash_magical_importer
 	ls -lah /etc/gnucash-magical-importer
