@@ -13,6 +13,7 @@ RUN if [ "$USE_APT_PROXY" = "True" ] ; then \
 		echo "------------------- NOT a DEV machine!! -------------------"; \
 	fi
 
+# TODO split this in various command to make more easy the installation
 RUN apt-get update && apt-get install -y --no-install-recommends \
   gnucash \
   python3-gnucash \

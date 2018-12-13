@@ -101,21 +101,27 @@ docker_prune: clean
 
 manual_clean_bin: clean
 	@echo "------------------- STARTING manual_clean_bin -------------------"
-	rm -rf /usr/bin/gnucash-magical-importer/
 	rm -rf /usr/bin/gnucash_magical_importer
-	rm -rf /etc/gnucash-magical-importer
+	rm -rf /usr/bin/gnucash-magical-importer/
+	rm -rf /usr/lib/gnucash-magical-importer/
+	rm -rf /etc/gnucash-magical-importer/
 	@echo "------------------- FINISHED manual_clean_bin -------------------"
 	@echo ""
 
+# FIXME use python3 setup.py install --prefix=/usr to install correctly
 manual_install_bin: build_cxfreeze manual_clean_bin
 	@mkdir -p /usr/bin/gnucash-magical-importer/
+	@mkdir -p /usr/lib/gnucash-magical-importer/
 	@mkdir -p /etc/gnucash-magical-importer/
 	@cp dist/gnucash_magical_importer /usr/bin/gnucash-magical-importer/
+	@ln -s /usr/bin/gnucash-magical-importer/gnucash_magical_importer /usr/bin/gnucash_magical_importer
 	@cp dist/libpython3.6m.so.1.0 /usr/bin/gnucash-magical-importer/
 	@cp -r dist/lib /usr/bin/gnucash-magical-importer/
+	# @cp dist/libpython3.6m.so.1.0 /usr/lib/gnucash-magical-importer/
+	# @cp -r dist/lib /usr/lib/gnucash-magical-importer/
 	@cp setup.cfg /etc/gnucash-magical-importer/
-	@ln -s /usr/bin/gnucash-magical-importer/gnucash_magical_importer /usr/bin/gnucash_magical_importer
 	@echo "------------------- FINISHED copy -------------------"
-	ls -lah /usr/bin/gnucash-magical-importer
 	ls -lah /usr/bin/gnucash_magical_importer
+	ls -lah /usr/bin/gnucash-magical-importer
+	ls -lah /usr/lib/gnucash-magical-importer
 	ls -lah /etc/gnucash-magical-importer
