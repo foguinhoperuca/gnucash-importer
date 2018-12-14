@@ -3,13 +3,16 @@ Section: python
 Priority: optional
 Maintainer: Jefferson Campos <jefferson@jeffersoncampos.eti.br>
 Build-Depends: debhelper (>= 11),
-			   gnucash
+			   gnucash,
+			   python3,
+			   python3-pip,
+			   python3-gnucash
 Standards-Version: 4.1.3
 Homepage: https://github.com/foguinhoperuca/gnucash_magical_importer
 Vcs-Git: https://github.com/foguinhoperuca/gnucash_magical_importer.git
 
-Package: python3-gnucash-magical-importer
-Architecture: any
+Package: gnucash-magical-importer
+Architecture: amd64
 Section: python
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: A magical importer of data file to gnucash file.
