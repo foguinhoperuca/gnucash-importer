@@ -1,4 +1,5 @@
 * TODO [#A] implement a package version
+** TODO Enhance Make with wildly-know targets
 ** TODO [#B] dist
 *** TODO [#A] pypi
 *** TODO [#B] debian

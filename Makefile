@@ -10,6 +10,20 @@ APP_RUN_SCRIPT=gnucash_importer/run_app.py
 APP_PARAMS= -gf $(FIXTURE_LEDGER) -a nubank -af $(FIXTURE_CREDITCARD)
 APP_PARAMS_GENERIC= -gf $(FIXTURE_LEDGER) -a generic -af $(FIXTURE_CREDITCARD) -acf "Liabilities:Credit Card:Nubank" -act "Imbalance-BRL:nubank"
 
+# # TODO implemente wildly-know targets
+# DESTDIR=/usr/bin (debian package) || DESTDIR=/usr/local/bin (manual install)
+# check:
+# 	echo "TODO implement it!"
+
+# install:
+# 	echo "TODO implement it!"
+
+# uninstall:
+# 	echo "TODO implement it!"
+
+# distclean:
+# 	echo "TODO implement it!"
+
 all: clean run
 
 clean:
