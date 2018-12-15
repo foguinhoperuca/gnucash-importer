@@ -5,6 +5,7 @@
 **** TODO tutorial
 ***** https://wiki.debian.org/Packaging
 ***** https://debian-handbook.info/
+***** https://www.debian.org/doc/packaging-manuals/python-policy/
 **** TODO [#A] source code
 **** TODO [#B] binary
 **** TODO [#C] doc - https://wiki.debian.org/DebianPackageDocumentation
