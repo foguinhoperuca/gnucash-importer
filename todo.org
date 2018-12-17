@@ -1,5 +1,4 @@
 * TODO [#A] implement a package version
-** TODO Enhance Make with wildly-know targets
 ** TODO [#B] dist
 *** TODO [#A] pypi
 *** TODO [#B] debian
@@ -20,6 +19,7 @@
 *** DONE binary
 **** DONE cx_freeze
 **** DONE pyinstller
+** DONE Enhance Make with wildly-know targets
 ** DONE pip/egg
 ** DONE implement basic layout
 * TODO [#B] create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)

@@ -3,7 +3,7 @@
 # .SILENT: clean
 SHELL=/bin/sh
 # FIXME Use make prefix=/usr <TARGET> for debian package build
-prefix=/usr
+prefix=/usr/local
 exec_prefix=$(prefix)
 # FIXME srcdir must be setted to .
 srcdir=$(prefix)/src
@@ -18,6 +18,8 @@ mandir=$(prefix)/share/man
 
 # Custom variables
 VERSION=$(shell cat gnucash_importer/version.py | tr -d __version__\ =\ \')
+# TODO implement automatic parse for DEBIAN_VERSION
+DEBIAN_VERSION=1
 FIXTURE_LEDGER=test/fixtures/test_ledger.gnucash
 FIXTURE_CREDITCARD=test/fixtures/creditcard.ofx
 PLANTUML=/usr/local/plantuml/plantuml.jar
@@ -53,7 +55,13 @@ clean_soft:
 	@echo ""
 
 distclean: clean
-	rm -rf ../python3-gnucash-magical-importer-$(VERSION).tar.gz
+	rm -rf ../python3-gnucash-magical-importer_$(VERSION).orig.tar.gz
+	rm -rf ../gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION)_amd64.deb
+	rm -rf ../gnucash-magical-importer-dbgsym_$(VERSION)-$(DEBIAN_VERSION)_amd64.ddeb
+	rm -rf ../python3-gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION)_amd64.buildinfo
+	rm -rf ../python3-gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION)_amd64.changes
+	rm -rf ../python3-gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION).debian.tar.xz
+	rm -rf ../python3-gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION).dsc
 
 mostlyclean:
 	@echo "TODO implement it!!"
