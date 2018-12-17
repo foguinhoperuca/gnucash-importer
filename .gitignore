@@ -109,3 +109,5 @@ example/test_ledger.gnucash.*
 *#*
 *.swp
 doc/*.png
+
+debian/debhelper-build-stamp

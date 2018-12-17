@@ -1,4 +1,0 @@
-build/gnucash_magical_importer usr/bin/gnucash-magical-importer/
-build/libpython3.6m.so.1.0 usr/bin/gnucash-magical-importer/
-build/lib usr/bin/gnucash-magical-importer/lib/
-setup.cfg etc/gnucash-magical-importer/
