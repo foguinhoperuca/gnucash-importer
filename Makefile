@@ -9,6 +9,10 @@ BIN=dist/$(BINARY_NAME)
 APP_RUN_SCRIPT=gnucash_importer/run_app.py
 APP_PARAMS= -gf $(FIXTURE_LEDGER) -a nubank -af $(FIXTURE_CREDITCARD)
 APP_PARAMS_GENERIC= -gf $(FIXTURE_LEDGER) -a generic -af $(FIXTURE_CREDITCARD) -acf "Liabilities:Credit Card:Nubank" -act "Imbalance-BRL:nubank"
+DESTDIR_BIN=/usr/local/bin
+DESTDIR_LIB=/usr/local/bin
+DESTDIR_DOC=/usr/local/share
+DESTDIR_CONF=/usr/local/bin
 
 # # TODO implemente wildly-know targets
 # DESTDIR=/usr/bin (debian package) || DESTDIR=/usr/local/bin (manual install)
@@ -115,27 +119,28 @@ docker_prune: clean
 
 manual_clean_bin: clean
 	@echo "------------------- STARTING manual_clean_bin -------------------"
-	rm -rf /usr/bin/gnucash_magical_importer
-	rm -rf /usr/bin/gnucash-magical-importer/
-	rm -rf /usr/lib/gnucash-magical-importer/
-	rm -rf /etc/gnucash-magical-importer/
+	rm -rf $(DESTDIR_BIN)/gnucash_magical_importer
+	rm -rf $(DESTDIR_BIN)/gnucash-magical-importer/
+	rm -rf $(DESTDIR_LIB)/gnucash-magical-importer/
+	rm -rf $(DESTDIR_CONF)/gnucash-magical-importer/
 	@echo "------------------- FINISHED manual_clean_bin -------------------"
 	@echo ""
 
 # FIXME use python3 setup.py install --prefix=/usr to install correctly
-manual_install_bin: build_cxfreeze manual_clean_bin
-	@mkdir -p /usr/bin/gnucash-magical-importer/
-	@mkdir -p /usr/lib/gnucash-magical-importer/
-	@mkdir -p /etc/gnucash-magical-importer/
-	@cp dist/gnucash_magical_importer /usr/bin/gnucash-magical-importer/
-	@ln -s /usr/bin/gnucash-magical-importer/gnucash_magical_importer /usr/bin/gnucash_magical_importer
-	@cp dist/libpython3.6m.so.1.0 /usr/bin/gnucash-magical-importer/
-	@cp -r dist/lib /usr/bin/gnucash-magical-importer/
-	# @cp dist/libpython3.6m.so.1.0 /usr/lib/gnucash-magical-importer/
-	# @cp -r dist/lib /usr/lib/gnucash-magical-importer/
-	@cp setup.cfg /etc/gnucash-magical-importer/
+install: build_cxfreeze manual_clean_bin
+	@mkdir -p $(DESTDIR_BIN)/gnucash-magical-importer/
+	@mkdir -p $(DESTDIR_LIB)/gnucash-magical-importer/
+	@mkdir -p $(DEST_DIR_CONF)/gnucash-magical-importer/
+	@cp dist/gnucash_magical_importer $(DESTDIR_BIN)/gnucash-magical-importer/
+	@ln -s $(DESTDIR_BIN)/gnucash-magical-importer/gnucash_magical_importer $(DESTDIR_BIN)/gnucash_magical_importer
+	@cp dist/libpython3.6m.so.1.0 $(DESTDIR_BIN)/gnucash-magical-importer/
+	@cp -r dist/lib $(DESTDIR_BIN)/gnucash-magical-importer/ # FIXME not working in $(DESTDIR_LIB) yet!!
+	# @cp dist/libpython3.6m.so.1.0 $(DESTDIR_LIB)/gnucash-magical-importer/
+	# @cp -r dist/lib $(DESTDIR_LIB)/gnucash-magical-importer/
+	# FIXME test if program can found .cfg
+	# @cp setup.cfg $(DESTDIR_CONF)/gnucash-magical-importer/
 	@echo "------------------- FINISHED copy -------------------"
-	ls -lah /usr/bin/gnucash_magical_importer
-	ls -lah /usr/bin/gnucash-magical-importer
-	ls -lah /usr/lib/gnucash-magical-importer
-	ls -lah /etc/gnucash-magical-importer
+	ls -lah $(DESTDIR_BIN)/gnucash_magical_importer
+	ls -lah $(DESTDIR_BIN)/gnucash-magical-importer
+	ls -lah $(DESTDIR_LIB)/gnucash-magical-importer
+	ls -lah $(DESTDIR_CONF)/gnucash-magical-importer
