@@ -3,7 +3,13 @@
 # .SILENT: clean
 SHELL=/bin/sh
 # FIXME Use make prefix=/usr <TARGET> for debian package build
-prefix=/usr/local
+
+ifeq ($(DEB_BUILD),true)
+	prefix=/usr
+else
+	prefix=/usr/local
+endif
+
 exec_prefix=$(prefix)
 # FIXME srcdir must be setted to .
 srcdir=$(prefix)/src
@@ -39,11 +45,16 @@ clean:
 	find . -name '*.pyo' -exec rm --force {} +
 	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
 	find doc/ -name '*.png' -exec rm --force {} +
+	rm -rf debian/.debhelper/
+	rm -rf debian/files
+	rm -rf debian/gnucash-magical-importer.substvars
+	rm -rf debian/gnucash-magical-importer/
 	rm -rf build
 	rm -rf dist
 	rm -rf gnucash_importer.egg-info
 	rm -rf debian/debhelper-build-stamp
 	git checkout $(FIXTURE_LEDGER)
+	@echo "prefix is: " $(prefix) " -- " $(DEB_BUILD)
 	@echo "------------------- CLEANNED -------------------"
 	@echo ""
 
@@ -55,7 +66,7 @@ clean_soft:
 	@echo ""
 
 distclean: clean
-	rm -rf ../python3-gnucash-magical-importer_$(VERSION).orig.tar.gz
+	# rm -rf ../python3-gnucash-magical-importer_$(VERSION).orig.tar.gz
 	rm -rf ../gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION)_amd64.deb
 	rm -rf ../gnucash-magical-importer-dbgsym_$(VERSION)-$(DEBIAN_VERSION)_amd64.ddeb
 	rm -rf ../python3-gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION)_amd64.buildinfo
@@ -69,6 +80,7 @@ mostlyclean:
 
 maintainer-clean:
 	@echo "TODO implement it!!"
+	@echo "prefix is: " $(prefix) " -- " $(DEB_BUILD)
 
 # info: foo.info
 # foo.info: foo.texi chap1.texi chap2.texi
