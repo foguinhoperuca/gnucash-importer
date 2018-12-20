@@ -33,7 +33,7 @@ class Util:
 
     def __init__(self):
         """Grab all configuration in setup.cfg"""
-        self.config.read('setup.cfg')
+        self.config.read('setup.cfg') # FIXME setup in global dir setup.cfg (maybe /etc/gnucash-magical-importer/setup.cfg ?!?)
         self.DEFAULT_CURRENCY = self.config['app_init']['default_currency']
         self.DEFAULT_GNUCASH_FILE = self.config['app_init']['default_gnucash_file']
         self.DEFAULT_ACCOUNT_SRC_FILE = self.config['app_init']['default_account_src_file']

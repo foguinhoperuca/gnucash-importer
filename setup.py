@@ -13,13 +13,13 @@ executables = [
     Executable(
         'gnucash_importer/run_app.py',
         base = base,
-        targetName = 'gnucash_magical_importer'
+        targetName = 'gmi'
     )
 ]
 
 setup(
 # setuptools.setup(
-    name = "gnucash_importer",
+    name = "gmi",
     version = __version__,
     # version_command='git describe',
     author = "Jefferson Campos",
