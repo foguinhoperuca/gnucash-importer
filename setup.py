@@ -27,7 +27,7 @@ setup(
     description = "Parse data source (ofx, qif, csv, etc.) and import to Gnucash file.",
     long_description = long_description,
     long_description_content_type = "text/markdown",
-    url = "https://github.com/foguinhoperuca/gnucash-importer",
+    url = "https://github.com/foguinhoperuca/gnucash_magical_importer",
     packages = setuptools.find_packages(),
     classifiers = [
         'Development Status :: 3 - Alpha',
