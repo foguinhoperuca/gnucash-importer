@@ -2,16 +2,17 @@
 ** TODO [#B] dist
 *** TODO [#A] pypi
 *** TODO [#B] debian
-**** TODO Fix /usr/local && /usr for installation
-**** TODO Fix creation of softlink inside /usr/bin
+**** TODO include in stable/dev
+**** DONE Fix /usr/local && /usr for installation
+**** DONE [#C] doc - https://wiki.debian.org/DebianPackageDocumentation
+**** DONE Fix creation of softlink inside /usr/bin
 **** DONE basic creation source/binary package
-**** TODO tutorial
+**** DONE tutorial
 ***** https://wiki.debian.org/Packaging
 ***** https://debian-handbook.info/
 ***** https://www.debian.org/doc/packaging-manuals/python-policy/
-**** TODO [#A] source code
-**** TODO [#B] binary
-**** TODO [#C] doc - https://wiki.debian.org/DebianPackageDocumentation
+**** DONE [#A] source code
+**** DONE [#B] binary
 *** TODO [#C] ubuntu
 **** TODO [#C] ubuntu PPA
 *** TODO [#C] github
@@ -33,6 +34,7 @@
 ** DONE color
 * TODO [#C] implement doc
 ** TODO [#C] manual published in blogpost/social media
+** TODO [#C] gnu manpage
 ** DONE source code with docstring
 * TODO [#C] implement get total number of transactions
 ** TODO [#C] verify an implementation for gnucash-bind using gnucash_core_c.gnc_book_count_transactions(session.book)

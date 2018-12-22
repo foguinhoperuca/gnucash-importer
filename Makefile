@@ -12,13 +12,10 @@ exec_prefix=$(prefix)
 srcdir=$(prefix)/src
 bindir=$(exec_prefix)/bin
 libdir=$(exec_prefix)/lib
-# FIXME for debian installation, the sysconfdir must be /etc/gnucash-magical-importer/
-# sysconfdir=$(prefix)/etc
-sysconfdir=/etc
+sysconfdir=$(prefix)/etc
 datadir=$(prefix)/share
 infodir=$(prefix)/share/doc
 mandir=$(prefix)/share/man
-# DESTDIR=$(HOME)/
 
 # Custom variables
 VERSION=$(shell cat gnucash_importer/version.py | tr -d __version__\ =\ \')
@@ -36,9 +33,9 @@ APP_PARAMS= -gf $(FIXTURE_LEDGER) -a nubank -af $(FIXTURE_CREDITCARD)
 APP_PARAMS_GENERIC= -gf $(FIXTURE_LEDGER) -a generic -af $(FIXTURE_CREDITCARD) -acf "Liabilities:Credit Card:Nubank" -act "Imbalance-BRL:nubank"
 
 CFGS=/etc/gnucash-magical-importer /usr/local/etc/gnucash-magical-importer /usr/etc/gnucash-magical-importer $(HOME)/.gnucash-magical-importer
-# CFGS=/usr/local/etc/gnucash-magical-importer /usr/etc/gnucash-magical-importer $(HOME)/.gnucash-magical-importer
-# CFGS=/usr/etc/gnucash-magical-importer $(HOME)/.gnucash-magical-importer
-# CFGS=$(HOME)/.gnucash-magical-importer
+# TODO implement mkinstalldirs
+# FIXME need / between $(bindir) and $(FINALDIR) ?!?
+DIRS=$(DESTDIR)$(bindir)/$(FINALDIR) $(DESTDIR)$(libdir)/$(FINALDIR) $(DESTDIR)$(sysconfdir)/$(FINALDIR) $(DESTDIR)$(infodir)/$(FINALDIR)
 
 all: clean build
 
@@ -58,15 +55,8 @@ clean:
 	rm -rf gnucash_importer.egg-info
 	rm -rf debian/debhelper-build-stamp
 	git checkout $(FIXTURE_LEDGER)
-	@echo "prefix is: " $(prefix) " -- " $(DEB_BUILD) " -- " $(DEBIAN_VERSION)
+	@echo "prefix " $(prefix) " DEB_BUILD " $(DEB_BUILD) " DEBIAN_VERSION " $(DEBIAN_VERSION)
 	@echo "------------------- CLEANNED -------------------"
-	@echo ""
-
-clean_soft:
-	clear
-	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
-	git checkout $(FIXTURE_LEDGER)
-	@echo "------------------- CLEANNED SOFT-------------------"
 	@echo ""
 
 distclean: clean
@@ -78,8 +68,11 @@ distclean: clean
 	rm -rf ../python3-gnucash-magical-importer_$(VERSION)-$(DEBIAN_VERSION).dsc
 
 mostlyclean:
-	@echo "TODO implement it!!"
-	@echo "FIXME can replace clean_soft?!?"
+	clear
+	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
+	git checkout $(FIXTURE_LEDGER)
+	@echo "------------------- CLEANNED SOFT-------------------"
+	@echo ""
 
 maintainer-clean:
 	@echo "TODO implement it!!"
@@ -156,9 +149,6 @@ coverage: clean
 	coverage run --source gnucash_importer/ $(APP_RUN_SCRIPT) $(APP_PARAMS)
 	coverage report
 
-# TODO implement mkinstalldirs
-# FIXME need / between $(bindir) and $(FINALDIR) ?!?
-DIRS=$(DESTDIR)$(bindir)/$(FINALDIR) $(DESTDIR)$(libdir)/$(FINALDIR) $(DESTDIR)$(sysconfdir)/$(FINALDIR) $(DESTDIR)$(infodir)/$(FINALDIR)
 uninstall: clean
 	@echo "------------------- STARTING uninstall -------------------"
 	rm -rf $(DESTDIR)$(bindir)/$(BINARY_NAME)
@@ -166,13 +156,14 @@ uninstall: clean
 	@echo "------------------- FINISHED uninstall -------------------"
 	@echo ""
 
-# FIXME use python3 setup.py install --prefix=/usr to install correctly
 install: build info uninstall
 	@$(foreach dir, $(DIRS), mkdir -p $(dir);)
 	@cp $(BIN) $(DESTDIR)$(bindir)/$(FINALDIR)
 	@ln -s $(bindir)/$(FINALDIR)/$(BINARY_NAME) $(DESTDIR)$(bindir)/$(BINARY_NAME)
-	@cp dist/libpython3.6m.so.1.0 $(DESTDIR)$(bindir)/$(FINALDIR)/
-	@cp -r dist/lib $(DESTDIR)$(bindir)/$(FINALDIR)/ # FIXME not working in $(DESTDIR)$(libdir) yet!!
+	@cp dist/libpython3.6m.so.1.0 $(DESTDIR)$(libdir)/$(FINALDIR)/
+	@ln -s $(libdir)/$(FINALDIR)/libpython3.6m.so.1.0 $(DESTDIR)$(bindir)/$(FINALDIR)/libpython3.6m.so.1.0
+	@cp -r dist/lib $(DESTDIR)$(libdir)/$(FINALDIR)/
+	@ln -s $(libdir)/$(FINALDIR)/lib $(DESTDIR)$(bindir)/$(FINALDIR)/lib
 	@cp setup.cfg $(DESTDIR)$(sysconfdir)/$(FINALDIR)/
 	@cp -r $(DOC) $(DESTDIR)$(infodir)/$(FINALDIR)/
 	@echo "------------------- FINISHED copy -------------------"

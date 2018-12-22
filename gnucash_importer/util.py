@@ -54,8 +54,6 @@ class Util:
         if not file_found:
             raise Exception("Couldn't find in setup.cfg file in any common path! Please, install it anywhere in {a}".format(a = setup_cfg_path))
 
-        # logging.debug("SOME DEBUG IN util.py")
-        
         self.DEFAULT_CURRENCY = self.config['app_init']['default_currency']
         self.DEFAULT_GNUCASH_FILE = self.config['app_init']['default_gnucash_file']
         self.DEFAULT_ACCOUNT_SRC_FILE = self.config['app_init']['default_account_src_file']
