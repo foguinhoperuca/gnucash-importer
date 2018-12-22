@@ -38,5 +38,7 @@ RUN pip3 install -r /tmp/requirements.txt
 COPY test/fixtures/gnucash.conf /tmp/
 RUN dbus-launch dconf load /org/gnucash/ < /tmp/gnucash.conf
 
+COPY setup.cfg /etc/gnucash-magical-importer/
+
 WORKDIR /app
 COPY . /app

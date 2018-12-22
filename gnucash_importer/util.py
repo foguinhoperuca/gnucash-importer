@@ -8,6 +8,7 @@ This modules support all other classes/modules with usefull source code that doe
 import configparser
 import logging
 from termcolor import colored, cprint
+from pathlib import Path
 
 class Util:
     """Helper class used to provide configuration, defaults and so on."""
@@ -31,9 +32,30 @@ class Util:
     DEFAULT_BRADESCO_SAVINGS_TO = None
     DEFAULT_BRADESCO_SAVINGS_FROM = None
 
+    # FIXME Why I need instantiate Util class?!?! Make all methods statics wouldn't be enough?!?
     def __init__(self):
         """Grab all configuration in setup.cfg"""
-        self.config.read('setup.cfg') # FIXME setup in global dir setup.cfg (maybe /etc/gnucash-magical-importer/setup.cfg ?!?)
+        setup_cfg_path = [
+            "/etc/gnucash-magical-importer/setup.cfg",
+            "/usr/local/etc/gnucash-magical-importer/setup.cfg",
+            "/usr/etc/gnucash-magical-importer/setup.cfg",
+            str(Path.home().joinpath(".gnucash-magical-importer", "setup.cfg"))
+        ]
+
+        file_found = False
+        for f in setup_cfg_path:
+            sf = Path(f)
+            if sf.is_file():
+                self.config.read(f)
+                file_found = True
+                # FIXME why can't work with logging.debug ?!?!
+                # logging.debug(colored("file found was..: {p}".format(p = f), 'grey', attrs=['reverse', 'bold', 'underline']))
+                break
+        if not file_found:
+            raise Exception("Couldn't find in setup.cfg file in any common path! Please, install it anywhere in {a}".format(a = setup_cfg_path))
+
+        # logging.debug("SOME DEBUG IN util.py")
+        
         self.DEFAULT_CURRENCY = self.config['app_init']['default_currency']
         self.DEFAULT_GNUCASH_FILE = self.config['app_init']['default_gnucash_file']
         self.DEFAULT_ACCOUNT_SRC_FILE = self.config['app_init']['default_account_src_file']
