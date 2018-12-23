@@ -19,8 +19,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 Here are the scope to be released. See [todo.org](todo.org) for more details.
 
 * Implement UI with ncurse
-* Make this package debian friendly
-* Create bin version
 
 ## [0.1.0][HEAD] - 2018-XX-XX ##
 
@@ -44,3 +42,5 @@ Basic funcional version.
 * Added basic documentation to source code
 * Added support to use docker
 * Added use of Travis-CI
+* Make this package debian friendly
+* Create bin version
