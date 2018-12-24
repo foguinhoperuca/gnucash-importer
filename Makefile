@@ -52,7 +52,7 @@ clean:
 	rm -rf debian/gnucash-magical-importer/
 	rm -rf build
 	rm -rf dist
-	rm -rf gnucash_importer.egg-info
+	rm -rf gnucash_magical_importer.egg-info
 	rm -rf debian/debhelper-build-stamp
 	git checkout $(FIXTURE_LEDGER)
 	@echo "prefix " $(prefix) " DEB_BUILD " $(DEB_BUILD) " DEBIAN_VERSION " $(DEBIAN_VERSION)
@@ -81,6 +81,7 @@ maintainer-clean:
 # info: foo.info
 # foo.info: foo.texi chap1.texi chap2.texi
 #         $(MAKEINFO) $(srcdir)/foo.texi
+# TODO implement awesome_bot (ruby) CHANGELOG.md --allow-ssl
 info: clean
 	@mkdir -p $(DOC)
 	@cp -r styles $(DOC)
@@ -119,11 +120,11 @@ installcheck: build setup-cfg
 build: clean info
 	cxfreeze gnucash_importer/run_app.py --target-dir dist --target-name $(BINARY_NAME) -s
 
-build-bdist_wheel:
-	python3 setup.py sdist bdist_wheel
-
 debian: dist
 	dpkg-buildpackage -us -uc
+
+build-bdist_wheel:
+	python3 setup.py sdist bdist_wheel
 
 sdist:
 	python3 setup.py sdist

@@ -81,3 +81,12 @@ or
 ```
 jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-importer/ $ make docker_run
 ```
+
+# Hacking with bdsit-wheel
+
+0. manually create egg-info bdsit (bdist_egg) and copy it with expected name as gnucash_magical_importer-0.1.0-py3.6.egg-info in directory build/bdsit.linux-x86_64/wheel;
+1. Comment lines in python3 source code: sudo vim /usr/lib/python3.6/email/message.py#558 and #559;
+2. Then, run python3 setup.py sdist bdist_wheel;
+3. finally, revert step 2;
+
+https://github.com/pypa/wheel/blob/master/wheel/bdist_wheel.py

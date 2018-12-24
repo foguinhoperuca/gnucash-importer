@@ -78,6 +78,6 @@ if __name__ == "__main__":
         logging.error(Util.error("Failed with account: need be defined!!!"))
         sys.exit("Failed execution. Please, see the log above.")
 
-    # FIXME args.gnuccash_file must be mandatory!!!
+    # FIXME args.gnucash_file must be mandatory!!!
     Cli.import_data(account, args.currency, args.dry_run, args.gnucash_file)
     sys.exit(0)

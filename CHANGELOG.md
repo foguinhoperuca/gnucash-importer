@@ -1,6 +1,3 @@
-<!-- build command: pandoc CHANGELOG.md --standalone -o CHANGELOG.html -f gfm -t html --css vimwiki.css --metadata pagetitle="CHANGELOG v1.1.0" -->
-<!-- awesome_bot CHANGELOG.md --allow-ssl -->
-
 <!-- Link's references -->
 <!-- TODO plan it correctly!! -->
 [file_01]: ../../data/cmdb/test_import_desktops.csv

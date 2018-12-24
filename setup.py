@@ -7,6 +7,7 @@ with open("README.md", "r") as fh:
 with open('gnucash_importer/version.py') as f:
     exec(f.read())
 
+# FIXME build with setup.py but do not execute (not find module cli)
 buildOptions = dict(packages = ['gnucash_importer'], excludes = [])
 base = 'Console'
 executables = [
@@ -19,9 +20,8 @@ executables = [
 
 setup(
 # setuptools.setup(
-    name = "gmi",
+    name = "gnucash_magical_importer",
     version = __version__,
-    # version_command='git describe',
     author = "Jefferson Campos",
     author_email = "jefferson@jeffersoncampos.eti.br",
     description = "Parse data source (ofx, qif, csv, etc.) and import to Gnucash file.",
@@ -29,6 +29,7 @@ setup(
     long_description_content_type = "text/markdown",
     url = "https://github.com/foguinhoperuca/gnucash_magical_importer",
     packages = setuptools.find_packages(),
+    python_requires='>=3.6',
     classifiers = [
         'Development Status :: 3 - Alpha',
         "Programming Language :: Python :: 3",
