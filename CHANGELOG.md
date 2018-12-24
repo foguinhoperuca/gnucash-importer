@@ -17,9 +17,9 @@ Here are the scope to be released. See [todo.org](todo.org) for more details.
 
 * Implement UI with ncurse
 
-## [0.1.0][HEAD] - 2018-XX-XX ##
+## [0.1.0][HEAD] - 2018-12-XX ##
 
-Basic funcional version.
+Basic funcional version with importing data.
 
 ### Latest Commit's Hashes ###
 
