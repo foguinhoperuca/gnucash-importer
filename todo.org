@@ -1,10 +1,12 @@
 * TODO [#A] implement a package version
 ** TODO [#B] dist
 *** TODO [#A] pypi
-**** TODO egg
-**** TODO source
 **** TODO wheel
-*** TODO [#B] debian
+**** DONE egg
+**** DONE source
+*** TODO [#B] ubuntu
+**** TODO [#C] ubuntu PPA
+*** TODO [#C] debian
 **** TODO include in stable/dev
 **** DONE Fix /usr/local && /usr for installation
 **** DONE [#C] doc - https://wiki.debian.org/DebianPackageDocumentation
@@ -16,10 +18,8 @@
 ***** https://www.debian.org/doc/packaging-manuals/python-policy/
 **** DONE [#A] source code
 **** DONE [#B] binary
-*** TODO [#C] ubuntu
-**** TODO [#C] ubuntu PPA
-*** TODO [#C] github
-**** TODO upload binary (deb, snap, tarball)
+*** DONE [#C] github
+**** DONE upload binary (deb, snap, tarball)
 **** DONE source code
 ** DONE build/compile
 *** DONE manual install
