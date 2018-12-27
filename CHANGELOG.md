@@ -1,9 +1,10 @@
 <!-- Link's references -->
 <!-- TODO plan it correctly!! -->
-[file_01]: ../../data/cmdb/test_import_desktops.csv
-[file_04]: ../../doc/queues.org
-[9f4ee56]: http://gnucash-importer.jeffersoncampos.eti.br/db/importer/commits/9f4ee55
-[3b872cd]: http://gnucash-importer.jeffersoncampos.eti.br/db/importer/commits/3b872ca
+[HEAD_COMMIT]: https://github.com/foguinhoperuca/gnucash_magical_importer/commits/master "HEAD on master."
+[v0.1.0]: https://github.com/foguinhoperuca/gnucash_magical_importer/commit/ "v0.1.0"
+[debian_v0.1.0]: ../../doc/queues.org
+[tarball_v0.1.0]: http://gnucash-importer.jeffersoncampos.eti.br/db/importer/commits/9f4ee55
+[pypi_v0.1.0]: http://gnucash-importer.jeffersoncampos.eti.br/db/importer/commits/3b872ca
 
 # Changelog #
 
@@ -11,20 +12,30 @@ All notable changes to this project will be documented in this file. More detail
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] ##
+## [Unreleased](https://github.com/foguinhoperuca/gnucash_magical_importer/blob/master/todo.org "Detailed tasks.") ##
 
 Here are the scope to be released. See [todo.org](todo.org) for more details.
 
-* Implement UI with ncurse
+* Implement UI with ncurse/web view
+* Dist package in debian (stable), ubuntu (ppa/snap) and pypi (wheel)
+* Create data file
+* Implement abstract class
+* Implement classifier
+* Write log to file
+* Gnu man page
+* Publish about software in gnucash forum, blogpost, vivaolinux.com.br, etc
+* Fix integration with C lib to get total number of transactions
 
-## [0.1.0][HEAD] - 2018-12-XX ##
+## [0.1.0][v0.1.0][HEAD][HEAD_COMMIT] - 2018-12-26 ##
 
 Basic funcional version with importing data.
+Closes #1
 
-### Latest Commit's Hashes ###
+### Latest File Release ###
 
-* [data/cmdb/test_import_desktops..:][file_01] [9f4ee55][9f4ee55]
-* [doc/queues......................:][file_04] [3b872ca][3b872ca]
+* [debian binary..0.1.0][debian-binary_v0.1.0]
+* [tarball........0.1.0][tarbal_v0.1.0]
+* [pypi...........0.1.0][pypi_v0.1.0]
 
 ### Added ###
 
