@@ -1,10 +1,10 @@
 <!-- Link's references -->
 <!-- TODO plan it correctly!! -->
 [HEAD_COMMIT]: https://github.com/foguinhoperuca/gnucash_magical_importer/commits/master "HEAD on master."
-[v0.1.0]: https://github.com/foguinhoperuca/gnucash_magical_importer/commit/ "v0.1.0"
-[debian_v0.1.0]: ../../doc/queues.org
-[tarball_v0.1.0]: http://gnucash-importer.jeffersoncampos.eti.br/db/importer/commits/9f4ee55
-[pypi_v0.1.0]: http://gnucash-importer.jeffersoncampos.eti.br/db/importer/commits/3b872ca
+[v0.1.0]: https://github.com/foguinhoperuca/gnucash_magical_importer/releases/tag/v0.1.0 "v0.1.0"
+[debian_v0.1.0]: https://github.com/foguinhoperuca/gnucash_magical_importer/releases/download/v0.1.0/gnucash-magical-importer_0.1.0-1_amd64.deb
+[tarball_v0.1.0]: https://github.com/foguinhoperuca/gnucash_magical_importer/releases/download/v0.1.0/python3-gnucash-magical-importer_0.1.0.orig.tar.gz
+[pypi_v0.1.0]: https://pypi.org/project/gnucash-magical-importer/0.1.0/
 
 # Changelog #
 
@@ -26,7 +26,26 @@ Here are the scope to be released. See [todo.org](todo.org) for more details.
 * Publish about software in gnucash forum, blogpost, vivaolinux.com.br, etc
 * Fix integration with C lib to get total number of transactions
 
-## [0.1.0][v0.1.0][HEAD][HEAD_COMMIT] - 2018-12-26 ##
+## [0.2.0][v0.2.0][HEAD][HEAD_COMMIT] - 2019-XX-XX ##
+
+Classifier.
+Closes #2
+
+### Latest File Release ###
+
+* [debian binary..0.2.0][debian-binary_v0.2.0]
+* [tarball........0.2.0][tarbal_v0.2.0]
+* [pypi...........0.2.0][pypi_v0.2.0]
+
+### Added ###
+
+* ...
+
+### Changed ###
+
+* ...
+
+## [0.1.0][v0.1.0][94ecf3e][v0.1.0] - 2018-12-26 ##
 
 Basic funcional version with importing data.
 Closes #1

@@ -1,4 +1,10 @@
-python3-gnucash-magical-importer (0.1.0-1) UNRELEASED; urgency=low
+python3-gnucash-magical-importer (0.2.0-1) UNRELEASED; urgency=low
+
+  * Classifier. (Closes: #2)
+
+ -- Jefferson Campos <jefferson@jeffersoncampos.eti.br>  Wed, XX XXX 2019 22:46:32 -0200
+
+python3-gnucash-magical-importer (0.1.0-1) RELEASED; urgency=low
 
   * Initial release. (Closes: #1)
 
