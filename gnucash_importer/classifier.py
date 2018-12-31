@@ -1,3 +1,5 @@
+import csv
+
 class Classifier:
     _strategy = None
     _AVAILABLE_STRATEGIES = {
@@ -48,15 +50,25 @@ class Strategy(object):
     def validate_split(split):
         print("TODO implement it!")
         return True
-        
-class SupplierStrategy(Strategy):
-    def classify(split):
-        print("TODO implement it!")
-        classified_split = None
-        
-        print("TODO search in a file key/value and return split transaction")
 
-        if not super.validate_split(classified_split):
+class SupplierStrategy(Strategy):
+    # FIXME not working yet!
+    def classify(split):
+        classified_split = None
+        account = None
+
+        with open('classifier_rules.csv', 'r') as rules:
+            reader = csv.reader(rules, delimiter=';')
+            for row in reader:
+                if row[0] == split.from:
+                    account = row[1]
+
+        if account == None:
+           account =  "DEFAULT_ACCOUNT_GOES_HERE" # TODO get data in setup.cfg - or do not modify original split_to.GetAccount
+
+        if not super.validate_split(account):
             raise Error("validate split failed!!!")
+
+        classified_split.to = account
 
         return classified_split
