@@ -137,7 +137,7 @@ dist_test:
 # You can pass DEBUG_TEST=True to update loggin level to DEBUG. You can, also, pass PARAMS=-v to verbose output
 check: clean setup-cfg test-check
 test-check:
-	python3 -m unittest test.test_ledger test.test_read_entry test.test_account
+	python3 -m unittest test.test_ledger test.test_read_entry test.test_account test.test_classifier
 	$(MAKE) diff-fixture
 	sleep 1
 	python3 $(APP_RUN_SCRIPT) $(APP_PARAMS) $(PARAMS)

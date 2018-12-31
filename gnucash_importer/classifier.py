@@ -35,28 +35,28 @@ class Classifier:
 
         return valid
 
-    def classify_transaction(transaction, strategy = _strategy):
-        classified_transaction = None
+    def classify_split(split, strategy = _strategy):
+        classified_split = None
 
         if strategy == "SupplierStrategy":
-            classified_transaction = SupplierStrategy.classify(transaction)
+            classified_split = SupplierStrategy.classify(split)
 
-        return classified_transaction
+        return classified_split
 
 # TODO implement as abstract class
 class Strategy(object):
-    def validate_transaction(transacation):
+    def validate_split(split):
         print("TODO implement it!")
         return True
         
 class SupplierStrategy(Strategy):
-    def classify(transaction):
+    def classify(split):
         print("TODO implement it!")
-        classified_transaction = None
+        classified_split = None
         
-        print("TODO search in a file key/value and return classified transaction")
+        print("TODO search in a file key/value and return split transaction")
 
-        if not super.validate_transaction(classified_transaction):
-            raise Error("validate transaction failed!!!")
+        if not super.validate_split(classified_split):
+            raise Error("validate split failed!!!")
 
-        return classified_transaction
+        return classified_split

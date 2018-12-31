@@ -23,15 +23,15 @@ class ClassifierTestCase(unittest.TestCase):
         # def validate_strategy(strategy = _strategy):
 
     @unittest.skip("TODO implement it!")
-    def test_classify_transaction(self):
-        # def classify_transaction(transaction, strategy = _strategy):
+    def test_classify_split(self):
+        # def classify_split(split, strategy = _strategy):
         assertTrue(True)
 
     @unittest.skip("TODO implement it!")
-    def test_validate_transaction(account):
+    def test_validate_split(account):
         assertTrue(True)
 
     @unittest.skip("TODO implement it!")
-    def test_classify(transaction):
+    def test_classify(split):
         assertTrue(True)
-        # def classify(transaction)
+        # def classify(split)
