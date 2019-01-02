@@ -34,6 +34,10 @@ The gnucash's xml file will act as transaction database. All other reports will 
 
 # Classifier
 
+## Rules
+
+You will need a rule file to classify all transactions. The file must reside along with setup.cfg in one of four locations (se bellow to more informations). The file must have the follow structure: First column is the supplier and the second column is the account that expense must be saved. You can't have the same supplier twice in the file nor have an invalid account path.
+
 ## Main goal
 
 * Single transaction
