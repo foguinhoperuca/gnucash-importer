@@ -60,7 +60,7 @@ class SupplierStrategy(Strategy):
         with open('classifier_rules.csv', 'r') as rules:
             reader = csv.reader(rules, delimiter=';')
             for row in reader:
-                if row[0] == split.from:
+                if row[0] == split.from_account:
                     account = row[1]
 
         if account == None:
