@@ -1,4 +1,7 @@
 import csv
+import logging
+from util import Util
+from ledger import Ledger
 
 class Classifier:
     _strategy = None
@@ -37,6 +40,7 @@ class Classifier:
 
         return valid
 
+    # TODO can be a method from account class?! Or be a different class to use composition?!
     def classify_split(split, strategy = _strategy):
         classified_split = None
 
@@ -53,22 +57,29 @@ class Strategy(object):
 
 class SupplierStrategy(Strategy):
     # FIXME not working yet!
-    def classify(split):
+    def classify(split, gnucash_book):
         classified_split = None
         account = None
 
+        logging.debug(Util.debug("split.GetAccount() is: {a}".format(a = split.GetAccount())))
+        
         with open('classifier_rules.csv', 'r') as rules:
             reader = csv.reader(rules, delimiter=';')
             for row in reader:
-                if row[0] == split.from_account:
+                if row[0] == split.GetAccount():
                     account = row[1]
+                    break
 
-        if account == None:
-           account =  "DEFAULT_ACCOUNT_GOES_HERE" # TODO get data in setup.cfg - or do not modify original split_to.GetAccount
+        logging.debug(Util.debug("account is: {a}".format(a = account)))
+        # if account == None:
+        #    account =  "DEFAULT_ACCOUNT_GOES_HERE" # TODO get data in setup.cfg - or do not modify original split_to.GetAccount
 
-        if not super.validate_split(account):
-            raise Error("validate split failed!!!")
+        # if not super.validate_split(account):
+        #     raise Error("validate split failed!!!")
 
-        classified_split.to = account
+        # ledger = Ledger()
+        # acc = ledger.get_gnucash_account(gnucash_book, account)
 
-        return classified_split
+        # split.SetAccount(acc)
+
+        # return split
