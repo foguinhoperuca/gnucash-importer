@@ -2,9 +2,12 @@ import unittest
 import gnucash_importer
 from gnucash_importer.util import Util
 from gnucash_importer.classifier import Classifier, Strategy, SupplierStrategy
+import unittest
+from gnucash import Session, GncCommodity
 
 class ClassifierTestCase(unittest.TestCase):
-    def setUp(sel):
+    def setUp(self):
+        self.util = Util()
         session = Session(self.util.DEFAULT_GNUCASH_FILE)
         self.book = session.book
         self.currency = self.book.get_table().lookup('ISO4217', self.util.DEFAULT_CURRENCY)
