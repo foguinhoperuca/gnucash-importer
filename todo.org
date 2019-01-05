@@ -14,3 +14,6 @@
 * TODO [#C] implement test
 ** TODO [#C] implement unittest discover --> python3 -m unittest discover
 * TODO [#C] implement ncurses interface
+* implement classifier
+** supplier name
+** NFP
