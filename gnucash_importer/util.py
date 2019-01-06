@@ -70,6 +70,30 @@ class Util:
         self.DEFAULT_BRADESCO_SAVINGS_TO = self.config['app_init']['default_bradesco_savings_to']
         self.DEFAULT_BRADESCO_SAVINGS_FROM = self.config['app_init']['default_bradesco_savings_from']
 
+    # TODO implement it!
+    @staticmethod
+    def get_app_file(filename = None):
+        default_install_dir = "gnucash-magical-importer"
+        file_found = False
+
+        if filename is None:
+            raise ValueError("Couldn't find {f} file in any path!".format(f = filename))
+
+        setup_path = [
+            Path("/etc").joinpath(default_install_dir, filename),
+            Path("/usr/local/etc").joinpath(default_install_dir, filename),
+            Path("/usr/etc").joinpath(default_install_dir, filename),
+            Path.home().joinpath(".gnucash-magical-importer", filename)
+        ]
+        logging.debug(colored("path found was..: {p}".format(p = setup_path), 'grey', attrs=['reverse', 'bold', 'underline']))
+
+        for f in setup_path:
+            if f.is_file():
+                logging.debug(colored("file found was..: {p}".format(p = f), 'grey', attrs=['reverse', 'bold', 'underline']))
+                return f
+        if not file_found:
+            raise Exception("Couldn't find {f} file in any common path!".format(f = filename))
+
     def show_methods(obj):
         """Helper to discovery API of an object."""
         logging.basicConfig(level = logging.DEBUG, format = Util.LOG_FORMAT_DEBUG)

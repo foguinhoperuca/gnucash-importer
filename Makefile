@@ -201,4 +201,7 @@ show-cfg:
 setup-cfg: clean
 	@echo "------------------- RUNNING setup-cfg -------------------"
 	@echo ""
-	@$(foreach cfg, $(CFGS), rm -rf $(cfg); mkdir -p $(cfg); ln -s $(shell pwd)/setup.cfg $(cfg)/setup.cfg; tree -L 1 $(cfg);)
+	@$(foreach cfg, $(CFGS), rm -rf $(cfg); mkdir -p $(cfg);)
+	@$(foreach cfg, $(CFGS), ln -s $(shell pwd)/setup.cfg $(cfg)/setup.cfg;)
+	@$(foreach cfg, $(CFGS), ln -s $(shell pwd)/classifier_rules.csv $(cfg)/classifier_rules.csv;)
+	@$(foreach cfg, $(CFGS), tree -L 1 $(cfg);)
