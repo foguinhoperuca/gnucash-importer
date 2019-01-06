@@ -57,20 +57,23 @@ class Strategy(object):
 
 class SupplierStrategy(Strategy):
     # FIXME not working yet!
-    def classify(split, gnucash_book):
+    def classify(transaction, gnucash_book):
         classified_split = None
         account = None
 
-        logging.debug(Util.debug("split.GetAccount() is: {a}".format(a = split.GetAccount())))
-        
+        logging.debug(Util.debug("transaction.GetDesription() is: {t}".format(t = transaction.GetDesription())))
+
+        # TODO open classifier_rules.csv in correct path...
         with open('classifier_rules.csv', 'r') as rules:
             reader = csv.reader(rules, delimiter=';')
             for row in reader:
-                if row[0] == split.GetAccount():
+                if row[0] == transaction.GetDescription(): # FIXME validate rules against transaction.description!
                     account = row[1]
                     break
 
         logging.debug(Util.debug("account is: {a}".format(a = account)))
+
+        return account
         # if account == None:
         #    account =  "DEFAULT_ACCOUNT_GOES_HERE" # TODO get data in setup.cfg - or do not modify original split_to.GetAccount
 
