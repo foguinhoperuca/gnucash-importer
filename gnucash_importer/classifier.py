@@ -56,12 +56,8 @@ class Strategy(object):
         return True
 
 class SupplierStrategy(Strategy):
-    # FIXME not working yet!
-    def classify(transaction, gnucash_book):
-        classified_split = None
+    def classify(self, transaction):
         account = None
-
-        logging.debug(Util.debug("transaction.GetDesription() is: {t}".format(t = transaction.GetDesription())))
 
         # TODO open classifier_rules.csv in correct path...
         with open('classifier_rules.csv', 'r') as rules:
@@ -74,15 +70,3 @@ class SupplierStrategy(Strategy):
         logging.debug(Util.debug("account is: {a}".format(a = account)))
 
         return account
-        # if account == None:
-        #    account =  "DEFAULT_ACCOUNT_GOES_HERE" # TODO get data in setup.cfg - or do not modify original split_to.GetAccount
-
-        # if not super.validate_split(account):
-        #     raise Error("validate split failed!!!")
-
-        # ledger = Ledger()
-        # acc = ledger.get_gnucash_account(gnucash_book, account)
-
-        # split.SetAccount(acc)
-
-        # return split

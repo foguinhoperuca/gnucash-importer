@@ -1,15 +1,13 @@
 import unittest
 import gnucash_importer
 from gnucash_importer.util import Util
-from gnucash_importer.ledger import Ledger
 from gnucash_importer.classifier import Classifier, Strategy, SupplierStrategy
 import unittest
-from gnucash import Session, GncCommodity
+from gnucash import Session, Transaction, GncCommodity
 
 class ClassifierTestCase(unittest.TestCase):
     def setUp(self):
         self.util = Util()
-        self.ledger = Ledger()
         session = Session(self.util.DEFAULT_GNUCASH_FILE)
         self.book = session.book
         self.currency = self.book.get_table().lookup('ISO4217', self.util.DEFAULT_CURRENCY) # FIXME need it?
@@ -31,43 +29,26 @@ class ClassifierTestCase(unittest.TestCase):
 
     @unittest.skip("TODO implement it!")
     def test_validate_strategy(self):
-        assertTrue(True)
+        pass
         # def validate_strategy(strategy = _strategy):
 
     @unittest.skip("TODO implement it!")
     def test_classify_split(self):
         # def classify_split(split, strategy = _strategy):
-        assertTrue(True)
+        pass
 
     @unittest.skip("TODO implement it!")
-    def test_validate_split(account):
-        assertTrue(True)
+    def test_validate_split(self):
+        pass
 
-    @unittest.skip("TODO implement it!")
-    def test_classify(split):
-        assertTrue(True)
-        # def classify(split, gnuash_book)
-
-        # # FIXME need mannually use this code before real test!!!!
-        # gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.account.acc_to)
-        # amount = int(Decimal(item.amount) * gnucash_currency.get_fraction())
-        # tx = Transaction(gnucash_book)
-        # tx.BeginEdit()
-        # tx.SetCurrency(gnucash_currency)
-        # tx.SetDescription(item.memo)
-        # tx.SetDateEnteredSecs(datetime.datetime.now())
-        # tx.SetDatePostedSecs(item.date)
-
-        # TODO get a invalid account
+    def test_classify(self):
+        supplier_strategy = SupplierStrategy()
         tx = Transaction(self.book)
         tx.BeginEdit()
-        tx.SetDescription(item.memo)
-        supplier_not_found = SupplierStrategy()
-        assertEqual(self.util.DEFAULT_NUBANK_TO, supplier_not_found.classify()) # FIXME parse it back to string
 
-        # TODO get a valid account
-        tx = Transaction(self.book)
-        tx.BeginEdit()
-        tx.SetDescription(item.memo)
-        supplier_found = SupplierStrategy()
-        assertEqual("", supplier_found.classify()) # FIXME parse it back to string
+        tx.SetDescription("Postoextrasorocaba2686")
+        self.assertEqual("Expenses:Auto:Gas", supplier_strategy.classify(tx))
+
+        tx.SetDescription("Supplier Not Found!")
+        self.assertIsNone(supplier_strategy.classify(tx))
+        
