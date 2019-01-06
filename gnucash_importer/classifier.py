@@ -59,8 +59,10 @@ class SupplierStrategy(Strategy):
     def classify(self, transaction):
         account = None
 
-        # TODO open classifier_rules.csv in correct path...
-        with open('classifier_rules.csv', 'r') as rules:
+        filename = Util.get_app_file('classifier_rules.csv')
+        logging.debug(Util.debug("filename is..: {f}").format(f = filename))
+
+        with open(filename, 'r') as rules:
             reader = csv.reader(rules, delimiter=';')
             for row in reader:
                 if row[0] == transaction.GetDescription(): # FIXME validate rules against transaction.description!
