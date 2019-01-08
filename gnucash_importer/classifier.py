@@ -1,7 +1,6 @@
 import csv
 import logging
 from util import Util
-from ledger import Ledger
 
 class Classifier:
     _strategy = None
@@ -41,13 +40,25 @@ class Classifier:
         return valid
 
     # TODO can be a method from account class?! Or be a different class to use composition?!
-    def classify_split(split, strategy = _strategy):
-        classified_split = None
+    def classify_account(self, account, description, strategy = None):
+        classified_account = None
+        classifier = None
+
+        # FIXME optional parameter self.strategy (or even self._strategy) do not work!!!!
+        if strategy is None:
+            strategy = self.strategy
 
         if strategy == "SupplierStrategy":
-            classified_split = SupplierStrategy.classify(split)
+            classifier = SupplierStrategy()
 
-        return classified_split
+        logging.debug(Util.debug(classifier))
+        classified_account = classifier.classify(description)
+
+        if classified_account is None:
+            classified_account = account
+
+        logging.debug(Util.debug("classified_account --> {a}".format(a = classified_account)))
+        return classified_account
 
 # TODO implement as abstract class
 class Strategy(object):
@@ -56,16 +67,16 @@ class Strategy(object):
         return True
 
 class SupplierStrategy(Strategy):
-    def classify(self, transaction):
+    def classify(self, description):
         account = None
 
         filename = Util.get_app_file('classifier_rules.csv')
         logging.debug(Util.debug("filename is..: {f}").format(f = filename))
 
-        with open(filename, 'r') as rules:
+        with open(filename, 'r', encoding='utf-8') as rules:
             reader = csv.reader(rules, delimiter=';')
             for row in reader:
-                if row[0] == transaction.GetDescription(): # FIXME validate rules against transaction.description!
+                if row[0] == description:
                     account = row[1]
                     break
 

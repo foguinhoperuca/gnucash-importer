@@ -1,7 +1,9 @@
+import logging
 import unittest
 import gnucash_importer
 from gnucash_importer.util import Util
 from gnucash_importer.classifier import Classifier, Strategy, SupplierStrategy
+from gnucash_importer.account import Account, Nubank
 import unittest
 from gnucash import Session, Transaction, GncCommodity
 
@@ -32,10 +34,41 @@ class ClassifierTestCase(unittest.TestCase):
         pass
         # def validate_strategy(strategy = _strategy):
 
-    @unittest.skip("TODO implement it!")
-    def test_classify_split(self):
-        # def classify_split(split, strategy = _strategy):
-        pass
+    # @unittest.skip("TODO implement it!")
+    def test_classify_account(self):
+        nubank = Nubank(Util().DEFAULT_ACCOUNT_SRC_FILE)
+        classifier = Classifier("SupplierStrategy")
+        items = nubank.get_items()
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[0].memo)
+        self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[1].memo)
+        self.assertEqual("Expenses:Groceries", gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[2].memo)
+        self.assertEqual("Expenses:Pets", gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[3].memo)
+        self.assertEqual("Expenses:Transport:Auto:Gas", gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[4].memo)
+        self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[5].memo)
+        self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[6].memo)
+        self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[7].memo)
+        self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+
+        gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[8].memo)
+        self.assertEqual("Expenses:Transport:Auto:Gas", gnucash_acc_to)
+
+
+
 
     @unittest.skip("TODO implement it!")
     def test_validate_split(self):
@@ -43,12 +76,10 @@ class ClassifierTestCase(unittest.TestCase):
 
     def test_classify(self):
         supplier_strategy = SupplierStrategy()
-        tx = Transaction(self.book)
-        tx.BeginEdit()
 
-        tx.SetDescription("Postoextrasorocaba2686")
-        self.assertEqual("Expenses:Auto:Gas", supplier_strategy.classify(tx))
+        found = "Postoextrasorocaba2686"
+        self.assertEqual("Expenses:Transport:Auto:Gas", supplier_strategy.classify(found))
 
-        tx.SetDescription("Supplier Not Found!")
-        self.assertIsNone(supplier_strategy.classify(tx))
+        not_found = "Supplier Not Found!"
+        self.assertIsNone(supplier_strategy.classify(not_found))
         

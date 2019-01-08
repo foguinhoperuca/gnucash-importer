@@ -44,7 +44,7 @@ clean:
 	find . -name '*.pyc' -exec rm --force {} +
 	find . -name '*~' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
-	find . -name 'test_ledger.gnucash.*' -exec rm --force {} +
+	find test/fixtures -name 'test_ledger.gnucash.*' -exec rm --force {} +
 	find doc/ -name '*.png' -exec rm --force {} +
 	rm -rf debian/.debhelper/
 	rm -rf debian/files
