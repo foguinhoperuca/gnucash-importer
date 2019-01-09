@@ -48,7 +48,7 @@
   </slot>
 </book:slots>
 <gnc:count-data cd:type="commodity">1</gnc:count-data>
-<gnc:count-data cd:type="account">134</gnc:count-data>
+<gnc:count-data cd:type="account">135</gnc:count-data>
 <gnc:count-data cd:type="transaction">36</gnc:count-data>
 <gnc:commodity version="2.0.0">
   <cmdty:space>CURRENCY</cmdty:space>
@@ -1720,6 +1720,23 @@
   <act:commodity-scu>100</act:commodity-scu>
   <act:description>Water</act:description>
   <act:parent type="guid">52b2259d4167dca3af31591bbbb42bf9</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Pets</act:name>
+  <act:id type="guid">66437b9a1d78408789e19bc40d66d9d6</act:id>
+  <act:type>EXPENSE</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>BRL</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:slots>
+    <slot>
+      <slot:key>color</slot:key>
+      <slot:value type="string">Not Set</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">42087051246fad5166035e01944d1037</act:parent>
 </gnc:account>
 <gnc:account version="2.0.0">
   <act:name>Equity</act:name>

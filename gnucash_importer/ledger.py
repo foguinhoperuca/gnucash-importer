@@ -100,10 +100,10 @@ class Ledger():
         gnucash_currency = self.get_gnucash_currency(gnucash_book, self.currency)
         gnucash_acc_from = self.get_gnucash_account(gnucash_book, self.account.acc_from)
         
-        gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.account.acc_to)
-        # classifier = Classifier("SupplierStrategy")
-        # gnucash_acc_to = self.get_gnucash_account(gnucash_book, classifier.classify_account(self.account.acc_to, item.memo))
-        # logging.debug(Util.debug(gnucash_acc_to))
+        # gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.account.acc_to)
+        classifier = Classifier("SupplierStrategy")
+        gnucash_acc_to = self.get_gnucash_account(gnucash_book, classifier.classify_account(self.account.acc_to, item.memo))
+        logging.debug(Util.debug("gnucash_acc_to --> {a}".format(a = gnucash_acc_to)))
 
         # amount = int(Decimal(item.split_amount.replace(',', '.')) * curr.get_fraction()) # FIXME need it yet?
         amount = int(Decimal(item.amount) * gnucash_currency.get_fraction())
@@ -144,6 +144,7 @@ class Ledger():
         """Wrapper method to get gnucash account."""
         return self.get_gnucash_account_by_path(book.get_root_account(), acc_name.split(':'))
 
+    # TODO catch account not found!!!
     def get_gnucash_account_by_path(self, root, path):
         """De facto, implement the search for an account into gnucash file."""
         acc = None

@@ -75,4 +75,5 @@ class Classifier:
         if classified_account is None:
             classified_account = account
 
+        logging.debug(Util.debug("classified_account is --> {c}".format(c = classified_account)))
         return classified_account
