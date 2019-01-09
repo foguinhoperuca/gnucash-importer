@@ -1,5 +1,6 @@
 import logging
 import unittest
+from termcolor import colored, cprint
 import gnucash_importer
 from gnucash_importer.util import Util
 from gnucash_importer.classifier import Classifier, Strategy, SupplierStrategy
@@ -18,23 +19,21 @@ class ClassifierTestCase(unittest.TestCase):
 
     def test_init_classifier(self):
         classifier = Classifier("SupplierStrategy")
-        self.assertEqual("SupplierStrategy", classifier.strategy)
+        self.assertEqual("Supplier Strategy", classifier.strategy.name)
 
         with self.assertRaises(ValueError) as context:
             Classifier(None)
-        self.assertTrue("strategy can't be None! Please, inform the strategy that should be utilized to classify a transaction!", context.exception)
+            self.assertTrue("strategy can't be None! Please, inform the strategy that should be utilized to classify a transaction!", context.exception)
 
         with self.assertRaises(ValueError) as context:
             Classifier("NOT_AVAILABLE_STRATEGY")
-        self.assertTrue("strategy must be valid! Please, inform a valid strategy from ({s}) that should be utilized to classify a transaction!".format(s = Classifier.AVAILABLE_STRATEGIES), context.exception)
-        
+            self.assertTrue("strategy must be valid! Please, inform a valid strategy from ({s}) that should be utilized to classify a transaction!".format(s = Classifier.AVAILABLE_STRATEGIES), context.exception)
 
-    @unittest.skip("TODO implement it!")
-    def test_validate_strategy(self):
-        pass
-        # def validate_strategy(strategy = _strategy):
+    def test_is_valid_strategy(self):
+        self.assertTrue(Classifier.is_valid_strategy("SupplierStrategy"))
+        self.assertFalse(Classifier.is_valid_strategy("NotImplementedYet"))
+        self.assertFalse(Classifier.is_valid_strategy(None))
 
-    # @unittest.skip("TODO implement it!")
     def test_classify_account(self):
         nubank = Nubank(Util().DEFAULT_ACCOUNT_SRC_FILE)
         classifier = Classifier("SupplierStrategy")
@@ -42,37 +41,57 @@ class ClassifierTestCase(unittest.TestCase):
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[0].memo)
         self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[0].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[1].memo)
         self.assertEqual("Expenses:Groceries", gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[1].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[2].memo)
         self.assertEqual("Expenses:Pets", gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[2].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[3].memo)
         self.assertEqual("Expenses:Transport:Auto:Gas", gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[3].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[4].memo)
         self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[4].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[5].memo)
         self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[5].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[6].memo)
         self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[6].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[7].memo)
         self.assertEqual(self.util.DEFAULT_NUBANK_TO, gnucash_acc_to)
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[7].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
         gnucash_acc_to = classifier.classify_account(nubank.acc_to, items[8].memo)
         self.assertEqual("Expenses:Transport:Auto:Gas", gnucash_acc_to)
-
-
-
-
-    @unittest.skip("TODO implement it!")
-    def test_validate_split(self):
-        pass
+        if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
+            logging.debug(colored("items[0].memo --> {m}".format(m = items[8].memo), 'yellow', attrs=['bold']))
+            print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
     def test_classify(self):
         supplier_strategy = SupplierStrategy()
@@ -82,4 +101,3 @@ class ClassifierTestCase(unittest.TestCase):
 
         not_found = "Supplier Not Found!"
         self.assertIsNone(supplier_strategy.classify(not_found))
-        

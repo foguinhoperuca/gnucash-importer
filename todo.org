@@ -6,6 +6,7 @@
 ** TODO [#C] include in stable/dev debian
 * TODO [#B] create data file (http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files)
 * TODO [#B] implement abstract class PEP 3119 - https://docs.python.org/3/library/abc.html
+** https://julien.danjou.info/guide-python-static-class-abstract-methods/
 * TODO [#B] write log to file
 * TODO [#C] implement doc
 ** TODO [#C] manual published in blogpost/social media

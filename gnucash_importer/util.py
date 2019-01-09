@@ -85,7 +85,6 @@ class Util:
             Path("/usr/etc").joinpath(default_install_dir, filename),
             Path.home().joinpath(".gnucash-magical-importer", filename)
         ]
-        logging.debug(colored("path found was..: {p}".format(p = setup_path), 'grey', attrs=['reverse', 'bold', 'underline']))
 
         for f in setup_path:
             if f.is_file():
