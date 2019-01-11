@@ -44,11 +44,13 @@ class Classifier:
         if not self.is_valid_strategy(strategy):
             raise ValueError("strategy must be valid! Please, inform a valid strategy from ({s}) that should be utilized to classify a transaction!".format(s = self.AVAILABLE_STRATEGIES))
 
-        self._strategy = self.AVAILABLE_STRATEGIES[strategy]
+        self._strategy = self.AVAILABLE_STRATEGIES()[strategy]
 
-    @property
-    def AVAILABLE_STRATEGIES(self):
-        return self._AVAILABLE_STRATEGIES
+    # @property
+    @classmethod
+    # FIXME test classmethod
+    def AVAILABLE_STRATEGIES(cls):
+        return cls._AVAILABLE_STRATEGIES
 
     @property
     def strategy(self):

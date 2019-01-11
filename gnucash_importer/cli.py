@@ -8,7 +8,7 @@ from ledger import Ledger
 
 class Cli:
     """This class will coordinate all actions."""
-    def import_data(account, currency, dry_run, gnucash_file):
+    def import_data(account, currency, dry_run, gnucash_file, classifier):
         """
         Import data from a given file into a given gnucash file.
 
@@ -17,5 +17,5 @@ class Cli:
         Also, is optional define dry_run (default is **true**).
         """
         logging.info(Util.info("Importing data to ")  + colored("{a}".format(a = account.name), 'yellow', attrs=['bold', 'underline']) + Util.info("'s account"))
-        Ledger(account, currency, dry_run, gnucash_file).write()
+        Ledger(account, currency, dry_run, gnucash_file, classifier).write()
         # TODO implement report

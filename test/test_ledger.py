@@ -44,8 +44,10 @@ class LedgerTestCase(unittest.TestCase):
         # TODO implement the catch if not found root.lookup_by_name
 
     def test_write(self):
+        # without classifier - using default account.to
         self.ledger.write()
         self.assertEqual(self.ledger.get_quantity_transactions(), 45)
+        # TODO test ledger.write ith a classifier...
 
 if __name__ == '__main__':
     unittest.main()

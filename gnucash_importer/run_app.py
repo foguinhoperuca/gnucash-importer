@@ -19,6 +19,7 @@ from util import Util
 from ledger import Ledger
 from read_entry import OfxReader, QifReader, CsvReader
 from account import GenericAccount, Nubank, CashInWallet, CefSavingsAccount, ItauCheckingAccount, ItauSavingsAccount, BradescoSavingsAccount
+from classifier import Classifier, SupplierStrategy # FIXME use SupplierStrategy here?
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "GNUCash utility to fix xml file and import custom data.")
@@ -31,6 +32,7 @@ if __name__ == "__main__":
     parser.add_argument("-af", "--account_src_file", required = True, help = "Set account source to integrate")
     parser.add_argument("-acf", "--account_from", help = "Define from import")
     parser.add_argument("-act", "--account_to", help = "Define to import")
+    parser.add_argument("-cl", "--classifier", default = None, choices = Classifier.AVAILABLE_STRATEGIES().keys(), help = "Define classifier that must be used to import data")
 
     args = parser.parse_args()
     if args.verbose:
@@ -78,6 +80,16 @@ if __name__ == "__main__":
         logging.error(Util.error("Failed with account: need be defined!!!"))
         sys.exit("Failed execution. Please, see the log above.")
 
+    print("--------------------------")
+    print(args.classifier)
+    logging.debug(Util.debug("args.classifier --> {c}".format(c = args.classifier)))
+    print("--------------------------")
+    
+    classifier = None
+    if args.classifier is not None:
+        classifier = Classifier(args.classifier)
+    logging.debug(Util.debug("classifier --> {c}".format(c = classifier)))
+    
     # FIXME args.gnucash_file must be mandatory!!!
-    Cli.import_data(account, args.currency, args.dry_run, args.gnucash_file)
+    Cli.import_data(account, args.currency, args.dry_run, args.gnucash_file, classifier)
     sys.exit(0)

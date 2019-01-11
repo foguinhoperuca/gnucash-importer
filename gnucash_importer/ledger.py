@@ -14,12 +14,14 @@ class Ledger():
     _currency = None
     _dry_run = None
     _src_file = None
+    _classifier = None
 
-    def __init__(self, account, currency = Util().DEFAULT_CURRENCY, dry_run = True, src_file = Util().DEFAULT_GNUCASH_FILE):
+    def __init__(self, account, currency = Util().DEFAULT_CURRENCY, dry_run = True, src_file = Util().DEFAULT_GNUCASH_FILE, classifier = None):
         self._account = account
         self._currency = currency
         self._dry_run = dry_run
         self._src_file = src_file
+        self._classifier = classifier
 
     @property
     def account(self):
@@ -61,6 +63,16 @@ class Ledger():
     def src_file(self):
         del self._src_file
 
+    @property
+    def classifier(self):
+        return self._classifier
+    @classifier.setter
+    def classifier(self, value):
+        self._classifier = value
+    @classifier.deleter
+    def classifier(self):
+        del self._classifier
+
     def write(self):
         """Write all gnucash transactions to physical file."""
         session = Session(self.src_file)
@@ -99,10 +111,16 @@ class Ledger():
 
         gnucash_currency = self.get_gnucash_currency(gnucash_book, self.currency)
         gnucash_acc_from = self.get_gnucash_account(gnucash_book, self.account.acc_from)
-        
-        # gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.account.acc_to)
-        classifier = Classifier("SupplierStrategy")
-        gnucash_acc_to = self.get_gnucash_account(gnucash_book, classifier.classify_account(self.account.acc_to, item.memo))
+
+        if self.classifier is None:
+            gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.account.acc_to)
+        else:
+            # FIXME add to a var to tests purpose only.
+            # classifier = Classifier("SupplierStrategy")
+            classifier = self.classifier
+            logging.debug(Util.debug("classifier strategy --> {cs}".format(cs = classifier.strategy.name)))
+            gnucash_acc_to = self.get_gnucash_account(gnucash_book, classifier.classify_account(self.account.acc_to, item.memo))
+
         logging.debug(Util.debug("gnucash_acc_to --> {a}".format(a = gnucash_acc_to)))
 
         # amount = int(Decimal(item.split_amount.replace(',', '.')) * curr.get_fraction()) # FIXME need it yet?
