@@ -110,16 +110,14 @@ class Ledger():
             raise Exception("Could not create a gnucash transaction: missing item!!")
 
         gnucash_currency = self.get_gnucash_currency(gnucash_book, self.currency)
+        # FIXME gnucash_acc_from must be setted to a default placeholder inside the original account that can be used t manually review all imports
         gnucash_acc_from = self.get_gnucash_account(gnucash_book, self.account.acc_from)
 
         if self.classifier is None:
             gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.account.acc_to)
         else:
-            # FIXME add to a var to tests purpose only.
-            # classifier = Classifier("SupplierStrategy")
-            classifier = self.classifier
             logging.debug(Util.debug("classifier strategy --> {cs}".format(cs = classifier.strategy.name)))
-            gnucash_acc_to = self.get_gnucash_account(gnucash_book, classifier.classify_account(self.account.acc_to, item.memo))
+            gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.classifier.classify_account(self.account.acc_to, item.memo))
 
         logging.debug(Util.debug("gnucash_acc_to --> {a}".format(a = gnucash_acc_to)))
 

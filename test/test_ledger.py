@@ -1,8 +1,10 @@
+import time
 import logging
 import gnucash_importer
 from gnucash_importer.util import Util
 from gnucash_importer.account import Nubank
 from gnucash_importer.ledger import Ledger
+from gnucash_importer.classifier import Classifier
 import unittest
 from gnucash import Session, GncCommodity
 
@@ -47,7 +49,13 @@ class LedgerTestCase(unittest.TestCase):
         # without classifier - using default account.to
         self.ledger.write()
         self.assertEqual(self.ledger.get_quantity_transactions(), 45)
-        # TODO test ledger.write ith a classifier...
+        # using a classifier - only SupplierStrategy is availiable by now...
+        # FIXME workarrund to write again in same file
+        time.sleep(1)
+        classifier_strategy_supplier = Classifier("SupplierStrategy")
+        ledger_classify = Ledger(self.account, self.util.DEFAULT_CURRENCY, False, self.util.DEFAULT_GNUCASH_FILE, classifier_strategy_supplier)
+        ledger_classify.write()
+        self.assertEqual(self.ledger.get_quantity_transactions(), 54)
 
 if __name__ == '__main__':
     unittest.main()
