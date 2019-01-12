@@ -21,6 +21,9 @@ class ClassifierTestCase(unittest.TestCase):
         classifier = Classifier("SupplierStrategy")
         self.assertEqual("Supplier Strategy", classifier.strategy.name)
 
+        classifier = Classifier("RegexStrategy")
+        self.assertEqual("Regex Strategy", classifier.strategy.name)
+
         with self.assertRaises(ValueError) as context:
             Classifier(None)
             self.assertTrue("strategy can't be None! Please, inform the strategy that should be utilized to classify a transaction!", context.exception)
@@ -31,6 +34,7 @@ class ClassifierTestCase(unittest.TestCase):
 
     def test_is_valid_strategy(self):
         self.assertTrue(Classifier.is_valid_strategy("SupplierStrategy"))
+        self.assertTrue(Classifier.is_valid_strategy("RegexStrategy"))
         self.assertFalse(Classifier.is_valid_strategy("NotImplementedYet"))
         self.assertFalse(Classifier.is_valid_strategy(None))
 

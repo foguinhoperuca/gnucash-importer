@@ -34,7 +34,7 @@ class SupplierStrategy(Strategy):
 
 class RegexStrategy(Strategy):
     def __init__(self):
-        self._name = "RegexStrategy"
+        self._name = "Regex Strategy"
 
     # TODO test it!
     def classify(self, description):
