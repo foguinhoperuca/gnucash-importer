@@ -41,13 +41,6 @@ class RegexStrategy(Strategy):
         account = None
         pattern = None
 
-        # print("-------------------------")
-        # logging.debug(Util.debug("description --> {d}".format(d = description)))
-        # pattern = re.compile("Barbosa")
-        # logging.debug(Util.debug("pattern --> {p}".format(p = pattern)))
-        # result = pattern.search(description)
-        # logging.debug(Util.debug("result --> {r}".format(r = result)))
-
         with open(Util.get_app_file('regex_rules.csv'), 'r', encoding='utf-8') as rules:
             reader = csv.reader(rules, delimiter=';')
             for row in reader:
