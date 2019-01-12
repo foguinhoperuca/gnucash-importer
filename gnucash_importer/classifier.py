@@ -1,5 +1,6 @@
 import csv
 import logging
+import re
 from util import Util
 
 # TODO implement as abstract class
@@ -12,7 +13,7 @@ class Strategy(object):
     # TODO test raise Exception
     def __init__(self):
         raise Exception("Can't instantiate this class because it intented to be an abstract class.")
-
+    
 class SupplierStrategy(Strategy):
     def __init__(self):
         self._name = "Supplier Strategy"
@@ -31,10 +32,40 @@ class SupplierStrategy(Strategy):
 
         return account
 
+class RegexStrategy(Strategy):
+    def __init__(self):
+        self._name = "RegexStrategy"
+
+    # TODO test it!
+    def classify(self, description):
+        account = None
+        pattern = None
+
+        # print("-------------------------")
+        # logging.debug(Util.debug("description --> {d}".format(d = description)))
+        # pattern = re.compile("Barbosa")
+        # logging.debug(Util.debug("pattern --> {p}".format(p = pattern)))
+        # result = pattern.search(description)
+        # logging.debug(Util.debug("result --> {r}".format(r = result)))
+
+        with open(Util.get_app_file('regex_rules.csv'), 'r', encoding='utf-8') as rules:
+            reader = csv.reader(rules, delimiter=';')
+            for row in reader:
+                pattern = re.compile(row[0])
+                if pattern.search(description):
+                    account = row[1]
+                    break
+
+        logging.debug(Util.debug("account is --> {a}".format(a = account)))
+
+        return account
+        
+
 class Classifier:
     _strategy = None
     _AVAILABLE_STRATEGIES = {
-        'SupplierStrategy': SupplierStrategy()
+        'SupplierStrategy': SupplierStrategy(),
+        'RegexStrategy': RegexStrategy()
     }
 
     def __init__(self, strategy):

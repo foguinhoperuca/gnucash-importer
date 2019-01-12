@@ -40,6 +40,7 @@ RUN dbus-launch dconf load /org/gnucash/ < /tmp/gnucash.conf
 
 COPY setup.cfg /etc/gnucash-magical-importer/
 COPY classifier_rules.csv /etc/gnucash-magical-importer/
+COPY regex_rules.csv /etc/gnucash-magical-importer/
 
 WORKDIR /app
 COPY . /app

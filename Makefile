@@ -204,4 +204,5 @@ setup-cfg: clean
 	@$(foreach cfg, $(CFGS), rm -rf $(cfg); mkdir -p $(cfg);)
 	@$(foreach cfg, $(CFGS), ln -s $(shell pwd)/setup.cfg $(cfg)/setup.cfg;)
 	@$(foreach cfg, $(CFGS), ln -s $(shell pwd)/classifier_rules.csv $(cfg)/classifier_rules.csv;)
+	@$(foreach cfg, $(CFGS), ln -s $(shell pwd)/regex_rules.csv $(cfg)/regex_rules.csv;)
 	@$(foreach cfg, $(CFGS), tree -L 1 $(cfg);)

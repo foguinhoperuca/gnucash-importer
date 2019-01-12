@@ -8,6 +8,7 @@ from gnucash import Session, Transaction, Split, GncNumeric
 from util import Util
 from classifier import Classifier
 
+# TODO implement a report method to know how much splits couldn't be classified
 class Ledger():
     """Meant to be the main interaction with GnuCash."""
     _account = None
@@ -116,7 +117,7 @@ class Ledger():
         if self.classifier is None:
             gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.account.acc_to)
         else:
-            logging.debug(Util.debug("classifier strategy --> {cs}".format(cs = classifier.strategy.name)))
+            logging.debug(Util.debug("classifier strategy --> {cs}".format(cs = self.classifier.strategy.name)))
             gnucash_acc_to = self.get_gnucash_account(gnucash_book, self.classifier.classify_account(self.account.acc_to, item.memo))
 
         logging.debug(Util.debug("gnucash_acc_to --> {a}".format(a = gnucash_acc_to)))

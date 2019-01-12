@@ -3,7 +3,7 @@ import unittest
 from termcolor import colored, cprint
 import gnucash_importer
 from gnucash_importer.util import Util
-from gnucash_importer.classifier import Classifier, Strategy, SupplierStrategy
+from gnucash_importer.classifier import Classifier, Strategy, SupplierStrategy, RegexStrategy
 from gnucash_importer.account import Account, Nubank
 import unittest
 from gnucash import Session, Transaction, GncCommodity
@@ -94,10 +94,18 @@ class ClassifierTestCase(unittest.TestCase):
             print(colored("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", 'yellow', attrs=['bold']))
 
     def test_classify(self):
-        supplier_strategy = SupplierStrategy()
-
+        strategy = SupplierStrategy()
         found = "Postoextrasorocaba2686"
-        self.assertEqual("Expenses:Transport:Auto:Gas", supplier_strategy.classify(found))
-
+        self.assertEqual("Expenses:Transport:Auto:Gas", strategy.classify(found))
         not_found = "Supplier Not Found!"
-        self.assertIsNone(supplier_strategy.classify(not_found))
+        self.assertIsNone(strategy.classify(not_found))
+
+        strategy = RegexStrategy()
+        found = "CF 78339-32 Barbosa Supermercado LTDA"
+        self.assertEqual("Expenses:Grocery", strategy.classify(found))
+        found = "BK Wallmart Limao"
+        self.assertEqual("Expenses:Restaurant:Dining", strategy.classify(found))
+        found = "IOF de Google Play Cia"
+        self.assertEqual("Expenses:Taxes", strategy.classify(found))
+        not_found = "Regex Not Found!"
+        self.assertIsNone(strategy.classify(not_found))
