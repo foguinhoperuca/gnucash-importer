@@ -49,13 +49,21 @@ class LedgerTestCase(unittest.TestCase):
         # without classifier - using default account.to
         self.ledger.write()
         self.assertEqual(self.ledger.get_quantity_transactions(), 45)
-        # using a classifier - only SupplierStrategy is availiable by now...
+
+        # using a classifier
         # FIXME workarrund to write again in same file
         time.sleep(1)
-        classifier_strategy_supplier = Classifier("SupplierStrategy")
-        ledger_classify = Ledger(self.account, self.util.DEFAULT_CURRENCY, False, self.util.DEFAULT_GNUCASH_FILE, classifier_strategy_supplier)
+        classifier = Classifier("SupplierStrategy")
+        ledger_classify = Ledger(self.account, self.util.DEFAULT_CURRENCY, False, self.util.DEFAULT_GNUCASH_FILE, classifier)
         ledger_classify.write()
         self.assertEqual(self.ledger.get_quantity_transactions(), 54)
+
+        # FIXME workarrund to write again in same file
+        time.sleep(1)
+        classifier = Classifier("RegexStrategy")
+        ledger_classify = Ledger(self.account, self.util.DEFAULT_CURRENCY, False, self.util.DEFAULT_GNUCASH_FILE, classifier)
+        ledger_classify.write()
+        self.assertEqual(self.ledger.get_quantity_transactions(), 63)
 
     @unittest.skip("not implemented yet")
     def test_validate_account_in_ledger(self):
