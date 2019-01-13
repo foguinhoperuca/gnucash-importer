@@ -13,7 +13,7 @@ class Strategy(object):
     # TODO test raise Exception
     def __init__(self):
         raise Exception("Can't instantiate this class because it intented to be an abstract class.")
-    
+
 class SupplierStrategy(Strategy):
     def __init__(self):
         self._name = "Supplier Strategy"
@@ -52,7 +52,6 @@ class RegexStrategy(Strategy):
         logging.debug(Util.debug("account is --> {a}".format(a = account)))
 
         return account
-        
 
 class Classifier:
     _strategy = None
@@ -70,9 +69,7 @@ class Classifier:
 
         self._strategy = self.AVAILABLE_STRATEGIES()[strategy]
 
-    # @property
     @classmethod
-    # FIXME test classmethod
     def AVAILABLE_STRATEGIES(cls):
         return cls._AVAILABLE_STRATEGIES
 
@@ -90,7 +87,6 @@ class Classifier:
     # TODO use @staticmethod or @classmethod here?!?
     @classmethod
     def is_valid_strategy(cls, strategy):
-        # return strategy in self.AVAILABLE_STRATEGIES
         return strategy in cls._AVAILABLE_STRATEGIES
 
     # TODO can be a method from account class?! Or be a different class to use composition?!

@@ -57,5 +57,9 @@ class LedgerTestCase(unittest.TestCase):
         ledger_classify.write()
         self.assertEqual(self.ledger.get_quantity_transactions(), 54)
 
+    @unittest.skip("not implemented yet")
+    def test_validate_account_in_ledger(self):
+        pass
+
 if __name__ == '__main__':
     unittest.main()

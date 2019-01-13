@@ -200,3 +200,8 @@ class Ledger():
             raise ValueError('Total transaction tag not found!!')
 
         return total_transactions
+
+    # TODO implement it! Validate files before running. Must be a helper to build files.
+    @staticmethod
+    def validate_account_in_ledger(account):
+        return True
