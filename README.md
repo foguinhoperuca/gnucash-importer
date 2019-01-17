@@ -59,7 +59,7 @@ jefferson@nami.jeffersoncampos.eti.br: ~/universal/projects/gnucash/gnucash-magi
 
 ## Configuration File
 
-This project have a [setup.cfg](../../setup.cfg) file ([ini format](https://docs.python.org/3/library/configparser.html "Offical doc.")) that must be installed to app run. The order of search is:
+This project have a [setup.cfg](../../setup.cfg) file ([ini format](https://docs.python.org/3/library/configparser.html "Offical doc.")) that must be installed to app run. Also, this app have 2 (two) configuration files ([classifier_rules.csv](../../classifier_rules.csv) and [regex_rules.csv](../../regex_rules.csv)) for classifier that's must resid within setup.cfg file. The order of search is:
 
 1. /etc/gnucash-magical-importer/setup.cfg
 2. /usr/local/etc/gnucash-magical-importer/setup.cfg
