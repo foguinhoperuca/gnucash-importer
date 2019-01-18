@@ -15,6 +15,7 @@
 * TODO [#C] implement doc
 ** TODO [#C] manual published in blogpost/social media
 ** TODO [#C] gnu manpage
+** TODO [#C] classifier use
 * TODO [#C] see implementation for gnucash-bind using gnucash_core_c.gnc_book_count_transactions(session.book) to get total number of transactions
 * TODO [#C] implement test
 ** TODO [#C] implement unittest discover --> python3 -m unittest discover
